@@ -30,6 +30,10 @@
 		sf::Sprite sCar(tCar);
 		sf::Sprite sTank(tTank);
 		
+		// свойства спрайтов
+		sCar.setPosition(200, 200);
+		sTank.setPosition(200, 300);
+		
 		while (MWindow.isOpen()) {
 			sf::Event event;
 			
@@ -41,7 +45,8 @@
 			MWindow.clear();
 			
 			MWindow.draw(sBackground);
-			
+			MWindow.draw(sCar);
+			MWindow.draw(sTank);
 			MWindow.display();
 		}
 		
