@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/tiho_the_game.dir/main.cxx.o  -o tiho_the_game 
