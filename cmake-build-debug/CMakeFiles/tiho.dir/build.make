@@ -70,14 +70,74 @@ CMakeFiles/tiho.dir/main.cxx.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tiho.dir/main.cxx.s"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/fahr/git/tiho_the_game/main.cxx -o CMakeFiles/tiho.dir/main.cxx.s
 
+CMakeFiles/tiho.dir/Car.cpp.o: CMakeFiles/tiho.dir/flags.make
+CMakeFiles/tiho.dir/Car.cpp.o: ../Car.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/fahr/git/tiho_the_game/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/tiho.dir/Car.cpp.o"
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/tiho.dir/Car.cpp.o -c /home/fahr/git/tiho_the_game/Car.cpp
+
+CMakeFiles/tiho.dir/Car.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tiho.dir/Car.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/fahr/git/tiho_the_game/Car.cpp > CMakeFiles/tiho.dir/Car.cpp.i
+
+CMakeFiles/tiho.dir/Car.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tiho.dir/Car.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/fahr/git/tiho_the_game/Car.cpp -o CMakeFiles/tiho.dir/Car.cpp.s
+
+CMakeFiles/tiho.dir/Tank.cpp.o: CMakeFiles/tiho.dir/flags.make
+CMakeFiles/tiho.dir/Tank.cpp.o: ../Tank.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/fahr/git/tiho_the_game/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/tiho.dir/Tank.cpp.o"
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/tiho.dir/Tank.cpp.o -c /home/fahr/git/tiho_the_game/Tank.cpp
+
+CMakeFiles/tiho.dir/Tank.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tiho.dir/Tank.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/fahr/git/tiho_the_game/Tank.cpp > CMakeFiles/tiho.dir/Tank.cpp.i
+
+CMakeFiles/tiho.dir/Tank.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tiho.dir/Tank.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/fahr/git/tiho_the_game/Tank.cpp -o CMakeFiles/tiho.dir/Tank.cpp.s
+
+CMakeFiles/tiho.dir/Entity.cpp.o: CMakeFiles/tiho.dir/flags.make
+CMakeFiles/tiho.dir/Entity.cpp.o: ../Entity.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/fahr/git/tiho_the_game/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/tiho.dir/Entity.cpp.o"
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/tiho.dir/Entity.cpp.o -c /home/fahr/git/tiho_the_game/Entity.cpp
+
+CMakeFiles/tiho.dir/Entity.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tiho.dir/Entity.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/fahr/git/tiho_the_game/Entity.cpp > CMakeFiles/tiho.dir/Entity.cpp.i
+
+CMakeFiles/tiho.dir/Entity.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tiho.dir/Entity.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/fahr/git/tiho_the_game/Entity.cpp -o CMakeFiles/tiho.dir/Entity.cpp.s
+
+CMakeFiles/tiho.dir/Animation.cpp.o: CMakeFiles/tiho.dir/flags.make
+CMakeFiles/tiho.dir/Animation.cpp.o: ../Animation.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/fahr/git/tiho_the_game/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/tiho.dir/Animation.cpp.o"
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/tiho.dir/Animation.cpp.o -c /home/fahr/git/tiho_the_game/Animation.cpp
+
+CMakeFiles/tiho.dir/Animation.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tiho.dir/Animation.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/fahr/git/tiho_the_game/Animation.cpp > CMakeFiles/tiho.dir/Animation.cpp.i
+
+CMakeFiles/tiho.dir/Animation.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tiho.dir/Animation.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/fahr/git/tiho_the_game/Animation.cpp -o CMakeFiles/tiho.dir/Animation.cpp.s
+
 # Object files for target tiho
 tiho_OBJECTS = \
-"CMakeFiles/tiho.dir/main.cxx.o"
+"CMakeFiles/tiho.dir/main.cxx.o" \
+"CMakeFiles/tiho.dir/Car.cpp.o" \
+"CMakeFiles/tiho.dir/Tank.cpp.o" \
+"CMakeFiles/tiho.dir/Entity.cpp.o" \
+"CMakeFiles/tiho.dir/Animation.cpp.o"
 
 # External object files for target tiho
 tiho_EXTERNAL_OBJECTS =
 
 tiho: CMakeFiles/tiho.dir/main.cxx.o
+tiho: CMakeFiles/tiho.dir/Car.cpp.o
+tiho: CMakeFiles/tiho.dir/Tank.cpp.o
+tiho: CMakeFiles/tiho.dir/Entity.cpp.o
+tiho: CMakeFiles/tiho.dir/Animation.cpp.o
 tiho: CMakeFiles/tiho.dir/build.make
 tiho: /usr/lib/x86_64-linux-gnu/libsfml-system.so
 tiho: /usr/lib/x86_64-linux-gnu/libsfml-window.so
@@ -85,7 +145,7 @@ tiho: /usr/lib/x86_64-linux-gnu/libsfml-graphics.so
 tiho: /usr/lib/x86_64-linux-gnu/libsfml-network.so
 tiho: /usr/lib/x86_64-linux-gnu/libsfml-audio.so
 tiho: CMakeFiles/tiho.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/fahr/git/tiho_the_game/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable tiho"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/fahr/git/tiho_the_game/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable tiho"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/tiho.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

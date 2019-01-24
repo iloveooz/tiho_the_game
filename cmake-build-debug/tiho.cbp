@@ -84,6 +84,30 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/fahr/git/tiho_the_game/Animation.cpp">
+			<Option target="tiho"/>
+		</Unit>
+		<Unit filename="/home/fahr/git/tiho_the_game/Animation.h">
+			<Option target="tiho"/>
+		</Unit>
+		<Unit filename="/home/fahr/git/tiho_the_game/Car.cpp">
+			<Option target="tiho"/>
+		</Unit>
+		<Unit filename="/home/fahr/git/tiho_the_game/Car.h">
+			<Option target="tiho"/>
+		</Unit>
+		<Unit filename="/home/fahr/git/tiho_the_game/Entity.cpp">
+			<Option target="tiho"/>
+		</Unit>
+		<Unit filename="/home/fahr/git/tiho_the_game/Entity.h">
+			<Option target="tiho"/>
+		</Unit>
+		<Unit filename="/home/fahr/git/tiho_the_game/Tank.cpp">
+			<Option target="tiho"/>
+		</Unit>
+		<Unit filename="/home/fahr/git/tiho_the_game/Tank.h">
+			<Option target="tiho"/>
+		</Unit>
 		<Unit filename="/home/fahr/git/tiho_the_game/main.cxx">
 			<Option target="tiho"/>
 		</Unit>

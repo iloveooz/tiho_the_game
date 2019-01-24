@@ -123,6 +123,114 @@ tiho/fast:
 	$(MAKE) -f CMakeFiles/tiho.dir/build.make CMakeFiles/tiho.dir/build
 .PHONY : tiho/fast
 
+Animation.o: Animation.cpp.o
+
+.PHONY : Animation.o
+
+# target to build an object file
+Animation.cpp.o:
+	$(MAKE) -f CMakeFiles/tiho.dir/build.make CMakeFiles/tiho.dir/Animation.cpp.o
+.PHONY : Animation.cpp.o
+
+Animation.i: Animation.cpp.i
+
+.PHONY : Animation.i
+
+# target to preprocess a source file
+Animation.cpp.i:
+	$(MAKE) -f CMakeFiles/tiho.dir/build.make CMakeFiles/tiho.dir/Animation.cpp.i
+.PHONY : Animation.cpp.i
+
+Animation.s: Animation.cpp.s
+
+.PHONY : Animation.s
+
+# target to generate assembly for a file
+Animation.cpp.s:
+	$(MAKE) -f CMakeFiles/tiho.dir/build.make CMakeFiles/tiho.dir/Animation.cpp.s
+.PHONY : Animation.cpp.s
+
+Car.o: Car.cpp.o
+
+.PHONY : Car.o
+
+# target to build an object file
+Car.cpp.o:
+	$(MAKE) -f CMakeFiles/tiho.dir/build.make CMakeFiles/tiho.dir/Car.cpp.o
+.PHONY : Car.cpp.o
+
+Car.i: Car.cpp.i
+
+.PHONY : Car.i
+
+# target to preprocess a source file
+Car.cpp.i:
+	$(MAKE) -f CMakeFiles/tiho.dir/build.make CMakeFiles/tiho.dir/Car.cpp.i
+.PHONY : Car.cpp.i
+
+Car.s: Car.cpp.s
+
+.PHONY : Car.s
+
+# target to generate assembly for a file
+Car.cpp.s:
+	$(MAKE) -f CMakeFiles/tiho.dir/build.make CMakeFiles/tiho.dir/Car.cpp.s
+.PHONY : Car.cpp.s
+
+Entity.o: Entity.cpp.o
+
+.PHONY : Entity.o
+
+# target to build an object file
+Entity.cpp.o:
+	$(MAKE) -f CMakeFiles/tiho.dir/build.make CMakeFiles/tiho.dir/Entity.cpp.o
+.PHONY : Entity.cpp.o
+
+Entity.i: Entity.cpp.i
+
+.PHONY : Entity.i
+
+# target to preprocess a source file
+Entity.cpp.i:
+	$(MAKE) -f CMakeFiles/tiho.dir/build.make CMakeFiles/tiho.dir/Entity.cpp.i
+.PHONY : Entity.cpp.i
+
+Entity.s: Entity.cpp.s
+
+.PHONY : Entity.s
+
+# target to generate assembly for a file
+Entity.cpp.s:
+	$(MAKE) -f CMakeFiles/tiho.dir/build.make CMakeFiles/tiho.dir/Entity.cpp.s
+.PHONY : Entity.cpp.s
+
+Tank.o: Tank.cpp.o
+
+.PHONY : Tank.o
+
+# target to build an object file
+Tank.cpp.o:
+	$(MAKE) -f CMakeFiles/tiho.dir/build.make CMakeFiles/tiho.dir/Tank.cpp.o
+.PHONY : Tank.cpp.o
+
+Tank.i: Tank.cpp.i
+
+.PHONY : Tank.i
+
+# target to preprocess a source file
+Tank.cpp.i:
+	$(MAKE) -f CMakeFiles/tiho.dir/build.make CMakeFiles/tiho.dir/Tank.cpp.i
+.PHONY : Tank.cpp.i
+
+Tank.s: Tank.cpp.s
+
+.PHONY : Tank.s
+
+# target to generate assembly for a file
+Tank.cpp.s:
+	$(MAKE) -f CMakeFiles/tiho.dir/build.make CMakeFiles/tiho.dir/Tank.cpp.s
+.PHONY : Tank.cpp.s
+
 main.o: main.cxx.o
 
 .PHONY : main.o
@@ -159,6 +267,18 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... tiho"
+	@echo "... Animation.o"
+	@echo "... Animation.i"
+	@echo "... Animation.s"
+	@echo "... Car.o"
+	@echo "... Car.i"
+	@echo "... Car.s"
+	@echo "... Entity.o"
+	@echo "... Entity.i"
+	@echo "... Entity.s"
+	@echo "... Tank.o"
+	@echo "... Tank.i"
+	@echo "... Tank.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

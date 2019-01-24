@@ -1,22 +1,28 @@
 
+    #include <SFML/Graphics.hpp>
+
 	#include <iostream>
-	#include <SFML/Graphics.hpp>
 	#include <cmath>
 	#include <string>
-	
+
+    #include <list>
+
+    #include "Entity.h"
+
+    #include "Car.h"
+    #include "Tank.h"
+
+	#include "Animation.h"
+
 	const int Weight = 1600; // ширина главного окна
 	const int Height = 800;  // высота главного окна
 	
-	const int AmountTanks = 10;
-	
-	struct point {
-		int x;
-		int y;
-	};
+	const int AmountTanks = 5;
+	// const int AmountCars = 5;
 	
 	int main() {
 		
-		srand(time(NULL));
+		srand(time(0));
 		
 		std::cout << "start!" << std::endl;
 		
@@ -33,31 +39,32 @@
 		
 		sf::Texture tTank;
 		tTank.loadFromFile("images/tank.png");
-		
+
 		// создаём спрайты
 		sf::Sprite sBackground(tBackground);
-		sf::Sprite sCar(tCar);
-		sf::Sprite sTank(tTank);
-		
-		// фигура хексагон
-		sf::CircleShape fHexagon(80, 6);
-		
-		// массив танков
-		point tanks[AmountTanks];
-		
-		// заполняем массив
+
+		Animation asTank(tTank, 74, 108);
+		Animation asCar(tCar, 43, 45);
+
+		// танки, машинки и всё остальное
+		std::list <Entity *> objects;
+
+		// создание астероидов
 		for (int i = 0; i < AmountTanks; i++) {
-			tanks[i].x = rand() % Weight;
-			tanks[i].y = rand() % Height;
-		}		
-		
-		// свойства спрайтов
-		sCar.setPosition(200, 200);
-		// sTank.setPosition(200, 300);
-		fHexagon.setPosition(200, 300);
-		fHexagon.setFillColor(sf::Color::Transparent);
-		fHexagon.setOutlineColor(sf::Color::Green);
-		fHexagon.setOutlineThickness(1);
+			Tank *tank = new Tank();
+			Car *car = new Car();
+
+			tank->settings(asTank, rand() % Weight, rand() % Height, rand() % 360);
+			car->settings(asCar, rand() % Weight, rand() % Height, rand() % 360);
+
+			// вставка элемента в конец контейнера
+			objects.push_back(tank);
+			std::cout << i << "-ый танк " << tank->name << " создан." << '\n';
+
+			objects.push_back(car);
+			std::cout << i << "-ая машинка " << car->name << " создана." << '\n';
+		}
+
 		while (MWindow.isOpen()) {
 			sf::Event event;
 			
@@ -65,17 +72,27 @@
 				if (event.type == sf::Event::Closed) 
 					MWindow.close();
 			}
-			
+			// цикл обновления
+			for (auto i = objects.begin(); i != objects.end();) {
+				Entity *object = *i;
+				object->update();
+
+				if (object->alive == false) {
+					i = objects.erase(i);
+					delete object;
+				}
+				else
+					i++;
+			}
+
 			MWindow.clear();
 			
 			MWindow.draw(sBackground);
-			
-			for (int i = 0; i < 8; i++) {
-				sTank.setPosition(tanks[i].x, tanks[i].y);
-				MWindow.draw(sTank);
-			}			
-			MWindow.draw(sCar);
-			MWindow.draw(fHexagon);
+
+			// отображение танков
+			for (auto i:objects)
+				i->draw(MWindow);
+
 			MWindow.display();
 		}
 		
