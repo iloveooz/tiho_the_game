@@ -15,6 +15,7 @@ void Entity::update() {}
 
 void Entity::draw(sf::RenderWindow &app) {
     animation.sprite.setPosition((float )x, (float )y);
-    animation.sprite.setRotation((float )angle);
+    animation.sprite.setRotation(angle + x);
+    animation.sprite.setColor(sf::Color::Green);
     app.draw(animation.sprite);
 }
