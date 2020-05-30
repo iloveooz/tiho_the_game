@@ -6,13 +6,25 @@
 
 #IncludeRegexTransform: 
 
+/home/fahr/git/tiho_the_game/Animation.cpp
+Animation.h
+/home/fahr/git/tiho_the_game/Animation.h
+
 /home/fahr/git/tiho_the_game/Animation.h
 SFML/Graphics/Sprite.hpp
 -
 
+/home/fahr/git/tiho_the_game/Car.cpp
+Car.h
+/home/fahr/git/tiho_the_game/Car.h
+
 /home/fahr/git/tiho_the_game/Car.h
 cmath
 -
+Entity.h
+/home/fahr/git/tiho_the_game/Entity.h
+
+/home/fahr/git/tiho_the_game/Entity.cpp
 Entity.h
 /home/fahr/git/tiho_the_game/Entity.h
 
@@ -23,6 +35,12 @@ SFML/Graphics/RenderWindow.hpp
 -
 Animation.h
 /home/fahr/git/tiho_the_game/Animation.h
+
+/home/fahr/git/tiho_the_game/Tank.cpp
+Tank.h
+/home/fahr/git/tiho_the_game/Tank.h
+cmath
+-
 
 /home/fahr/git/tiho_the_game/Tank.h
 Entity.h
