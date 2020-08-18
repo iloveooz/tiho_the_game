@@ -1,8 +1,5 @@
 #include "Car.hpp"
 
-const int Weight = 1600; // ширина главного окна
-const int Height = 800;  // высота главного окна
-
 Car::Car() {
     m_dDx = sin(rand() % 2 + 1) * 2;
     m_dDy = cos(rand() % 2 + 1) * 2;

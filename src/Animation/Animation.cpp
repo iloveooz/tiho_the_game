@@ -1,8 +1,6 @@
 #include "Animation.hpp"
 
-Animation::Animation() {
-
-}
+Animation::Animation() {}
 
 Animation::Animation(sf::Texture &t, int wBorder, int hBorder) {
     m_sprite.setTexture(t);

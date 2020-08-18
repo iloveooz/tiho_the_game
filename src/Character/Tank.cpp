@@ -1,8 +1,5 @@
 #include "Tank.hpp"
 
-const int Weight = 1600; // ширина главного окна
-const int Height = 800;  // высота главного окна
-
 Tank::Tank() {
     m_dDx = rand() % 2 + 1;
     m_dDy = rand() % 2 + 1;

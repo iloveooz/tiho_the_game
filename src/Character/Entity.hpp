@@ -6,6 +6,7 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "../Game/Game.hpp"
 #include "../Animation/Animation.hpp"
 #include "../IObject/IObject.hpp"
 
@@ -18,6 +19,10 @@ public:
     virtual void update();
     void draw(sf::RenderWindow &app);
 
+    std::string& getName();
+    bool isAlive() const;
+
+protected:
     // координаты фигуры
     double m_dX;
     double m_dY;
@@ -30,7 +35,7 @@ public:
     double m_dAngle;
 
     // здоровье
-    bool m_bAlive = true;
+    bool m_bAlive;
 
     // наименование элемента
     std::string m_sName;
