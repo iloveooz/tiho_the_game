@@ -52,17 +52,17 @@
 		// создание танчиков
 		for (int i = 0; i < AmountTanks; i++) {
 			Tank *tank = new Tank();
-			// Car *car = new Car();
+			Car *car = new Car();
 
 			tank->settings(asTank, rand() % Weight, rand() % Height, rand() % 360);
-			// car->settings(asCar, rand() % Weight, rand() % Height, rand() % 360);
+			car->settings(asCar, rand() % Weight, rand() % Height, rand() % 360);
 
 			// вставка элемента в конец контейнера
 			objects.push_back(tank);
 			std::cout << i << "-ый танк " << tank->name << " создан." << '\n';
 
-			// objects.push_back(car);
-			// std::cout << i << "-ая машинка " << car->name << " создана." << '\n';
+			objects.push_back(car);
+			std::cout << i << "-ая машинка " << car->name << " создана." << '\n';
 		}
 
 		while (MWindow.isOpen()) {
