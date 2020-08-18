@@ -5,15 +5,9 @@
 
 class Tank : public Entity {
 public:
-    // конструктор
-    Tank () {
-        dx = rand() % 2 + 1;
-        dy = rand() % 2 + 1;
-        name = "tank";
-    }
+    Tank();
 
-    void update();
+    void update() override;
 };
-
 
 #endif //TIHO_TANK_HPP

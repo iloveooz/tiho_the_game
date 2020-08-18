@@ -10,8 +10,8 @@ public:
     static long getCounter();
     long getID() const;
 private:
-    static long m_counter;
-    long m_ID;
+    static long m_lCounter;
+    long m_lID;
 };
 
 #endif //TIHO_IOBJECT_HPP

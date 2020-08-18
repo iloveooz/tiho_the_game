@@ -1,19 +1,24 @@
 #include "Tank.hpp"
-#include <cmath>
 
 const int Weight = 1600; // ширина главного окна
 const int Height = 800;  // высота главного окна
+
+Tank::Tank() {
+    m_dDx = rand() % 2 + 1;
+    m_dDy = rand() % 2 + 1;
+    m_sName = "tank";
+}
 
 void Tank::update() {
     // x += dx;
     // y += dy;
 
-    x += sin(angle) * dx;
-    y -= cos(angle) * dy;
+    m_dX += sin(m_dAngle) * m_dDx;
+    m_dY -= cos(m_dAngle) * m_dDy;
 
-    if (x > Weight) x = 0;
-    if (x < 0) x = Weight;
+    if (m_dX > Weight) m_dX = 0;
+    if (m_dX < 0) m_dX = Weight;
 
-    if (y > Height) y = 0;
-    if (y < 0) y = Height;
+    if (m_dY > Height) m_dY = 0;
+    if (m_dY < 0) m_dY = Height;
 }

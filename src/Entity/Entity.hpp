@@ -2,50 +2,41 @@
 #define TIHO_ENTITY_HPP
 
 #include <string>
-#include <SFML/Graphics/RenderWindow.hpp>
+#include <cmath>
+
+#include <SFML/Graphics.hpp>
 
 #include "../Animation/Animation.hpp"
 #include "../IObject/IObject.hpp"
 
 class Entity : public IObject {
 public:
-    // координаты фигуры
-    double x;
-    double y;
+    Entity();
+    virtual ~Entity() {};
 
-    // смещение
-    double dx;
-    double dy;
-
-    // угол поворота
-    double angle;
-
-    // здоровье
-    bool alive = true;
-    int hp;
-
-    // наименование элемента
-    std::string name;
-
-    // анимация или спрайт
-    Animation animation;
-
-    // конструктор
-    Entity () {
-        alive = true;
-        hp = 100;
-    }
-
-    // установки при создании объекта
-    void settings (Animation &anim, double X, double Y, double Angle = 0);
-
-    // передвижение
+    void settings (Animation &animation, double x, double y, double angle = 0);
     virtual void update();
-
     void draw(sf::RenderWindow &app);
 
-    virtual ~Entity() = default;
-};
+    // координаты фигуры
+    double m_dX;
+    double m_dY;
 
+    // смещение
+    double m_dDx;
+    double m_dDy;
+
+    // угол поворота
+    double m_dAngle;
+
+    // здоровье
+    bool m_bAlive = true;
+
+    // наименование элемента
+    std::string m_sName;
+
+    // анимация или спрайт
+    Animation m_aAnimation;
+};
 
 #endif //TIHO_ENTITY_HPP

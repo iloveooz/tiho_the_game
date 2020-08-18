@@ -59,10 +59,10 @@
 
 			// вставка элемента в конец контейнера
 			objects.push_back(tank);
-			std::cout << i << "-ый танк " << tank->name << " создан." << '\n';
+			std::cout << i << "-ый танк " << tank->m_sName << " создан." << '\n';
 
 			objects.push_back(car);
-			std::cout << i << "-ая машинка " << car->name << " создана." << '\n';
+			std::cout << i << "-ая машинка " << car->m_sName << " создана." << '\n';
 		}
 
 		while (MWindow.isOpen()) {
@@ -77,7 +77,7 @@
 				Entity *object = *i;
 				object->update();
 
-				if (object->alive == false) {
+				if (object->m_bAlive == false) {
 					i = objects.erase(i);
 					delete object;
 				}

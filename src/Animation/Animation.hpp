@@ -5,13 +5,12 @@
 
 class Animation {
 public:
-    Animation ();
-    Animation (sf::Texture &t, int wBorder, int hBorder);
+    Animation();
+    Animation(sf::Texture &t, int wBorder, int hBorder);
 
     sf::Sprite& getSprite();
 private:
     sf::Sprite m_sprite;
 };
-
 
 #endif //TIHO_ANIMATION_HPP
