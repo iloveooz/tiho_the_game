@@ -1,7 +1,3 @@
-//
-// Created by fahr on 24.01.19.
-//
-
 #include "Car.h"
 
 const int Weight = 1600; // ширина главного окна

@@ -1,7 +1,3 @@
-//
-// Created by fahr on 24.01.19.
-//
-
 #ifndef TIHO_TANK_H
 #define TIHO_TANK_H
 

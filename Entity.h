@@ -1,7 +1,3 @@
-//
-// Created by fahr on 24.01.19.
-//
-
 #ifndef TIHO_ENTITY_H
 #define TIHO_ENTITY_H
 

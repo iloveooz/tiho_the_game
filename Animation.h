@@ -1,7 +1,3 @@
-//
-// Created by fahr on 24.01.19.
-//
-
 #ifndef TIHO_ANIMATION_H
 #define TIHO_ANIMATION_H
 
