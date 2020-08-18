@@ -4,7 +4,7 @@ project(tiho)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_COMPILER /usr/bin/g++)
 
-set(SOURCE_FILES src/main.cpp src/Entity/Car.cpp src/Entity/Car.hpp src/Entity/Tank.cpp src/Entity/Tank.hpp src/Entity/Entity.cpp src/Entity/Entity.hpp src/Animation/Animation.cpp src/Animation/Animation.hpp src/IObject/IObject.hpp src/IObject/IObject.cpp)
+set(SOURCE_FILES src/main.cpp src/Entity/Car.cpp src/Entity/Car.hpp src/Entity/Tank.cpp src/Entity/Tank.hpp src/Entity/Entity.cpp src/Entity/Entity.hpp src/Animation/Animation.cpp src/Animation/Animation.hpp src/IObject/IObject.hpp src/IObject/IObject.cpp src/Game/Game.cpp src/Game/Game.hpp)
 add_executable(tiho ${SOURCE_FILES})
 
 set(EXECUTABLE_NAME ${PROJECT_NAME})
