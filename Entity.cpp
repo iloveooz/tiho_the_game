@@ -1,4 +1,4 @@
-#include "Entity.h"
+#include "Entity.hpp"
 
 void Entity::settings(Animation &anim, double X, double Y, double Angle) {
     x = X;

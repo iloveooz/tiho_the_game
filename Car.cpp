@@ -1,4 +1,4 @@
-#include "Car.h"
+#include "Car.hpp"
 
 const int Weight = 1600; // ширина главного окна
 const int Height = 800;  // высота главного окна

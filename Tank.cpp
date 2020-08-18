@@ -1,4 +1,4 @@
-#include "Tank.h"
+#include "Tank.hpp"
 #include <cmath>
 
 const int Weight = 1600; // ширина главного окна

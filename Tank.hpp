@@ -1,7 +1,7 @@
-#ifndef TIHO_TANK_H
-#define TIHO_TANK_H
+#ifndef TIHO_TANK_HPP
+#define TIHO_TANK_HPP
 
-#include "Entity.h"
+#include "Entity.hpp"
 
 class Tank : public Entity {
 public:
@@ -16,4 +16,4 @@ public:
 };
 
 
-#endif //TIHO_TANK_H
+#endif //TIHO_TANK_HPP

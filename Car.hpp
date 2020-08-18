@@ -1,8 +1,8 @@
-#ifndef TIHO_CAR_H
-#define TIHO_CAR_H
+#ifndef TIHO_CAR_HPP
+#define TIHO_CAR_HPP
 
 #include <cmath>
-#include "Entity.h"
+#include "Entity.hpp"
 
 class Car : public Entity {
 public:
@@ -17,4 +17,4 @@ public:
 };
 
 
-#endif //TIHO_CAR_H
+#endif //TIHO_CAR_HPP

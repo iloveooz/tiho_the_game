@@ -1,11 +1,13 @@
-#ifndef TIHO_ENTITY_H
-#define TIHO_ENTITY_H
+#ifndef TIHO_ENTITY_HPP
+#define TIHO_ENTITY_HPP
 
 #include <string>
 #include <SFML/Graphics/RenderWindow.hpp>
-#include "Animation.h"
 
-class Entity {
+#include "Animation.hpp"
+#include "IObject/IObject.hpp"
+
+class Entity : public IObject {
 public:
     // координаты фигуры
     double x;
@@ -46,4 +48,4 @@ public:
 };
 
 
-#endif //TIHO_ENTITY_H
+#endif //TIHO_ENTITY_HPP

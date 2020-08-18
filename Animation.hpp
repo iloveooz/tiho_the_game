@@ -1,5 +1,5 @@
-#ifndef TIHO_ANIMATION_H
-#define TIHO_ANIMATION_H
+#ifndef TIHO_ANIMATION_HPP
+#define TIHO_ANIMATION_HPP
 
 #include <SFML/Graphics/Sprite.hpp>
 
@@ -16,4 +16,4 @@ public:
 };
 
 
-#endif //TIHO_ANIMATION_H
+#endif //TIHO_ANIMATION_HPP
