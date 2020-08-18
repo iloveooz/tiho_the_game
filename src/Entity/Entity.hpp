@@ -4,8 +4,8 @@
 #include <string>
 #include <SFML/Graphics/RenderWindow.hpp>
 
-#include "Animation.hpp"
-#include "IObject/IObject.hpp"
+#include "../Animation/Animation.hpp"
+#include "../IObject/IObject.hpp"
 
 class Entity : public IObject {
 public:

@@ -7,12 +7,12 @@
 
     #include <list>
 
-    #include "Entity.hpp"
+    #include "Entity/Entity.hpp"
 
-    #include "Car.hpp"
-    #include "Tank.hpp"
+    #include "Entity/Car.hpp"
+    #include "Entity/Tank.hpp"
 
-	#include "Animation.hpp"
+	#include "Animation/Animation.hpp"
 
 	const int Weight = 1600; // ширина главного окна
 	const int Height = 800;  // высота главного окна
