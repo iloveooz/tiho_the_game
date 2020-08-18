@@ -5,14 +5,12 @@
 
 class Animation {
 public:
-    sf::Sprite sprite;
+    Animation ();
+    Animation (sf::Texture &t, int wBorder, int hBorder);
 
-    Animation () {}
-
-    Animation (sf::Texture &t, int wBorder, int hBorder) {
-        sprite.setTexture(t);
-        sprite.setOrigin(wBorder / 2, hBorder / 2);
-    }
+    sf::Sprite& getSprite();
+private:
+    sf::Sprite m_sprite;
 };
 
 

@@ -1,20 +1,20 @@
 #include "IObject.hpp"
 
-long IObject::counter = 0;
+long IObject::m_counter = 0;
 
 IObject::IObject() {
-    counter++;
-    ID = counter;
+    m_counter++;
+    m_ID = m_counter;
 }
 
 IObject::~IObject() {
-    counter--;
+    m_counter--;
 }
 
 long IObject::getCounter() {
-    return counter;
+    return m_counter;
 }
 
 long IObject::getID() const {
-    return ID;
+    return m_ID;
 }

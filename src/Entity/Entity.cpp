@@ -10,8 +10,8 @@ void Entity::settings(Animation &anim, double X, double Y, double Angle) {
 void Entity::update() {}
 
 void Entity::draw(sf::RenderWindow &app) {
-    animation.sprite.setPosition((float )x, (float )y);
-    animation.sprite.setRotation(angle + x);
-    animation.sprite.setColor(sf::Color::Green);
-    app.draw(animation.sprite);
+    animation.getSprite().setPosition((float )x, (float )y);
+    animation.getSprite().setRotation(angle + x);
+    animation.getSprite().setColor(sf::Color::Green);
+    app.draw(animation.getSprite());
 }
