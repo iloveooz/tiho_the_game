@@ -92,5 +92,7 @@ int main() {
         MWindow.display();
     }
 
+    std::cout << IObject::getCounter() << std::endl;
+
     return 0;
 }

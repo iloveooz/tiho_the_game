@@ -1,7 +1,9 @@
 #ifndef TIHO_GAMESTATE_HPP
 #define TIHO_GAMESTATE_HPP
 
-class GameState {
+#include "../IObject/IObject.hpp"
+
+class GameState : public IObject {
 
 };
 

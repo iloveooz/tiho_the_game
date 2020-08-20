@@ -1,6 +1,8 @@
 #ifndef TIHO_IOBJECT_HPP
 #define TIHO_IOBJECT_HPP
 
+#include <iostream>
+
 // абстрактный класс (интерфейс) для всех объектов
 class IObject {
 public:

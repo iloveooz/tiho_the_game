@@ -1,7 +1,9 @@
 #ifndef TIHO_MAP_HPP
 #define TIHO_MAP_HPP
 
-class Map {
+#include "../IObject/IObject.hpp"
+
+class Map : public IObject {
 
 };
 

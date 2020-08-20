@@ -3,7 +3,9 @@
 
 #include <SFML/Graphics/Sprite.hpp>
 
-class Animation {
+#include "../IObject/IObject.hpp"
+
+class Animation : public IObject {
 public:
     Animation();
     Animation(sf::Texture &t, int wBorder, int hBorder);
