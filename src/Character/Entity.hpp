@@ -6,9 +6,11 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "../Game/Game.hpp"
 #include "../Animation/Animation.hpp"
 #include "../IObject/IObject.hpp"
+
+const int Weight = 1600; // ширина главного окна
+const int Height = 800;  // высота главного окна
 
 class Entity : public IObject {
 public:
