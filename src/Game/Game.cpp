@@ -38,6 +38,19 @@ void Game::run() {
         m_window.clear();
         m_window.draw(m_sBackground);
 
+        // цикл обновления
+        for (auto i = m_objects.begin(); i != m_objects.end();) {
+            Entity *object = *i;
+            object->update();
+
+            if (!object->isAlive()) {
+                i = m_objects.erase(i);
+                delete object;
+            }
+            else
+                i++;
+        }
+
         // отображение танков
         for (auto i : m_objects)
             i->draw(m_window);
