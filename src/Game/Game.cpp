@@ -16,8 +16,8 @@ Game::Game() : m_window(sf::VideoMode(Weight, Height), "Tycho Planet") {
 
     m_sBackground.setTexture(m_tBackground);
 
-    Animation animTank(m_tTank, 74, 108);
-    Animation animCar(m_tCar, 43, 45);
+    m_animTank.setTexture(m_tTank, 74, 108);
+    m_animCar.setTexture(m_tCar, 43, 45);
 }
 
 Game::~Game() {
@@ -34,21 +34,8 @@ void Game::run() {
             if (event.type == sf::Event::Closed)
                 m_window.close();
         }
-        // цикл обновления
-        for (auto i = m_objects.begin(); i != m_objects.end();) {
-            Entity *object = *i;
-            object->update();
-
-            if (!object->isAlive()) {
-                i = m_objects.erase(i);
-                delete object;
-            }
-            else
-                i++;
-        }
 
         m_window.clear();
-
         m_window.draw(m_sBackground);
 
         // отображение танков
