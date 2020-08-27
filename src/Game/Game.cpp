@@ -1,4 +1,6 @@
 #include "Game.hpp"
+#include "../Factory/CarFactory.hpp"
+#include "../Factory/TankFactory.hpp"
 
 Game::Game() : m_window(sf::VideoMode(Weight, Height), "Tycho Planet") {
     m_window.setFramerateLimit(60);
@@ -51,7 +53,7 @@ void Game::run() {
                 i++;
         }
 
-        // отображение танков
+        // отображение объектов
         for (auto i : m_objects)
             i->draw(m_window);
 
@@ -60,15 +62,8 @@ void Game::run() {
 }
 
 void Game::createObjects() {
-    for (int i = 0; i < m_amountTanks; i++) {
-        Tank *tank = new Tank();
-        Car *car = new Car();
-
-        tank->settings(m_animTank, rand() % Weight, rand() % Height, rand() % 360);
-        car->settings(m_animCar, rand() % Weight, rand() % Height, rand() % 360);
-
-        // вставка элемента в конец контейнера
-        m_objects.push_back(tank);
-        m_objects.push_back(car);
-    }
+    TankFactory tankFactory;
+    Entity *tank = tankFactory.createEntity();
+    tank->settings(m_animTank, rand() % Weight, rand() % Height, 0);
+    m_objects.push_back(tank);
 }

@@ -7,9 +7,6 @@ Tank::Tank() {
 }
 
 void Tank::update() {
-    // x += dx;
-    // y += dy;
-
     m_dX += sin(m_dAngle) * m_dDx;
     m_dY -= cos(m_dAngle) * m_dDy;
 

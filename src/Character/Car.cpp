@@ -1,8 +1,8 @@
 #include "Car.hpp"
 
 Car::Car() {
-    m_dDx = sin(rand() % 2 + 1) * 2;
-    m_dDy = cos(rand() % 2 + 1) * 2;
+    m_dDx = rand() % 2 + 1;
+    m_dDy = rand() % 2 + 1;
     m_sName = "car";
 }
 

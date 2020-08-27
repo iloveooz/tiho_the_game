@@ -29,7 +29,16 @@ set(SOURCE_FILES
         src/Map/Map.hpp
 
         src/Game/GameState.cpp
-        src/Game/GameState.hpp)
+        src/Game/GameState.hpp
+
+        src/Factory/CharacterFactory.hpp
+
+        src/Factory/TankFactory.cpp
+        src/Factory/TankFactory.hpp
+
+        src/Factory/CarFactory.cpp
+        src/Factory/CarFactory.hpp)
+
 add_executable(tiho ${SOURCE_FILES})
 
 set(EXECUTABLE_NAME ${PROJECT_NAME})
