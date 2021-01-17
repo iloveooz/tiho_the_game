@@ -20,7 +20,6 @@ public:
     Game();
     ~Game();
 
-    void createObjects();
     void run();
 
     sf::Texture& getBackground() const;
@@ -28,9 +27,13 @@ public:
     sf::Texture& getTankTexture() const;
 
 private:
-    void processEvents();
+    void createObjects();
     void updateObjects();
     void renderObjects();
+
+    void processEvents();
+
+    void handlePlayerEvent(sf::Keyboard::Key key, bool isPressed);
 
     sf::RenderWindow m_window;
     std::list <Entity *> m_objects;
@@ -43,6 +46,11 @@ private:
 
     Animation m_animTank;
     Animation m_animCar;
+
+    bool m_isMovingUp;
+    bool m_isMovingDown;
+    bool m_isMovingLeft;
+    bool m_isMovingRight;
 
     long m_amountTanks;
 };

@@ -9,12 +9,12 @@ void Entity::settings(Animation &animation, double x, double y, double angle) {
     m_aAnimation = animation;
 }
 
-void Entity::update() {}
+void Entity::update(double dx, double dy) {}
 
 void Entity::draw(sf::RenderWindow &app) {
     m_aAnimation.getSprite().setPosition((float) m_dX, (float) m_dY);
-    m_aAnimation.getSprite().setRotation(m_dAngle + m_dX);
-    m_aAnimation.getSprite().setColor(sf::Color::Green);
+    m_aAnimation.getSprite().setRotation(m_dAngle);
+    m_aAnimation.getSprite().setColor(sf::Color::Red);
     app.draw(m_aAnimation.getSprite());
 }
 

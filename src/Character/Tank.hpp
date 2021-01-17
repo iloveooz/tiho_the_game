@@ -7,7 +7,7 @@ class Tank : public Entity {
 public:
     Tank();
 
-    void update() override;
+    void update(double dx, double dy) override;
 };
 
 #endif //TIHO_TANK_HPP

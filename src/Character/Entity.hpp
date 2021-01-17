@@ -18,7 +18,7 @@ public:
     virtual ~Entity() {};
 
     void settings (Animation &animation, double x, double y, double angle = 0);
-    virtual void update();
+    virtual void update(double dx, double dy);
     void draw(sf::RenderWindow &app);
 
     std::string& getName();

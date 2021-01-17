@@ -7,7 +7,7 @@ class Car : public Entity {
 public:
     Car();
 
-    void update() override;
+    void update(double dx, double dy) override;
 };
 
 #endif //TIHO_CAR_HPP

@@ -4,6 +4,7 @@
 
 Game::Game() : m_window(sf::VideoMode(Weight, Height), "Tycho Planet") {
     m_window.setFramerateLimit(60);
+    m_window.setVerticalSyncEnabled(true);
 
     m_amountTanks = 5;
 
@@ -49,20 +50,22 @@ void Game::createObjects() {
     m_objects.push_back(car);
 }
 
-void Game::processEvents() {
-    sf::Event event;
-
-    while (m_window.pollEvent(event)) {
-        if (event.type == sf::Event::Closed)
-            m_window.close();
-    }
-}
-
 void Game::updateObjects() {
+    double dx = 0.0, dy = 0.0;
     // цикл обновления
     for (auto i = m_objects.begin(); i != m_objects.end();) {
         Entity *object = *i;
-        object->update();
+
+        if (m_isMovingUp)
+            dy -= 1.0;
+        if (m_isMovingDown)
+            dy += 1.0;
+        if (m_isMovingLeft)
+            dx -= 1.0;
+        if (m_isMovingRight)
+            dx += 1.0;
+
+        object->update(dx, dy);
 
         if (!object->isAlive()) {
             i = m_objects.erase(i);
@@ -75,6 +78,7 @@ void Game::updateObjects() {
 
 void Game::renderObjects() {
     m_window.clear();
+
     m_window.draw(m_sBackground);
 
     // отображение объектов
@@ -82,4 +86,34 @@ void Game::renderObjects() {
         i->draw(m_window);
 
     m_window.display();
+}
+
+void Game::processEvents() {
+    sf::Event event;
+
+    // обработка пользовательского ввода
+    while (m_window.pollEvent(event)) {
+        switch(event.type) {
+            case sf::Event::Closed:
+                m_window.close();
+                break;
+            case sf::Event::KeyPressed:
+                handlePlayerEvent(event.key.code, true);
+                break;
+            case sf::Event::KeyReleased:
+                handlePlayerEvent(event.key.code, false);
+                break;
+        }
+    }
+}
+
+void Game::handlePlayerEvent(sf::Keyboard::Key key, bool isPressed) {
+    if (key == sf::Keyboard::Up)
+        m_isMovingUp = isPressed;
+    else if (key == sf::Keyboard::Down)
+        m_isMovingDown = isPressed;
+    else if (key == sf::Keyboard::Left)
+        m_isMovingLeft = isPressed;
+    else if (key == sf::Keyboard::Right)
+        m_isMovingRight = isPressed;
 }

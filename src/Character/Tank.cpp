@@ -1,14 +1,14 @@
 #include "Tank.hpp"
 
 Tank::Tank() {
-    m_dDx = rand() % 2 + 1;
-    m_dDy = rand() % 2 + 1;
+    m_dDx = 0.0;
+    m_dDy = 0.0;
     m_sName = "tank";
 }
 
-void Tank::update() {
-    m_dX += sin(m_dAngle) * m_dDx;
-    m_dY -= cos(m_dAngle) * m_dDy;
+void Tank::update(double dx, double dy) {
+    m_dX += m_dDx + dx;
+    m_dY += m_dDy + dy;
 
     if (m_dX > Weight) m_dX = 0;
     if (m_dX < 0) m_dX = Weight;

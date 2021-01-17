@@ -1,14 +1,14 @@
 #include "Car.hpp"
 
 Car::Car() {
-    m_dDx = rand() % 2 + 1;
-    m_dDy = rand() % 2 + 1;
+    m_dDx = 0.0;
+    m_dDy = 0.0;
     m_sName = "car";
 }
 
-void Car::update() {
-    m_dX += m_dDx;
-    m_dY += m_dDy;
+void Car::update(double dx, double dy) {
+    m_dX += m_dDx + dx;
+    m_dY += m_dDy + dy;
 
     if (m_dX > Weight) m_dX = 0;
     if (m_dX < 0) m_dX = Weight;
