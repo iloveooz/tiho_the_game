@@ -23,11 +23,15 @@ public:
     void createObjects();
     void run();
 
-    sf::Texture& getBackground();
-    sf::Texture& getCarTexture();
-    sf::Texture& getTankTexture();
+    sf::Texture& getBackground() const;
+    sf::Texture& getCarTexture() const;
+    sf::Texture& getTankTexture() const;
 
 private:
+    void processEvents();
+    void updateObjects();
+    void renderObjects();
+
     sf::RenderWindow m_window;
     std::list <Entity *> m_objects;
 

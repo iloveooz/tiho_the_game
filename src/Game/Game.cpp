@@ -30,40 +30,56 @@ void Game::run() {
     createObjects();
 
     while (m_window.isOpen()) {
-        sf::Event event;
-
-        while (m_window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed)
-                m_window.close();
-        }
-
-        m_window.clear();
-        m_window.draw(m_sBackground);
-
-        // цикл обновления
-        for (auto i = m_objects.begin(); i != m_objects.end();) {
-            Entity *object = *i;
-            object->update();
-
-            if (!object->isAlive()) {
-                i = m_objects.erase(i);
-                delete object;
-            }
-            else
-                i++;
-        }
-
-        // отображение объектов
-        for (auto i : m_objects)
-            i->draw(m_window);
-
-        m_window.display();
+        processEvents();
+        updateObjects();
+        renderObjects();
     }
 }
 
 void Game::createObjects() {
     TankFactory tankFactory;
+    CarFactory carFactory;
+
     Entity *tank = tankFactory.createEntity();
     tank->settings(m_animTank, rand() % Weight, rand() % Height, 0);
     m_objects.push_back(tank);
+
+    Entity *car = carFactory.createEntity();
+    car->settings(m_animCar, rand() % Weight, rand() % Height, 0);
+    m_objects.push_back(car);
+}
+
+void Game::processEvents() {
+    sf::Event event;
+
+    while (m_window.pollEvent(event)) {
+        if (event.type == sf::Event::Closed)
+            m_window.close();
+    }
+}
+
+void Game::updateObjects() {
+    // цикл обновления
+    for (auto i = m_objects.begin(); i != m_objects.end();) {
+        Entity *object = *i;
+        object->update();
+
+        if (!object->isAlive()) {
+            i = m_objects.erase(i);
+            delete object;
+        }
+        else
+            i++;
+    }
+}
+
+void Game::renderObjects() {
+    m_window.clear();
+    m_window.draw(m_sBackground);
+
+    // отображение объектов
+    for (auto i : m_objects)
+        i->draw(m_window);
+
+    m_window.display();
 }
