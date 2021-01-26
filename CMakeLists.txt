@@ -13,6 +13,9 @@ set(SOURCE_FILES
         src/Character/Tank.cpp
         src/Character/Tank.hpp
 
+        src/Character/Worker.cpp
+        src/Character/Worker.hpp
+
         src/Character/Entity.cpp
         src/Character/Entity.hpp
 
