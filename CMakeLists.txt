@@ -40,7 +40,16 @@ set(SOURCE_FILES
         src/Factory/TankFactory.hpp
 
         src/Factory/CarFactory.cpp
-        src/Factory/CarFactory.hpp)
+        src/Factory/CarFactory.hpp
+
+        src/Resource/Iron.cpp
+        src/Resource/Iron.hpp
+
+        src/Resource/Oil.cpp
+        src/Resource/Oil.hpp
+
+        src/Resource/Energy.cpp
+        src/Resource/Energy.hpp)
 
 add_executable(tiho ${SOURCE_FILES})
 
