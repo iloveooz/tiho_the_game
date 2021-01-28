@@ -66,7 +66,7 @@ void Game::updateObjects() {
         object->update(dx, dy);
 
         if (!object->isAlive()) {
-            object = nullptr;
+            // TODO: object = nullptr; do something smart
         }
     }
 }
