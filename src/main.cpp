@@ -9,5 +9,7 @@ int main() {
     Game game;
     game.run();
 
+    int i = 0;
+
     return 0;
 }
