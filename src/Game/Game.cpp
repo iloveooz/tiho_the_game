@@ -8,13 +8,13 @@ Game::Game() : m_window(sf::VideoMode(Weight, Height), "Tycho Planet") {
 
     m_amountTanks = 5;
 
-    if (!m_tBackground.loadFromFile("images/terrain.png"))
+    if (!m_tBackground.loadFromFile("images/tiles/terrain.png"))
         throw std::runtime_error("Unable to load the terrain texture file");
 
-    if (!m_tCar.loadFromFile("images/car.png"))
+    if (!m_tCar.loadFromFile("images/characters/car.png"))
         throw std::runtime_error("Unable to load the terrain texture file");
 
-    if (!m_tTank.loadFromFile("images/tank.png"))
+    if (!m_tTank.loadFromFile("images/characters/tank.png"))
         throw std::runtime_error("Unable to load the terrain texture file");
 
     m_sBackground.setTexture(m_tBackground);
