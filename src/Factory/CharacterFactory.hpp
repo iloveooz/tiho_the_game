@@ -8,7 +8,7 @@ public:
     CharacterFactory() {}
     virtual ~CharacterFactory() {}
 
-    virtual Entity* createEntity() = 0;
+    virtual std::unique_ptr<Entity> createEntity() = 0;
 };
 
 #endif //TIHO_CHARACTERFACTORY_HPP

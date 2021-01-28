@@ -41,21 +41,19 @@ void Game::createObjects() {
     TankFactory tankFactory;
     CarFactory carFactory;
 
-    Entity *tank = tankFactory.createEntity();
+    std::unique_ptr<Entity> tank = tankFactory.createEntity();
     tank->settings(m_animTank, rand() % Weight, rand() % Height, 0);
-    m_objects.push_back(tank);
+    m_objects.push_back(std::move(tank));
 
-    Entity *car = carFactory.createEntity();
+    std::unique_ptr<Entity> car = carFactory.createEntity();
     car->settings(m_animCar, rand() % Weight, rand() % Height, 0);
-    m_objects.push_back(car);
+    m_objects.push_back(std::move(car));
 }
 
 void Game::updateObjects() {
     double dx = 0.0, dy = 0.0;
     // цикл обновления
-    for (auto i = m_objects.begin(); i != m_objects.end();) {
-        Entity *object = *i;
-
+    for (auto &object : m_objects) {
         if (m_isMovingUp)
             dy -= 1.0;
         if (m_isMovingDown)
@@ -68,11 +66,8 @@ void Game::updateObjects() {
         object->update(dx, dy);
 
         if (!object->isAlive()) {
-            i = m_objects.erase(i);
-            delete object;
+            object = nullptr;
         }
-        else
-            i++;
     }
 }
 
@@ -82,8 +77,8 @@ void Game::renderObjects() {
     m_window.draw(m_sBackground);
 
     // отображение объектов
-    for (auto i : m_objects)
-        i->draw(m_window);
+    for (auto const &object : m_objects)
+        object->draw(m_window);
 
     m_window.display();
 }

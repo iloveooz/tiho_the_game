@@ -8,7 +8,7 @@ public:
     CarFactory() {}
     virtual ~CarFactory() {}
 
-    Entity* createEntity() override;
+    std::unique_ptr<Entity> createEntity() override;
 };
 
 #endif //TIHO_CARFACTORY_HPP

@@ -36,7 +36,7 @@ private:
     void handlePlayerEvent(sf::Keyboard::Key key, bool isPressed);
 
     sf::RenderWindow m_window;
-    std::list <Entity *> m_objects;
+    std::list<std::unique_ptr<Entity>> m_objects;
 
     sf::Texture m_tBackground;
     sf::Texture m_tCar;

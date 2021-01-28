@@ -8,7 +8,7 @@ public:
     TankFactory() {}
     virtual ~TankFactory() {}
 
-    Entity* createEntity() override;
+    std::unique_ptr<Entity> createEntity() override;
 };
 
 #endif //TIHO_TANKFACTORY_HPP

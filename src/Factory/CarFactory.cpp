@@ -1,6 +1,6 @@
 #include "CarFactory.hpp"
 #include "../Character/Car.hpp"
 
-Entity *CarFactory::createEntity() {
-    return new Car;
+std::unique_ptr<Entity> CarFactory::createEntity() {
+    return std::unique_ptr<Entity>(new Car);
 }
