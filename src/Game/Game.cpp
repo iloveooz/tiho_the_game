@@ -66,7 +66,7 @@ void Game::updateObjects() {
         object->update(dx, dy);
 
         if (!object->isAlive()) {
-            // TODO: object = nullptr; do something smart
+            m_objects.remove(object);
         }
     }
 }
