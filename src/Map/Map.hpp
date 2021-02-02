@@ -22,11 +22,11 @@ namespace World {
 
         virtual ~Map();
 
-        bool isCellEmpty() const;
-        bool isCellWater() const;
-        bool isCellMeadow() const;
-        bool isCellDesert() const;
-        bool isCellMountain() const;
+        bool isCellEmpty(sf::Vector2i position) const;
+        bool isCellWater(sf::Vector2i position) const;
+        bool isCellMeadow(sf::Vector2i position) const;
+        bool isCellDesert(sf::Vector2i position) const;
+        bool isCellMountain(sf::Vector2i position) const;
 
     private:
         sf::Vector2i m_vMazeSize;
