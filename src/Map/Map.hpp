@@ -1,6 +1,7 @@
 #ifndef TIHO_MAP_HPP
 #define TIHO_MAP_HPP
 
+#include <SFML/Graphics.hpp>
 #include "../IObject/IObject.hpp"
 
 namespace World {
@@ -16,6 +17,9 @@ namespace World {
     class Map : public IObject {
     public:
         Map();
+
+        Map(const sf::Vector2i &mMazeSize);
+
         virtual ~Map();
 
         bool isCellEmpty() const;
@@ -23,6 +27,10 @@ namespace World {
         bool isCellMeadow() const;
         bool isCellDesert() const;
         bool isCellMountain() const;
+
+    private:
+        sf::Vector2i m_vMazeSize;
+        std::vector<CellType> m_vMazeData;
 
     };
 }
