@@ -49,7 +49,34 @@ set(SOURCE_FILES
         src/Resource/Oil.hpp
 
         src/Resource/Energy.cpp
-        src/Resource/Energy.hpp)
+        src/Resource/Energy.hpp
+
+        src/Building/MainBaseBuilding.cpp
+        src/Building/MainBaseBuilding.hpp
+
+        src/Building/GeneratorBuilding.cpp
+        src/Building/GeneratorBuilding.hpp
+
+        src/Building/MineBuilding.cpp
+        src/Building/MineBuilding.hpp
+
+        src/Building/Building.cpp
+        src/Building/Building.hpp
+
+        src/Building/OilDerrickBuilding.cpp
+        src/Building/OilDerrickBuilding.hpp
+
+        src/Building/FactoryBuilding.cpp
+        src/Building/FactoryBuilding.hpp
+
+        src/Building/ArsenalBuilding.cpp
+        src/Building/ArsenalBuilding.hpp
+
+        src/Building/CannonBuilding.cpp
+        src/Building/CannonBuilding.hpp
+
+        src/Building/LaboratoryBuilding.cpp
+        src/Building/LaboratoryBuilding.hpp)
 
 add_executable(tiho ${SOURCE_FILES})
 
