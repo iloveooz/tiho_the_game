@@ -34,6 +34,7 @@ protected:
     double m_dAngle;
 
     // здоровье
+    int m_iHealth;
     bool m_bAlive;
 
     // наименование элемента

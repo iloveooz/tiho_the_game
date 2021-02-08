@@ -28,6 +28,8 @@ namespace World {
         bool isCellDesert(sf::Vector2i position) const;
         bool isCellMountain(sf::Vector2i position) const;
 
+        void loadLevel();
+
     private:
         sf::Vector2i m_vMazeSize;
         std::vector<CellType> m_vMazeData;

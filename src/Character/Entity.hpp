@@ -34,9 +34,11 @@ protected:
     double m_dDy;
 
     // угол поворота
+    double m_dSpeed;
     double m_dAngle;
 
     // здоровье
+    int m_iHealth;
     bool m_bAlive;
 
     // наименование элемента
