@@ -76,7 +76,11 @@ set(SOURCE_FILES
         src/Building/CannonBuilding.hpp
 
         src/Building/LaboratoryBuilding.cpp
-        src/Building/LaboratoryBuilding.hpp)
+        src/Building/LaboratoryBuilding.hpp
+
+        src/Building/NuclearSiloBuilding.cpp
+
+        src/Building/NuclearSiloBuilding.hpp)
 
 add_executable(tiho ${SOURCE_FILES})
 
