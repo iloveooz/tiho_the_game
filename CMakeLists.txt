@@ -79,8 +79,19 @@ set(SOURCE_FILES
         src/Building/LaboratoryBuilding.hpp
 
         src/Building/NuclearSiloBuilding.cpp
+        src/Building/NuclearSiloBuilding.hpp
 
-        src/Building/NuclearSiloBuilding.hpp)
+        src/Game/MenuState.cpp
+        src/Game/MenuState.hpp
+
+        src/Game/PlayingState.cpp
+        src/Game/PlayingState.hpp
+
+        src/Game/WonState.cpp
+        src/Game/WonState.hpp
+
+        src/Game/LostState.cpp
+        src/Game/LostState.hpp)
 
 add_executable(tiho ${SOURCE_FILES})
 
