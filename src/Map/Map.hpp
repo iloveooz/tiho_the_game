@@ -13,7 +13,8 @@ namespace World {
         Desert,
         Mountain,
         OilSpot,
-        IronSpot
+        IronSpot,
+        StartPoint
     };
 
     class Map : public IObject {
@@ -32,6 +33,8 @@ namespace World {
 
         bool isCellIronSpot(sf::Vector2i position) const;
         bool isCellOilSpot(sf::Vector2i position) const;
+
+        bool isCellStartPoint(sf::Vector2i position) const;
 
         void loadLevel();
 
