@@ -11,7 +11,9 @@ namespace World {
         Water,
         Meadow,
         Desert,
-        Mountain
+        Mountain,
+        OilSpot,
+        IronSpot
     };
 
     class Map : public IObject {
@@ -27,6 +29,9 @@ namespace World {
         bool isCellMeadow(sf::Vector2i position) const;
         bool isCellDesert(sf::Vector2i position) const;
         bool isCellMountain(sf::Vector2i position) const;
+
+        bool isCellIronSpot(sf::Vector2i position) const;
+        bool isCellOilSpot(sf::Vector2i position) const;
 
         void loadLevel();
 
