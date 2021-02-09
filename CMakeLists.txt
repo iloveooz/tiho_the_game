@@ -91,7 +91,7 @@ set(SOURCE_FILES
         src/Game/WonState.hpp
 
         src/Game/LostState.cpp
-        src/Game/LostState.hpp)
+        src/Game/LostState.hpp src/Character/SpitFire.cpp src/Character/SpitFire.hpp)
 
 add_executable(tiho ${SOURCE_FILES})
 
