@@ -14,6 +14,11 @@
 #include "../Character/Tank.hpp"
 
 #include "../Animation/Animation.hpp"
+#include "GameState.hpp"
+
+namespace States {
+    class GameState;
+}
 
 class Game : public IObject {
 public:
@@ -37,6 +42,9 @@ private:
 
     sf::RenderWindow m_window;
     std::list<std::unique_ptr<Entity>> m_objects;
+
+    std::unique_ptr<States::GameState> m_pCurrentState;
+    std::array<std::unique_ptr<States::GameState>, States::TypeState::Count> m_gameStates;
 
     sf::Texture m_tBackground;
     sf::Texture m_tCar;

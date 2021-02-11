@@ -5,15 +5,16 @@
 
 #include "../IObject/IObject.hpp"
 
-#include "Game.hpp"
+class Game;
 
 namespace States {
 
-    enum State {
+    enum TypeState {
         Menu,
         Playing,
         Won,
-        Lost
+        Lost,
+        Count
     };
 
     class GameState : public IObject {

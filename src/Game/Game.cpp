@@ -24,7 +24,6 @@ Game::Game() : m_window(sf::VideoMode(Weight, Height), "Tycho Planet") {
 }
 
 Game::~Game() {
-
 }
 
 void Game::run() {
@@ -88,7 +87,7 @@ void Game::processEvents() {
 
     // обработка пользовательского ввода
     while (m_window.pollEvent(event)) {
-        switch(event.type) {
+        switch (event.type) {
             case sf::Event::Closed:
                 m_window.close();
                 break;

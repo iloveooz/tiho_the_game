@@ -8,6 +8,7 @@
 
 #include "../Animation/Animation.hpp"
 #include "../IObject/IObject.hpp"
+#include "../Map/Map.hpp"
 
 const int Weight = 1600; // ширина главного окна
 const int Height = 800;  // высота главного окна
@@ -46,6 +47,9 @@ protected:
 
     // анимация или спрайт
     Animation m_aAnimation;
+
+private:
+    std::unique_ptr<World::Map> m_pMap;
 };
 
 #endif //TIHO_ENTITY_HPP
