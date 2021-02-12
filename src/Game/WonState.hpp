@@ -5,7 +5,8 @@
 
 namespace States {
     class WonState : public GameState {
-
+    public:
+        WonState(std::shared_ptr<Game> pGame) : GameState(pGame) {}
     };
 }
 

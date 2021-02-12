@@ -21,6 +21,13 @@ Game::Game() : m_window(sf::VideoMode(Weight, Height), "Tycho Planet") {
 
     m_animTank.setTexture(m_tTank, 74, 108);
     m_animCar.setTexture(m_tCar, 43, 45);
+
+    std::shared_ptr<Game> pGame(this);
+
+    m_gameStates[States::Menu] = std::make_unique<States::MenuState>(pGame);
+    m_gameStates[States::Playing] = std::make_unique<States::PlayingState>(pGame);
+    m_gameStates[States::Won] = std::make_unique<States::WonState>(pGame);
+    m_gameStates[States::Lost] = std::make_unique<States::LostState>(pGame);
 }
 
 Game::~Game() {
@@ -110,4 +117,8 @@ void Game::handlePlayerEvent(sf::Keyboard::Key key, bool isPressed) {
         m_isMovingLeft = isPressed;
     else if (key == sf::Keyboard::Right)
         m_isMovingRight = isPressed;
+}
+
+void Game::changeGameState(States::TypeState gameState) {
+    // m_pCurrentState = m_gameStates[gameState];
 }

@@ -19,9 +19,11 @@ namespace States {
 
     class GameState : public IObject {
     public:
+        GameState(std::shared_ptr<Game> pGame);
+        std::shared_ptr<Game> getGame() const;
 
     private:
-        std::unique_ptr<Game> m_pGame;
+        std::shared_ptr<Game> m_pGame;
     };
 }
 #endif //TIHO_GAMESTATE_HPP
