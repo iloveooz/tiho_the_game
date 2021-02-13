@@ -41,6 +41,8 @@ public:
 
 private:
     void createObjects();
+    void createMap();
+
     void updateObjects();
     void renderObjects();
 
@@ -67,6 +69,8 @@ private:
     bool m_isMovingDown;
     bool m_isMovingLeft;
     bool m_isMovingRight;
+
+    World::Map m_map;
 
     long m_amountTanks;
 };

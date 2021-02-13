@@ -14,14 +14,13 @@ namespace World {
         Mountain,
         OilSpot,
         IronSpot,
-        StartPoint
+        StartPoint,
+        Count
     };
 
     class Map : public IObject {
     public:
         Map();
-
-        Map(const sf::Vector2i &mMazeSize);
 
         virtual ~Map();
 
@@ -36,11 +35,27 @@ namespace World {
 
         bool isCellStartPoint(sf::Vector2i position) const;
 
+        // helpers (inline = faster)
+        inline std::size_t positionToIndex(sf::Vector2i position) const;
+        inline sf::Vector2i indexToPosition(std::size_t index) const;
+
         void loadLevel();
 
     private:
         sf::Vector2i m_vMazeSize;
         std::vector<CellType> m_vMazeData;
+
+        sf::RenderTexture m_renderTexture;
+
+        sf::Texture m_DesertTexture;
+        sf::Texture m_MeadowTexture;
+        sf::Texture m_MountainTexture;
+        sf::Texture m_WaterTexture;
+
+        sf::Texture m_OilSpotTexture;
+        sf::Texture m_IronSpotTexture;
+
+        sf::Texture m_StartPointTexture;
 
     };
 }

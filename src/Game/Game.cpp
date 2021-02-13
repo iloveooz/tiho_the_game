@@ -28,6 +28,9 @@ Game::~Game() {
 
 void Game::run() {
     fillGameStates();
+    changeGameState(States::Playing);
+
+    createMap();
     createObjects();
 
     while (m_window.isOpen()) {
@@ -74,7 +77,7 @@ void Game::updateObjects() {
 void Game::renderObjects() {
     m_window.clear();
 
-    m_window.draw(m_sBackground);
+    //m_window.draw(m_sBackground);
 
     // отображение объектов
     for (auto const &object : m_objects)
@@ -122,4 +125,8 @@ void Game::fillGameStates() {
     m_gameStates[States::Playing] = std::make_unique<States::PlayingState>(shared_from_this());
     m_gameStates[States::Won] = std::make_unique<States::WonState>(shared_from_this());
     m_gameStates[States::Lost] = std::make_unique<States::LostState>(shared_from_this());
+}
+
+void Game::createMap() {
+    m_map.loadLevel();
 }
