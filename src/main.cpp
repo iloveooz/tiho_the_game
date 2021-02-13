@@ -6,8 +6,8 @@ int main() {
 
     srand(time(nullptr));
 
-    Game game;
-    game.run();
+    auto game = std::make_shared<Game>();
+    game->run();
 
     return 0;
 }

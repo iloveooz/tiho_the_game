@@ -25,7 +25,7 @@ namespace States {
     class GameState;
 }
 
-class Game : public IObject {
+class Game : public IObject, public std::enable_shared_from_this<Game> {
 public:
     Game();
     ~Game();
@@ -36,6 +36,7 @@ public:
     sf::Texture& getCarTexture() const;
     sf::Texture& getTankTexture() const;
 
+    void fillGameStates();
     void changeGameState(States::TypeState gameState);
 
 private:
