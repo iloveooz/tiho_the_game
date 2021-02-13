@@ -77,7 +77,7 @@ void Game::updateObjects() {
 void Game::renderObjects() {
     m_window.clear();
 
-    //m_window.draw(m_sBackground);
+    m_window.draw(m_sBackground);
 
     // отображение объектов
     for (auto const &object : m_objects)
