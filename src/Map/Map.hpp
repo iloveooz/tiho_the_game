@@ -18,7 +18,7 @@ namespace World {
         Count
     };
 
-    class Map : public IObject {
+class Map : public IObject, public sf::Drawable {
     public:
         Map();
 
@@ -42,6 +42,8 @@ namespace World {
         void loadLevel();
 
     private:
+        void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+
         sf::Vector2i m_vMazeSize;
         std::vector<CellType> m_vMazeData;
 

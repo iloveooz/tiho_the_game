@@ -171,4 +171,8 @@ namespace World {
     bool Map::isCellStartPoint(sf::Vector2i position) const {
         return m_vMazeData[positionToIndex(position)] == StartPoint;
     }
+
+    void Map::draw(sf::RenderTarget &target, sf::RenderStates states) const {
+        target.draw(sf::Sprite(m_renderTexture.getTexture()), states);
+    }
 }
