@@ -1,6 +1,6 @@
 #include "Game.hpp"
-#include "../Factory/CarFactory.hpp"
-#include "../Factory/TankFactory.hpp"
+#include "../Character/Factory/CarFactory.hpp"
+#include "../Character/Factory/TankFactory.hpp"
 
 Game::Game() : m_window(sf::VideoMode(Weight, Height), "Tycho Planet") {
     m_window.setFramerateLimit(60);

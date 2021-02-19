@@ -1,7 +1,7 @@
 #ifndef TIHO_CHARACTERFACTORY_HPP
 #define TIHO_CHARACTERFACTORY_HPP
 
-#include "../Character/Entity.hpp"
+#include "../Entity.hpp"
 
 class CharacterFactory {
 public:

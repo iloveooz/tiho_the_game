@@ -34,13 +34,13 @@ set(SOURCE_FILES
         src/Game/GameState.cpp
         src/Game/GameState.hpp
 
-        src/Factory/CharacterFactory.hpp
+        src/Character/Factory/CharacterFactory.hpp
 
-        src/Factory/TankFactory.cpp
-        src/Factory/TankFactory.hpp
+        src/Character/Factory/TankFactory.cpp
+        src/Character/Factory/TankFactory.hpp
 
-        src/Factory/CarFactory.cpp
-        src/Factory/CarFactory.hpp
+        src/Character/Factory/CarFactory.cpp
+        src/Character/Factory/CarFactory.hpp
 
         src/Resource/Iron.cpp
         src/Resource/Iron.hpp
@@ -97,7 +97,31 @@ set(SOURCE_FILES
         src/Character/SpitFire.hpp
 
         src/Character/NuclearRocket.cpp
-        src/Character/NuclearRocket.hpp)
+        src/Character/NuclearRocket.hpp
+
+        src/Character/Commands/UnitCommand.cpp
+        src/Character/Commands/UnitCommand.hpp
+
+        src/Character/Commands/GoCommand.cpp
+        src/Character/Commands/GoCommand.hpp
+
+        src/Character/Commands/StopCommand.cpp
+        src/Character/Commands/StopCommand.hpp
+
+        src/Character/Commands/AttackCommand.cpp
+        src/Character/Commands/AttackCommand.hpp
+
+        src/Character/Commands/RepairCommand.cpp
+        src/Character/Commands/RepairCommand.hpp
+
+        src/Character/Commands/HoldPositionCommand.cpp
+        src/Character/Commands/HoldPositionCommand.hpp
+
+        src/Character/Commands/PatrolCommand.cpp
+        src/Character/Commands/PatrolCommand.hpp
+
+        src/Character/Commands/DestroyCommand.cpp
+        src/Character/Commands/DestroyCommand.hpp)
 
 add_executable(tiho ${SOURCE_FILES})
 
