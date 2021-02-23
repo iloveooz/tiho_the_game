@@ -121,7 +121,10 @@ set(SOURCE_FILES
         src/Character/Commands/PatrolCommand.hpp
 
         src/Character/Commands/DestroyCommand.cpp
-        src/Character/Commands/DestroyCommand.hpp)
+        src/Character/Commands/DestroyCommand.hpp
+
+        src/Resource/Resource.cpp
+        src/Resource/Resource.hpp)
 
 add_executable(tiho ${SOURCE_FILES})
 

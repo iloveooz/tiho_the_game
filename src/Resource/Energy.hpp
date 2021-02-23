@@ -1,9 +1,9 @@
 #ifndef TIHO_ENERGY_HPP
 #define TIHO_ENERGY_HPP
 
-#include "../IObject/IObject.hpp"
+#include "Resource.hpp"
 
-class Energy : public IObject {
+class Energy : public Resource {
 
 };
 

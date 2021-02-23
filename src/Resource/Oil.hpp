@@ -1,9 +1,9 @@
 #ifndef TIHO_OIL_HPP
 #define TIHO_OIL_HPP
 
-#include "../IObject/IObject.hpp"
+#include "Resource.hpp"
 
-class Oil : public IObject {
+class Oil : public Resource {
 
 };
 

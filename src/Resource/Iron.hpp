@@ -1,9 +1,9 @@
 #ifndef TIHO_IRON_HPP
 #define TIHO_IRON_HPP
 
-#include "../IObject/IObject.hpp"
+#include "Resource.hpp"
 
-class Iron : public IObject {
+class Iron : public Resource {
 
 };
 
