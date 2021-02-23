@@ -3,10 +3,14 @@
 
 #include "UnitCommand.hpp"
 
-class StopCommand : public UnitCommand {
-public:
-    virtual ~StopCommand();
-    void execute() override {} ;
-};
+namespace Commands {
+
+    class StopCommand : public UnitCommand {
+    public:
+        virtual ~StopCommand();
+
+        void execute() override {};
+    };
+}
 
 #endif //TIHO_STOPCOMMAND_HPP

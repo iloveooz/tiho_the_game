@@ -3,10 +3,15 @@
 
 #include "UnitCommand.hpp"
 
-class RepairCommand : public UnitCommand {
-public:
-    virtual ~RepairCommand();
-    void execute() override {} ;
-};
+namespace Commands {
+
+    class RepairCommand : public UnitCommand {
+    public:
+        virtual ~RepairCommand();
+
+        void execute() override {};
+    };
+
+}
 
 #endif //TIHO_REPAIRCOMMAND_HPP

@@ -3,10 +3,15 @@
 
 #include "UnitCommand.hpp"
 
-class DestroyCommand : public UnitCommand {
-public:
-    virtual ~DestroyCommand();
-    void execute() override {} ;
-};
+namespace Commands {
+
+    class DestroyCommand : public UnitCommand {
+    public:
+        virtual ~DestroyCommand();
+
+        void execute() override {};
+    };
+
+}
 
 #endif //TIHO_DESTROYCOMMAND_HPP

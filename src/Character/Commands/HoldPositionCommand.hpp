@@ -3,10 +3,15 @@
 
 #include "UnitCommand.hpp"
 
-class HoldPositionCommand : public UnitCommand {
-public:
-    virtual ~HoldPositionCommand();
-    void execute() override {} ;
-};
+namespace Commands {
+
+    class HoldPositionCommand : public UnitCommand {
+    public:
+        virtual ~HoldPositionCommand();
+
+        void execute() override {};
+    };
+
+}
 
 #endif //TIHO_HOLDPOSITIONCOMMAND_HPP

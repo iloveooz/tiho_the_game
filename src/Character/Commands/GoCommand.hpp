@@ -3,10 +3,15 @@
 
 #include "UnitCommand.hpp"
 
-class GoCommand : public UnitCommand {
-public:
-    virtual ~GoCommand();
-    void execute() override {} ;
-};
+namespace Commands {
+
+    class GoCommand : public UnitCommand {
+    public:
+        virtual ~GoCommand();
+
+        void execute() override {};
+    };
+
+}
 
 #endif //TIHO_GOCOMMAND_HPP

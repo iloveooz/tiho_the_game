@@ -3,10 +3,15 @@
 
 #include "UnitCommand.hpp"
 
-class AttackCommand : public UnitCommand {
-public:
-    virtual ~AttackCommand();
-    void execute() override {} ;
-};
+namespace Commands {
+
+    class AttackCommand : public UnitCommand {
+    public:
+        virtual ~AttackCommand();
+
+        void execute() override {};
+    };
+
+}
 
 #endif //TIHO_ATTACKCOMMAND_HPP
