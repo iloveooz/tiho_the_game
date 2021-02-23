@@ -1,20 +1,21 @@
 #ifndef TIHO_ANIMATION_HPP
 #define TIHO_ANIMATION_HPP
 
-#include <SFML/Graphics/Sprite.hpp>
-
 #include "../IObject/IObject.hpp"
 
-class Animation : public IObject {
-public:
-    Animation();
-    Animation(sf::Texture &t, int wBorder, int hBorder);
+namespace Animations {
 
-    void setTexture(sf::Texture &t, int wBorder, int hBorder);
+    enum AnimationType {
+        NothingAnim,
+        CharacterAnim,
+        BuildingAnim,
+        Count
+    };
 
-    sf::Sprite& getSprite();
-private:
-    sf::Sprite m_sprite;
-};
+    class Animation : public IObject {
+
+    };
+
+}
 
 #endif //TIHO_ANIMATION_HPP

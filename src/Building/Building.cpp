@@ -2,7 +2,7 @@
 
 Building::Building() : m_bAlive(true), m_dX(0.0), m_dY(0.0), m_dDx(0.0), m_dDy(0.0), m_dAngle(0.0) {}
 
-void Building::settings(Animation &animation, double x, double y, double angle) {
+void Building::settings(Animations::BuildingAnimation &animation, double x, double y, double angle) {
     m_dX = x;
     m_dY = y;
     m_dAngle = angle;

@@ -6,15 +6,15 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "../Animation/Animation.hpp"
 #include "../IObject/IObject.hpp"
+#include "../Animation/BuildingAnimation.hpp"
 
 class Building : public IObject {
 public:
     Building();
     virtual ~Building() {};
 
-    void settings (Animation &animation, double x, double y, double angle = 0);
+    void settings (Animations::BuildingAnimation &animation, double x, double y, double angle = 0);
     virtual void update(double dx, double dy);
     void draw(sf::RenderWindow &app);
 
@@ -41,7 +41,7 @@ protected:
     std::string m_sName;
 
     // анимация или спрайт
-    Animation m_aAnimation;
+    Animations::BuildingAnimation m_aAnimation;
 };
 
 #endif //TIHO_BUILDING_HPP

@@ -19,8 +19,8 @@ set(SOURCE_FILES
         src/Character/Entity.cpp
         src/Character/Entity.hpp
 
-        src/Animation/Animation.cpp
-        src/Animation/Animation.hpp
+        src/Animation/CharacterAnimation.cpp
+        src/Animation/CharacterAnimation.hpp
 
         src/IObject/IObject.hpp
         src/IObject/IObject.cpp
@@ -124,7 +124,13 @@ set(SOURCE_FILES
         src/Character/Commands/DestroyCommand.hpp
 
         src/Resource/Resource.cpp
-        src/Resource/Resource.hpp)
+        src/Resource/Resource.hpp
+
+        src/Animation/Animation.cpp
+        src/Animation/Animation.hpp
+
+        src/Animation/BuildingAnimation.cpp
+        src/Animation/BuildingAnimation.hpp)
 
 add_executable(tiho ${SOURCE_FILES})
 

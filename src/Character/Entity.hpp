@@ -6,7 +6,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "../Animation/Animation.hpp"
+#include "../Animation/CharacterAnimation.hpp"
 #include "../IObject/IObject.hpp"
 #include "../Map/Map.hpp"
 
@@ -18,7 +18,7 @@ public:
     Entity();
     virtual ~Entity() {};
 
-    void settings (Animation &animation, double x, double y, double angle = 0);
+    void settings (Animations::CharacterAnimation &animation, double x, double y, double angle = 0);
     virtual void update(double dx, double dy);
     void draw(sf::RenderWindow &app);
 
@@ -46,7 +46,7 @@ protected:
     std::string m_sName;
 
     // анимация или спрайт
-    Animation m_aAnimation;
+    Animations::CharacterAnimation m_aAnimation;
 
 private:
     std::unique_ptr<World::Map> m_pMap;

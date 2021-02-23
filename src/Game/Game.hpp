@@ -13,7 +13,7 @@
 #include "../Character/Car.hpp"
 #include "../Character/Tank.hpp"
 
-#include "../Animation/Animation.hpp"
+#include "../Animation/CharacterAnimation.hpp"
 
 #include "GameState.hpp"
 #include "MenuState.hpp"
@@ -62,8 +62,8 @@ private:
 
     sf::Sprite m_sBackground;
 
-    Animation m_animTank;
-    Animation m_animCar;
+    Animations::CharacterAnimation m_animTank;
+    Animations::CharacterAnimation m_animCar;
 
     bool m_isMovingUp;
     bool m_isMovingDown;
