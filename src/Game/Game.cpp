@@ -101,12 +101,11 @@ void Game::processEvents() {
             case sf::Event::KeyReleased:
                 handlePlayerKeyboardEvent(event.key.code, false);
                 break;
-                // TODO: заменить KeyBoard Events на Mouse Events
             case sf::Event::MouseButtonPressed:
-                handlePlayerMouseEvent(event.key.code, true);
+                handlePlayerMouseEvent(event.mouseButton.button, true);
                 break;
             case sf::Event::MouseButtonReleased:
-                handlePlayerMouseEvent(event.key.code, false);
+                handlePlayerMouseEvent(event.mouseButton.button, false);
                 break;
         }
     }
@@ -123,15 +122,18 @@ void Game::handlePlayerKeyboardEvent(sf::Keyboard::Key key, bool isPressed) {
         m_isMovingRight = isPressed;
 }
 
-void Game::handlePlayerMouseEvent(sf::Keyboard::Key key, bool isPressed) {
-    if (key == sf::Mouse::Right && isPressed)
-        std::cout << "Right pressed!" << std::endl;
-    else if (key == sf::Mouse::Right && !isPressed)
-        std::cout << "Right released!" << std::endl;
-    else if (key == sf::Mouse::Left && isPressed)
-        std::cout << "Left pressed!" << std::endl;
-    else if (key == sf::Mouse::Left && !isPressed)
-        std::cout << "Left released!" << std::endl;
+void Game::handlePlayerMouseEvent(sf::Mouse::Button button, bool isPressed) {
+
+    sf::Vector2i position = sf::Mouse::getPosition(m_window);
+
+    if (button == sf::Mouse::Right && isPressed)
+        std::cout << "Right pressed! Coordinates: x = " << position.x << ", y = " << position.y << std::endl;
+    else if (button == sf::Mouse::Right && !isPressed)
+        std::cout << "Right released! Coordinates: x = " << position.x << ", y = " << position.y << std::endl;
+    else if (button == sf::Mouse::Left && isPressed)
+        std::cout << "Left pressed! Coordinates: x = " << position.x << ", y = " << position.y << std::endl;
+    else if (button == sf::Mouse::Left && !isPressed)
+        std::cout << "Left released! Coordinates: x = " << position.x << ", y = " << position.y << std::endl;
 }
 
 void Game::changeGameState(States::TypeState gameState) {

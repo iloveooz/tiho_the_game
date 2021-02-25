@@ -49,7 +49,7 @@ private:
     void processEvents();
 
     void handlePlayerKeyboardEvent(sf::Keyboard::Key key, bool isPressed);
-    void handlePlayerMouseEvent(sf::Keyboard::Key key, bool isPressed);
+    void handlePlayerMouseEvent(sf::Mouse::Button button, bool isPressed);
 
     sf::RenderWindow m_window;
     std::list<std::unique_ptr<Entity>> m_objects;
