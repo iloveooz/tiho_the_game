@@ -44,13 +44,13 @@ void Game::createObjects() {
     TankFactory tankFactory;
     CarFactory carFactory;
 
-    std::unique_ptr<Entity> tank = tankFactory.createEntity();
-    tank->settings(m_animTank, rand() % Weight, rand() % Height, 0);
-    m_objects.push_back(std::move(tank));
-
     std::unique_ptr<Entity> car = carFactory.createEntity();
     car->settings(m_animCar, rand() % Weight, rand() % Height, 0);
     m_objects.push_back(std::move(car));
+
+    std::unique_ptr<Entity> tank = tankFactory.createEntity();
+    tank->settings(m_animTank, rand() % Weight, rand() % Height, 0);
+    m_objects.push_back(std::move(tank));
 }
 
 void Game::updateObjects() {
@@ -96,16 +96,23 @@ void Game::processEvents() {
                 m_window.close();
                 break;
             case sf::Event::KeyPressed:
-                handlePlayerEvent(event.key.code, true);
+                handlePlayerKeyboardEvent(event.key.code, true);
                 break;
             case sf::Event::KeyReleased:
-                handlePlayerEvent(event.key.code, false);
+                handlePlayerKeyboardEvent(event.key.code, false);
+                break;
+                // TODO: заменить KeyBoard Events на Mouse Events
+            case sf::Event::MouseButtonPressed:
+                handlePlayerMouseEvent(event.key.code, true);
+                break;
+            case sf::Event::MouseButtonReleased:
+                handlePlayerMouseEvent(event.key.code, false);
                 break;
         }
     }
 }
 
-void Game::handlePlayerEvent(sf::Keyboard::Key key, bool isPressed) {
+void Game::handlePlayerKeyboardEvent(sf::Keyboard::Key key, bool isPressed) {
     if (key == sf::Keyboard::Up)
         m_isMovingUp = isPressed;
     else if (key == sf::Keyboard::Down)
@@ -114,6 +121,17 @@ void Game::handlePlayerEvent(sf::Keyboard::Key key, bool isPressed) {
         m_isMovingLeft = isPressed;
     else if (key == sf::Keyboard::Right)
         m_isMovingRight = isPressed;
+}
+
+void Game::handlePlayerMouseEvent(sf::Keyboard::Key key, bool isPressed) {
+    if (key == sf::Mouse::Right && isPressed)
+        std::cout << "Right pressed!" << std::endl;
+    else if (key == sf::Mouse::Right && !isPressed)
+        std::cout << "Right released!" << std::endl;
+    else if (key == sf::Mouse::Left && isPressed)
+        std::cout << "Left pressed!" << std::endl;
+    else if (key == sf::Mouse::Left && !isPressed)
+        std::cout << "Left released!" << std::endl;
 }
 
 void Game::changeGameState(States::TypeState gameState) {
