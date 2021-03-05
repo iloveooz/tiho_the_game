@@ -133,7 +133,10 @@ set(SOURCE_FILES
         src/Animation/BuildingAnimation.hpp
 
         src/Cursor/Cursor.cpp
-        src/Cursor/Cursor.hpp)
+        src/Cursor/Cursor.hpp
+
+        src/ResourceHolder/ResourceHolder.cpp
+        src/ResourceHolder/ResourceHolder.hpp)
 
 add_executable(tiho ${SOURCE_FILES})
 
