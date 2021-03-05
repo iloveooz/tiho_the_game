@@ -120,6 +120,8 @@ void Game::handlePlayerKeyboardEvent(sf::Keyboard::Key key, bool isPressed) {
         m_isMovingLeft = isPressed;
     else if (key == sf::Keyboard::Right)
         m_isMovingRight = isPressed;
+    else if (key == sf::Keyboard::B && isPressed)
+        createObjects();
 }
 
 void Game::handlePlayerMouseEvent(sf::Mouse::Button button, bool isPressed) {
