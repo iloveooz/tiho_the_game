@@ -9,6 +9,7 @@ namespace Animations {
         NothingAnim,
         CharacterAnim,
         BuildingAnim,
+        MapAnim,
         Count
     };
 
