@@ -1,0 +1,8 @@
+#ifndef TIHO_TEXTUREHOLDER_HPP
+#define TIHO_TEXTUREHOLDER_HPP
+
+class TextureHolder {
+
+};
+
+#endif //TIHO_TEXTUREHOLDER_HPP

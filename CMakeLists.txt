@@ -135,8 +135,8 @@ set(SOURCE_FILES
         src/Cursor/Cursor.cpp
         src/Cursor/Cursor.hpp
 
-        src/ResourceHolder/ResourceHolder.cpp
-        src/ResourceHolder/ResourceHolder.hpp)
+        src/TextureHolder/TextureHolder.cpp
+        src/TextureHolder/TextureHolder.hpp)
 
 add_executable(tiho ${SOURCE_FILES})
 
