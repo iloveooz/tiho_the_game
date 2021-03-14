@@ -11,6 +11,8 @@
 namespace Textures {
     enum ID {
         Empty,
+
+        /*  Buildings  */
         Arsenal,
         Cannon,
         Factory,
@@ -20,23 +22,42 @@ namespace Textures {
         Mine,
         NuclearSilo,
         OilDerrick,
+
+        /*  Characters  */
         Car,
         NuclearRocket,
         SpitFire,
         Tank,
         Worker,
+
+        /*  Tiles  */
         Water,
         Meadow,
         Desert,
         Mountain,
         OilSpot,
         IronSpot,
-        StartPoint,
+
+        /*  Maps  */
+        Map,
+
+        /*  Shots  */
+        FireBlueCarShot,
+        FireRedTankShot,
+        FireSpitFireShot,
+        FireWorkerShot,
+
+        /*  Explosions  */
+        SmallExplosion,
+        MiddleExplosion,
+        BigExplosion,
+
         Count
     };
 
     class TextureHolder : public IObject {
     public:
+        void init();
         void load(Textures::ID id, const std::string& fileName);
 
         sf::Texture& get(Textures::ID id);

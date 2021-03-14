@@ -15,11 +15,14 @@
 
 #include "../Animation/CharacterAnimation.hpp"
 
+#include "../TextureHolder/TextureHolder.hpp"
+
 #include "GameState.hpp"
 #include "MenuState.hpp"
 #include "PlayingState.hpp"
 #include "WonState.hpp"
 #include "LostState.hpp"
+
 
 namespace States {
     class GameState;
@@ -56,6 +59,8 @@ private:
 
     std::shared_ptr<States::GameState> m_pCurrentState;
     std::array<std::unique_ptr<States::GameState>, States::TypeState::Count> m_gameStates;
+
+    Textures::TextureHolder m_textureHolder;
 
     sf::Texture m_tBackground;
     sf::Texture m_tCar;
