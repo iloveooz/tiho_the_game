@@ -1,6 +1,7 @@
 #ifndef TIHO_TEXTUREHOLDER_HPP
 #define TIHO_TEXTUREHOLDER_HPP
 
+#include <cassert>
 #include <map>
 #include <memory>
 

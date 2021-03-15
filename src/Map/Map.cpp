@@ -59,7 +59,6 @@ namespace World {
         m_sWater.setTexture(textureHolder.get(Textures::Water));
         m_sOilSpot.setTexture(textureHolder.get(Textures::OilSpot));
         m_sIronSpot.setTexture(textureHolder.get(Textures::IronSpot));
-        m_sStartPoint.setTexture(textureHolder.get(Textures::Empty));
 
         m_renderTexture.display();
 

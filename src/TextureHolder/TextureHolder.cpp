@@ -8,16 +8,21 @@ namespace Textures {
         if (!texture->loadFromFile(fileName))
             throw std::runtime_error("Unable to load: " + fileName);
 
-        m_TextureMap.insert(std::make_pair(id, std::move(texture)));
+        auto inserted = m_TextureMap.insert(std::make_pair(id, std::move(texture)));
+        assert(inserted.second);
     }
 
     sf::Texture &TextureHolder::get(Textures::ID id) {
         auto found = m_TextureMap.find(id);
+        assert(found != m_TextureMap.end());
+
         return *found->second;
     }
 
     const sf::Texture &TextureHolder::get(Textures::ID id) const {
         auto found = m_TextureMap.find(id);
+        assert(found != m_TextureMap.end());
+
         return *found->second;
     }
 
