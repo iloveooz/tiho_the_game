@@ -8,21 +8,11 @@ Game::Game() : m_window(sf::VideoMode(Weight, Height), "Tycho Planet") {
 
     m_amountTanks = 5;
 
-    if (!m_tBackground.loadFromFile("images/tiles/terrain.png"))
-        throw std::runtime_error("Unable to load the terrain texture file");
-
-    if (!m_tCar.loadFromFile("images/characters/CarCharacter.png"))
-        throw std::runtime_error("Unable to load the car texture file");
-
-    if (!m_tTank.loadFromFile("images/characters/TankCharacter.png"))
-        throw std::runtime_error("Unable to load the tank texture file");
-
-    m_sBackground.setTexture(m_tBackground);
-
-    m_animTank.setTexture(m_tTank, 74, 108);
-    m_animCar.setTexture(m_tCar, 43, 45);
-
     m_textureHolder.init();
+
+    m_sBackground.setTexture(m_textureHolder.get(Textures::Terrain));
+    m_animTank.setTexture(m_textureHolder.get(Textures::Tank), 108, 108);
+    m_animCar.setTexture(m_textureHolder.get(Textures::Car), 45, 45);
 }
 
 Game::~Game() {
@@ -152,5 +142,5 @@ void Game::fillGameStates() {
 }
 
 void Game::createMap() {
-    m_map.loadLevel();
+    m_map.loadLevel(m_textureHolder);
 }

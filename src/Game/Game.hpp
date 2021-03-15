@@ -62,10 +62,6 @@ private:
 
     Textures::TextureHolder m_textureHolder;
 
-    sf::Texture m_tBackground;
-    sf::Texture m_tCar;
-    sf::Texture m_tTank;
-
     sf::Sprite m_sBackground;
 
     Animations::CharacterAnimation m_animTank;

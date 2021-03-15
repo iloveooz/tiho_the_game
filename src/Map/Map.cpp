@@ -10,23 +10,20 @@ namespace World {
 
     }
 
-    void Map::loadLevel() {
+    void Map::loadLevel(const Textures::TextureHolder& textureHolder) {
         m_vMazeSize = sf::Vector2i(0, 0);
         m_vMazeData.clear();
 
-        sf::Image levelData;
-
-        if (!levelData.loadFromFile("images/maps/LostTemple.png"))
-            throw std::runtime_error("Unable to load the map file");
+        sf::Image levelData = textureHolder.get(Textures::Map).copyToImage();;
 
         m_vMazeSize = sf::Vector2i(levelData.getSize());
 
         if (m_vMazeSize.x < 32 && m_vMazeSize.y < 32)
-            throw  std::runtime_error("The loaded level is too small (min 32 cells large)");
+            throw std::runtime_error("The loaded level is too small (min 32 cells large)");
 
         // loading maze data
-        for (unsigned int y = 0; y < m_vMazeSize.y; y++) {
-            for (unsigned int x = 0; x < m_vMazeSize.x; x++) {
+        for (unsigned int x = 0; x < m_vMazeSize.x; x++) {
+            for (unsigned int y = 0; y < m_vMazeSize.y; y++) {
                 sf::Color cellData = levelData.getPixel(x, y);
 
                 if (cellData == sf::Color::Yellow) {
@@ -56,34 +53,13 @@ namespace World {
         m_renderTexture.create(128 * m_vMazeSize.x, 128 * m_vMazeSize.y);
         m_renderTexture.clear(sf::Color::Black);
 
-        if (!m_DesertTexture.loadFromFile("images/tiles/desert.png"))
-            throw std::runtime_error("Unable to load the desert tile file");
-
-        if (!m_MeadowTexture.loadFromFile("images/tiles/meadow.png"))
-            throw std::runtime_error("Unable to load the meadow tile file");
-
-        if (!m_MountainTexture.loadFromFile("images/tiles/mountain.png"))
-            throw std::runtime_error("Unable to load the mountain tile file");
-
-        if (!m_WaterTexture.loadFromFile("images/tiles/water.png"))
-            throw std::runtime_error("Unable to load the water tile file");
-
-        if (!m_OilSpotTexture.loadFromFile("images/tiles/oilspot.png"))
-            throw std::runtime_error("Unable to load the oilspot tile file");
-
-        if (!m_IronSpotTexture.loadFromFile("images/tiles/ironspot.png"))
-            throw std::runtime_error("Unable to load the ironspot tile file");
-
-        if (!m_StartPointTexture.loadFromFile("images/tiles/empty.png"))
-            throw std::runtime_error("Unable to load the empty tile file");
-
-        sf::Sprite DesertSprite(m_DesertTexture);
-        sf::Sprite MeadowSprite(m_MeadowTexture);
-        sf::Sprite MountainSprite(m_MountainTexture);
-        sf::Sprite WaterSprite(m_WaterTexture);
-        sf::Sprite OilSpotSprite(m_OilSpotTexture);
-        sf::Sprite IronSpotSprite(m_IronSpotTexture);
-        sf::Sprite StartPointSprite(m_StartPointTexture);
+        m_sDesert.setTexture(textureHolder.get(Textures::Desert));
+        m_sMeadow.setTexture(textureHolder.get(Textures::Meadow));
+        m_sMountain.setTexture(textureHolder.get(Textures::Mountain));
+        m_sWater.setTexture(textureHolder.get(Textures::Water));
+        m_sOilSpot.setTexture(textureHolder.get(Textures::OilSpot));
+        m_sIronSpot.setTexture(textureHolder.get(Textures::IronSpot));
+        m_sStartPoint.setTexture(textureHolder.get(Textures::Empty));
 
         m_renderTexture.display();
 
@@ -91,38 +67,38 @@ namespace World {
             sf::Vector2i position = indexToPosition(i);
 
             if (isCellDesert(position)) {
-                DesertSprite.setPosition(128 * position.x, 128 * position.y);
-                m_renderTexture.draw(DesertSprite);
+                m_sDesert.setPosition(128 * position.x, 128 * position.y);
+                m_renderTexture.draw(m_sDesert);
             }
 
             if (isCellMeadow(position)) {
-                MeadowSprite.setPosition(128 * position.x, 128 * position.y);
-                m_renderTexture.draw(MeadowSprite);
+                m_sMeadow.setPosition(128 * position.x, 128 * position.y);
+                m_renderTexture.draw(m_sMeadow);
             }
 
             if (isCellMountain(position)) {
-                MountainSprite.setPosition(128 * position.x, 128 * position.y);
-                m_renderTexture.draw(MountainSprite);
+                m_sMountain.setPosition(128 * position.x, 128 * position.y);
+                m_renderTexture.draw(m_sMountain);
             }
 
             if (isCellWater(position)) {
-                WaterSprite.setPosition(128 * position.x, 128 * position.y);
-                m_renderTexture.draw(WaterSprite);
+                m_sWater.setPosition(128 * position.x, 128 * position.y);
+                m_renderTexture.draw(m_sWater);
             }
 
             if (isCellIronSpot(position)) {
-                IronSpotSprite.setPosition(128 * position.x, 128 * position.y);
-                m_renderTexture.draw(IronSpotSprite);
+                m_sOilSpot.setPosition(128 * position.x, 128 * position.y);
+                m_renderTexture.draw(m_sOilSpot);
             }
 
             if (isCellOilSpot(position)) {
-                OilSpotSprite.setPosition(128 * position.x, 128 * position.y);
-                m_renderTexture.draw(OilSpotSprite);
+                m_sIronSpot.setPosition(128 * position.x, 128 * position.y);
+                m_renderTexture.draw(m_sIronSpot);
             }
 
             if (isCellStartPoint(position)) {
-                StartPointSprite.setPosition(32 * position.x, 32 * position.y);
-                m_renderTexture.draw(StartPointSprite);
+                m_sStartPoint.setPosition(32 * position.x, 32 * position.y);
+                m_renderTexture.draw(m_sStartPoint);
             }
         }
     }

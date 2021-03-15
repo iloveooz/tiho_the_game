@@ -2,7 +2,9 @@
 #define TIHO_MAP_HPP
 
 #include <SFML/Graphics.hpp>
+
 #include "../IObject/IObject.hpp"
+#include "../TextureHolder/TextureHolder.hpp"
 
 namespace World {
 
@@ -39,7 +41,7 @@ class Map : public IObject, public sf::Drawable {
         inline std::size_t positionToIndex(sf::Vector2i position) const;
         inline sf::Vector2i indexToPosition(std::size_t index) const;
 
-        void loadLevel();
+        void loadLevel(const Textures::TextureHolder& textureHolder);
 
     private:
         void draw(sf::RenderTarget& target, sf::RenderStates states) const;
@@ -47,18 +49,15 @@ class Map : public IObject, public sf::Drawable {
         sf::Vector2i m_vMazeSize;
         std::vector<CellType> m_vMazeData;
 
+        sf::Sprite m_sDesert;
+        sf::Sprite m_sMeadow;
+        sf::Sprite m_sMountain;
+        sf::Sprite m_sWater;
+        sf::Sprite m_sOilSpot;
+        sf::Sprite m_sIronSpot;
+        sf::Sprite m_sStartPoint;
+
         sf::RenderTexture m_renderTexture;
-
-        sf::Texture m_DesertTexture;
-        sf::Texture m_MeadowTexture;
-        sf::Texture m_MountainTexture;
-        sf::Texture m_WaterTexture;
-
-        sf::Texture m_OilSpotTexture;
-        sf::Texture m_IronSpotTexture;
-
-        sf::Texture m_StartPointTexture;
-
     };
 }
 #endif //TIHO_MAP_HPP

@@ -46,6 +46,7 @@ namespace Textures {
         load(IronSpot, "images/tiles/ironspot.png");
 
         load(Map, "images/maps/LostTemple.png");
+        load(Terrain, "images/tiles/terrain.png");
 
         load(FireBlueCarShot, "images/shots/FireBlueCar.png");
         load(FireRedTankShot, "images/shots/FireRedTank.png");

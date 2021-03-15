@@ -40,6 +40,7 @@ namespace Textures {
 
         /*  Maps  */
         Map,
+        Terrain,
 
         /*  Shots  */
         FireBlueCarShot,
