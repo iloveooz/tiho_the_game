@@ -1,6 +1,7 @@
 #ifndef TIHO_GAME_HPP
 #define TIHO_GAME_HPP
 
+#include <array>
 #include <cmath>
 #include <string>
 #include <list>
