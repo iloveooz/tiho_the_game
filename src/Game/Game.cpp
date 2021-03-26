@@ -2,7 +2,12 @@
 #include "../Character/Factory/CarFactory.hpp"
 #include "../Character/Factory/TankFactory.hpp"
 
-Game::Game() : m_window(sf::VideoMode(Weight, Height), "Tycho Planet") {
+Game::Game() :
+    m_window(sf::VideoMode(Weight, Height), "Tycho Planet"),
+    m_logger(new ConsoleLogger) {
+
+    m_logger->log("Game begins!");
+
     m_window.setFramerateLimit(60);
     m_window.setVerticalSyncEnabled(true);
 

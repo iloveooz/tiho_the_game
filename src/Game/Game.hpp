@@ -24,6 +24,9 @@
 #include "WonState.hpp"
 #include "LostState.hpp"
 
+#include "../Logger/ConsoleLogger.hpp"
+#include "../Logger/FileLogger.hpp"
+#include "../Logger/SocketLogger.hpp"
 
 namespace States {
     class GameState;
@@ -74,6 +77,8 @@ private:
     bool m_isMovingRight;
 
     World::Map m_map;
+
+    std::shared_ptr<Logger> m_logger;
 
     long m_amountTanks;
 };
