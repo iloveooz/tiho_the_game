@@ -136,7 +136,22 @@ set(SOURCE_FILES
         src/Cursor/Cursor.hpp
 
         src/TextureHolder/TextureHolder.cpp
-        src/TextureHolder/TextureHolder.hpp)
+        src/TextureHolder/TextureHolder.hpp
+
+        src/Logger/Logger.cpp
+        src/Logger/Logger.hpp
+
+        src/Logger/LoggerImpl.cpp
+        src/Logger/LoggerImpl.hpp
+
+        src/Logger/ConsoleLogger.cpp
+        src/Logger/ConsoleLogger.hpp
+
+        src/Logger/FileLogger.cpp
+        src/Logger/FileLogger.hpp
+
+        src/Logger/SocketLogger.cpp
+        src/Logger/SocketLogger.hpp)
 
 add_executable(tiho ${SOURCE_FILES})
 
