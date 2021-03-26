@@ -78,7 +78,9 @@ private:
 
     World::Map m_map;
 
-    std::shared_ptr<Logger> m_logger;
+    std::shared_ptr<Logger> m_consoleLogger;
+    std::shared_ptr<Logger> m_fileLogger;
+    std::shared_ptr<Logger> m_socketLogger;
 
     long m_amountTanks;
 };

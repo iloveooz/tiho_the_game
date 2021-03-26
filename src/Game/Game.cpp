@@ -3,10 +3,14 @@
 #include "../Character/Factory/TankFactory.hpp"
 
 Game::Game() :
-    m_window(sf::VideoMode(Weight, Height), "Tycho Planet"),
-    m_logger(new ConsoleLogger) {
+        m_window(sf::VideoMode(Weight, Height), "Tycho Planet"),
+        m_consoleLogger(new ConsoleLogger()),
+        m_fileLogger(new FileLogger("output.log")),
+        m_socketLogger(new SocketLogger("remote", 6112)) {
 
-    m_logger->log("Game begins!");
+    m_consoleLogger->log("Game begins!");
+    m_fileLogger->log("Game begins!");
+    m_socketLogger->log("Game begins!");
 
     m_window.setFramerateLimit(60);
     m_window.setVerticalSyncEnabled(true);
