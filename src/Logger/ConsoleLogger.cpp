@@ -6,6 +6,6 @@ ConsoleLogger::ConsoleLogger() :
 
 }
 
-void ConsoleLogger::log(const std::string &str) {
-    m_plogImpl->console_log(str);
+void ConsoleLogger::log(const std::string& cls, const std::string& meth, const std::string &event) {
+    m_plogImpl->console_log(cls, meth, event);
 }

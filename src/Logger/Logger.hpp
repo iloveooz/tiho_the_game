@@ -11,7 +11,7 @@ public:
     explicit Logger(std::unique_ptr<LoggerImpl> pLogImpl);
     virtual ~Logger();
 
-    virtual void log(const std::string& str) = 0;
+    virtual void log(const std::string& cls, const std::string& meth, const std::string& event) = 0;
 
 protected:
     std::unique_ptr<LoggerImpl> m_plogImpl;

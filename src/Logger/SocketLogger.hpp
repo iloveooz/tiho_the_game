@@ -6,7 +6,7 @@
 class SocketLogger : public Logger {
 public:
     SocketLogger(const std::string& remoteHost, long remotePort);
-    void log(const std::string& str) override;
+    void log(const std::string& cls, const std::string& meth, const std::string& event) override;
 
 private:
     std::string m_sHost;

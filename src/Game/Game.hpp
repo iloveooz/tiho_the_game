@@ -39,14 +39,13 @@ public:
 
     void run();
 
-    sf::Texture& getBackground() const;
-    sf::Texture& getCarTexture() const;
-    sf::Texture& getTankTexture() const;
+    void getConsoleLogger() const;
+    void getFileLogger() const;
 
+private:
     void fillGameStates();
     void changeGameState(States::TypeState gameState);
 
-private:
     void createObjects();
     void createMap();
 
@@ -80,7 +79,6 @@ private:
 
     std::shared_ptr<Logger> m_consoleLogger;
     std::shared_ptr<Logger> m_fileLogger;
-    std::shared_ptr<Logger> m_socketLogger;
 
     long m_amountTanks;
 };

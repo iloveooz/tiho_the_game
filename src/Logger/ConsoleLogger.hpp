@@ -6,7 +6,7 @@
 class ConsoleLogger : public Logger {
 public:
     ConsoleLogger();
-    void log(const std::string& str) override;
+    void log(const std::string& cls, const std::string& meth, const std::string& event) override;
 };
 
 #endif //TIHO_CONSOLELOGGER_HPP
