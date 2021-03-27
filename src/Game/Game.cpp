@@ -20,12 +20,16 @@ Game::Game() :
     m_sBackground.setTexture(m_textureHolder.get(Textures::Terrain));
     m_animTank.setTexture(m_textureHolder.get(Textures::Tank), 108, 108);
     m_animCar.setTexture(m_textureHolder.get(Textures::Car), 45, 45);
+
+    m_fileLogger->log("Game", "Game", "END");
 }
 
 Game::~Game() {
 }
 
 void Game::run() {
+    m_fileLogger->log("Game", "run", "BEGIN");
+
     fillGameStates();
     changeGameState(States::Playing);
 
@@ -37,9 +41,13 @@ void Game::run() {
         updateObjects();
         renderObjects();
     }
+
+    m_fileLogger->log("Game", "run", "END");
 }
 
 void Game::createObjects() {
+    m_fileLogger->log("Game", "createObjects", "BEGIN");
+
     TankFactory tankFactory;
     CarFactory carFactory;
 
@@ -50,6 +58,8 @@ void Game::createObjects() {
     std::unique_ptr<Entity> tank = tankFactory.createEntity();
     tank->settings(m_animTank, rand() % Weight, rand() % Height, 0);
     m_objects.push_back(std::move(tank));
+
+    m_fileLogger->log("Game", "createObjects", "END");
 }
 
 void Game::updateObjects() {
@@ -111,6 +121,8 @@ void Game::processEvents() {
 }
 
 void Game::handlePlayerKeyboardEvent(sf::Keyboard::Key key, bool isPressed) {
+    m_fileLogger->log("Game", "handlePlayerKeyboardEvent", "BEGIN");
+
     if (key == sf::Keyboard::Up)
         m_isMovingUp = isPressed;
     else if (key == sf::Keyboard::Down)
@@ -121,9 +133,12 @@ void Game::handlePlayerKeyboardEvent(sf::Keyboard::Key key, bool isPressed) {
         m_isMovingRight = isPressed;
     else if (key == sf::Keyboard::B && isPressed)
         createObjects();
+
+    m_fileLogger->log("Game", "handlePlayerKeyboardEvent", "END");
 }
 
 void Game::handlePlayerMouseEvent(sf::Mouse::Button button, bool isPressed) {
+    m_fileLogger->log("Game", "handlePlayerMouseEvent", "BEGIN");
 
     sf::Vector2i position = sf::Mouse::getPosition(m_window);
 
@@ -135,19 +150,33 @@ void Game::handlePlayerMouseEvent(sf::Mouse::Button button, bool isPressed) {
         std::cout << "Left pressed! Coordinates: x = " << position.x << ", y = " << position.y << std::endl;
     else if (button == sf::Mouse::Left && !isPressed)
         std::cout << "Left released! Coordinates: x = " << position.x << ", y = " << position.y << std::endl;
+
+    m_fileLogger->log("Game", "handlePlayerMouseEvent", "END");
 }
 
 void Game::changeGameState(States::TypeState gameState) {
+    m_fileLogger->log("Game", "changeGameState", "BEGIN");
+
     m_pCurrentState = std::move(m_gameStates[gameState]);
+
+    m_fileLogger->log("Game", "changeGameState", "END");
 }
 
 void Game::fillGameStates() {
+    m_fileLogger->log("Game", "fillGameStates", "BEGIN");
+
     m_gameStates[States::Menu] = std::make_unique<States::MenuState>(shared_from_this());
     m_gameStates[States::Playing] = std::make_unique<States::PlayingState>(shared_from_this());
     m_gameStates[States::Won] = std::make_unique<States::WonState>(shared_from_this());
     m_gameStates[States::Lost] = std::make_unique<States::LostState>(shared_from_this());
+
+    m_fileLogger->log("Game", "fillGameStates", "END");
 }
 
 void Game::createMap() {
+    m_fileLogger->log("Game", "createMap", "BEGIN");
+
     m_map.loadLevel(m_textureHolder);
+
+    m_fileLogger->log("Game", "createMap", "END");
 }

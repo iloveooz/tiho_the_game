@@ -1,7 +1,7 @@
 #include "LoggerImpl.hpp"
 
 LoggerImpl::LoggerImpl() {
-    out.open("output.txt", std::ofstream::app);
+    out.open("output.txt", std::ofstream::out);
 
     if(!out) {
         throw std::runtime_error("Could not open file : for writing");
@@ -30,7 +30,7 @@ void LoggerImpl::file_log(const std::string& cls, const std::string& meth, const
     std::string time(21, ' ');
     getTime(time);
 
-    out << time << fileName.c_str() << ", " << cls.c_str() << "::" << meth << ", event: " << event.c_str() << std::endl;
+    out << time << ", " << cls.c_str() << "::" << meth << ", event: " << event.c_str() << std::endl;
 }
 
 void LoggerImpl::socket_log(const std::string& cls, const std::string& meth, const std::string &host, long port, const std::string &event) {

@@ -16,7 +16,7 @@ public:
     virtual void  socket_log(const std::string& cls, const std::string& meth, const std::string& host, long port, const std::string& event);
 
 private:
-    void getTime(std::string& time);
+    static void getTime(std::string& time);
     std::ofstream out;
 };
 
