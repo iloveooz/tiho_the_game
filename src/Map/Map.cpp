@@ -22,8 +22,8 @@ namespace World {
             throw std::runtime_error("The loaded level is too small (min 32 cells large)");
 
         // loading maze data
-        for (unsigned int x = 0; x < m_vMazeSize.x; x++) {
-            for (unsigned int y = 0; y < m_vMazeSize.y; y++) {
+        for (unsigned int y = 0; y < m_vMazeSize.y; y++) {
+            for (unsigned int x = 0; x < m_vMazeSize.x; x++) {
                 sf::Color cellData = levelData.getPixel(x, y);
 
                 if (cellData == sf::Color::Yellow) {
