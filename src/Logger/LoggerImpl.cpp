@@ -1,15 +1,22 @@
 #include "LoggerImpl.hpp"
 
 LoggerImpl::LoggerImpl() {
-    out.open("output.txt", std::ofstream::out);
+    try {
+        out.open("output.txt", std::ofstream::out);
+    }
+    catch (...) {}
 
     if(!out) {
         throw std::runtime_error("Could not open file : for writing");
     }
 }
 
-LoggerImpl::~LoggerImpl() {
-    out.close();
+LoggerImpl::~LoggerImpl() noexcept {
+    try {
+        if (out.is_open())
+            out.close();
+    }
+    catch (...) {}
 }
 
 void LoggerImpl::console_log(const std::string& cls, const std::string& meth, const std::string &event) {
@@ -17,7 +24,7 @@ void LoggerImpl::console_log(const std::string& cls, const std::string& meth, co
     std::string time(21, ' ');
     getTime(time);
 
-    std::cout << time << ", " << cls << "::" << meth << ", event: " << event << std::endl;
+    std::cout << time << cls << "::" << meth << ", event: " << event << std::endl;
 }
 
 void LoggerImpl::file_log(const std::string& cls, const std::string& meth, const std::string &fileName, const std::string &event) {

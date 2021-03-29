@@ -39,8 +39,8 @@ public:
 
     void run();
 
-    void getConsoleLogger() const;
-    void getFileLogger() const;
+    std::shared_ptr<Logger> getConsoleLogger() const;
+    std::shared_ptr<Logger> getFileLogger() const;
 
 private:
     void fillGameStates();

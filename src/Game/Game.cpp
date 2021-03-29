@@ -143,13 +143,13 @@ void Game::handlePlayerMouseEvent(sf::Mouse::Button button, bool isPressed) {
     sf::Vector2i position = sf::Mouse::getPosition(m_window);
 
     if (button == sf::Mouse::Right && isPressed)
-        std::cout << "Right pressed! Coordinates: x = " << position.x << ", y = " << position.y << std::endl;
+        m_consoleLogger->log("Game", "handlePlayerMouseEvent", "Right pressed! Coordinates: x = " + std::to_string(position.x) + ", y = " + std::to_string(position.y));
     else if (button == sf::Mouse::Right && !isPressed)
-        std::cout << "Right released! Coordinates: x = " << position.x << ", y = " << position.y << std::endl;
+        m_consoleLogger->log("Game", "handlePlayerMouseEvent", "Right released! Coordinates: x = " + std::to_string(position.x) + ", y = " + std::to_string(position.y));
     else if (button == sf::Mouse::Left && isPressed)
-        std::cout << "Left pressed! Coordinates: x = " << position.x << ", y = " << position.y << std::endl;
+        m_consoleLogger->log("Game", "handlePlayerMouseEvent", "Left pressed! Coordinates: x = " + std::to_string(position.x) + ", y = " + std::to_string(position.y));
     else if (button == sf::Mouse::Left && !isPressed)
-        std::cout << "Left released! Coordinates: x = " << position.x << ", y = " << position.y << std::endl;
+        m_consoleLogger->log("Game", "handlePlayerMouseEvent", "Left released! Coordinates: x = " + std::to_string(position.x) + ", y = " + std::to_string(position.y));
 
     m_fileLogger->log("Game", "handlePlayerMouseEvent", "END");
 }
@@ -179,4 +179,12 @@ void Game::createMap() {
     m_map.loadLevel(m_textureHolder);
 
     m_fileLogger->log("Game", "createMap", "END");
+}
+
+std::shared_ptr<Logger> Game::getConsoleLogger() const {
+    return m_consoleLogger;
+}
+
+std::shared_ptr<Logger> Game::getFileLogger() const {
+    return m_fileLogger;
 }
