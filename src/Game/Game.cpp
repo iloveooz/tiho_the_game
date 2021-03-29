@@ -7,7 +7,6 @@ Game::Game() :
         m_consoleLogger(new ConsoleLogger()),
         m_fileLogger(new FileLogger("output.log")) {
 
-    m_consoleLogger->log("Game", "Game", "BEGIN");
     m_fileLogger->log("Game", "Game", "BEGIN");
 
     m_window.setFramerateLimit(60);
