@@ -69,6 +69,9 @@ private:
 
     Animations::CharacterAnimation m_animTank;
     Animations::CharacterAnimation m_animCar;
+    Animations::CharacterAnimation m_animSpitFire;
+    Animations::CharacterAnimation m_animNuke;
+    Animations::CharacterAnimation m_animWorker;
 
     bool m_isMovingUp;
     bool m_isMovingDown;

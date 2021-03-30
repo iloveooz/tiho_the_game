@@ -1,6 +1,9 @@
 #include "Game.hpp"
 #include "../Character/Factory/CarFactory.hpp"
 #include "../Character/Factory/TankFactory.hpp"
+#include "../Character/SpitFire.hpp"
+#include "../Character/NuclearRocket.hpp"
+#include "../Character/Worker.hpp"
 
 Game::Game() :
         m_window(sf::VideoMode(Weight, Height), "Tycho Planet"),
@@ -17,8 +20,12 @@ Game::Game() :
     m_textureHolder.init();
 
     m_sBackground.setTexture(m_textureHolder.get(Textures::Terrain));
+
     m_animTank.setTexture(m_textureHolder.get(Textures::Tank), 108, 108);
     m_animCar.setTexture(m_textureHolder.get(Textures::Car), 45, 45);
+    m_animSpitFire.setTexture(m_textureHolder.get(Textures::SpitFire), 48, 48);
+    m_animNuke.setTexture(m_textureHolder.get(Textures::NuclearRocket), 48, 48);
+    m_animWorker.setTexture(m_textureHolder.get(Textures::Worker), 54, 54);
 
     m_fileLogger->log("Game", "Game", "END");
 }
@@ -57,6 +64,18 @@ void Game::createObjects() {
     std::unique_ptr<Entity> tank = tankFactory.createEntity();
     tank->settings(m_animTank, rand() % Weight, rand() % Height, 0);
     m_objects.push_back(std::move(tank));
+
+    std::unique_ptr<Entity> spitfire = std::unique_ptr<Entity>(new SpitFire);
+    spitfire->settings(m_animSpitFire, rand() % Weight, rand() % Height, 0);
+    m_objects.push_back(std::move(spitfire));
+
+    std::unique_ptr<Entity> nuke = std::unique_ptr<Entity>(new NuclearRocket);
+    nuke->settings(m_animNuke, rand() % Weight, rand() % Height, 0);
+    m_objects.push_back(std::move(nuke));
+
+    std::unique_ptr<Entity> worker = std::unique_ptr<Entity>(new Worker);
+    worker->settings(m_animWorker, rand() % Weight, rand() % Height, 0);
+    m_objects.push_back(std::move(worker));
 
     m_fileLogger->log("Game", "createObjects", "END");
 }
