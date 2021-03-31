@@ -5,7 +5,7 @@
 
 namespace Factory {
     enum CharID {
-        car,
+        car = 0,
         nuke,
         spit,
         tank,

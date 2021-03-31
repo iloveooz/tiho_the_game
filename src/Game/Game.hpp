@@ -11,8 +11,7 @@
 #include "../IObject/IObject.hpp"
 
 #include "../Character/Entity.hpp"
-#include "../Character/Car.hpp"
-#include "../Character/Tank.hpp"
+#include "../Building/Building.hpp"
 
 #include "../Animation/CharacterAnimation.hpp"
 
@@ -28,8 +27,13 @@
 #include "../Logger/FileLogger.hpp"
 #include "../Logger/SocketLogger.hpp"
 
+
 namespace States {
     class GameState;
+}
+
+namespace Buildings {
+    class Building;
 }
 
 class Game : public IObject, public std::enable_shared_from_this<Game> {
@@ -47,6 +51,8 @@ private:
     void changeGameState(States::TypeState gameState);
 
     void createObjects();
+    void createBuildings();
+
     void createMap();
 
     void updateObjects();
@@ -59,6 +65,7 @@ private:
 
     sf::RenderWindow m_window;
     std::list<std::unique_ptr<Entity>> m_objects;
+    std::list<std::unique_ptr<Buildings::Building>> m_buildings;
 
     std::shared_ptr<States::GameState> m_pCurrentState;
     std::array<std::unique_ptr<States::GameState>, States::TypeState::Count> m_gameStates;
@@ -72,6 +79,16 @@ private:
     Animations::CharacterAnimation m_animSpitFire;
     Animations::CharacterAnimation m_animNuke;
     Animations::CharacterAnimation m_animWorker;
+
+    Animations::BuildingAnimation m_animArsenal;
+    Animations::BuildingAnimation m_animCannon;
+    Animations::BuildingAnimation m_animFactory;
+    Animations::BuildingAnimation m_animGenerator;
+    Animations::BuildingAnimation m_animLab;
+    Animations::BuildingAnimation m_animMain;
+    Animations::BuildingAnimation m_animMine;
+    Animations::BuildingAnimation m_animNSilo;
+    Animations::BuildingAnimation m_animOil;
 
     bool m_isMovingUp;
     bool m_isMovingDown;

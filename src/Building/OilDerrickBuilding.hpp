@@ -3,8 +3,10 @@
 
 #include "Building.hpp"
 
-class OilDerrickBuilding : public Building {
+namespace Buildings {
+    class OilDerrickBuilding : public Building {
 
-};
+    };
+}
 
 #endif //TIHO_OILDERRICKBUILDING_HPP

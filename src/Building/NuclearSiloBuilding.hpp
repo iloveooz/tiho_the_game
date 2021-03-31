@@ -3,8 +3,10 @@
 
 #include "Building.hpp"
 
-class NuclearSiloBuilding : public Building {
+namespace Buildings {
+    class NuclearSiloBuilding : public Building {
 
-};
+    };
+}
 
 #endif //TIHO_NUCLEARSILOBUILDING_HPP

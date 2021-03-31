@@ -3,8 +3,10 @@
 
 #include "Building.hpp"
 
-class GeneratorBuilding : public Building {
+namespace Buildings {
+    class GeneratorBuilding : public Building {
 
-};
+    };
+}
 
 #endif //TIHO_GENERATORBUILDING_HPP

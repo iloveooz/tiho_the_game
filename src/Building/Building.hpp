@@ -3,45 +3,60 @@
 
 #include <string>
 #include <cmath>
+#include <cassert>
 
 #include <SFML/Graphics.hpp>
 
 #include "../IObject/IObject.hpp"
 #include "../Animation/BuildingAnimation.hpp"
 
-class Building : public IObject {
-public:
-    Building();
-    virtual ~Building() {};
+namespace Buildings {
+    enum BuildID {
+        arsenal = 0,
+        cannon,
+        factory,
+        gen,
+        lab,
+        main,
+        mine,
+        nsilo,
+        oil
+    };
 
-    void settings (Animations::BuildingAnimation &animation, double x, double y, double angle = 0);
-    virtual void update(double dx, double dy);
-    void draw(sf::RenderWindow &app);
+    class Building : public IObject {
+    public:
+        Building();
+        virtual ~Building() {};
 
-    std::string& getName();
-    bool isAlive() const;
+        static std::unique_ptr<Building> createBuilding(BuildID);
 
-protected:
-    // координаты фигуры
-    double m_dX;
-    double m_dY;
+        void settings(Animations::BuildingAnimation &animation, double x, double y, double angle = 0);
+        virtual void update(double dx, double dy);
+        void draw(sf::RenderWindow &app);
+        std::string &getName();
+        bool isAlive() const;
 
-    // смещение
-    double m_dDx;
-    double m_dDy;
+    protected:
+        // координаты фигуры
+        double m_dX;
+        double m_dY;
 
-    // угол поворота
-    double m_dAngle;
+        // смещение
+        double m_dDx;
+        double m_dDy;
 
-    // здоровье
-    int m_iHealth;
-    bool m_bAlive;
+        // угол поворота
+        double m_dAngle;
 
-    // наименование элемента
-    std::string m_sName;
+        // здоровье
+        int m_iHealth;
+        bool m_bAlive;
 
-    // анимация или спрайт
-    Animations::BuildingAnimation m_aAnimation;
-};
+        // наименование элемента
+        std::string m_sName;
 
+        // анимация или спрайт
+        Animations::BuildingAnimation m_aAnimation;
+    };
+}
 #endif //TIHO_BUILDING_HPP

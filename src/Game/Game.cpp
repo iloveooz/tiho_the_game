@@ -26,6 +26,16 @@ Game::Game() :
     m_animNuke.setTexture(m_textureHolder.get(Textures::NuclearRocket), 48, 48);
     m_animWorker.setTexture(m_textureHolder.get(Textures::Worker), 54, 54);
 
+    m_animArsenal.setTexture(m_textureHolder.get(Textures::Arsenal), 64, 64);
+    m_animCannon.setTexture(m_textureHolder.get(Textures::Cannon), 64, 64);
+    m_animFactory.setTexture(m_textureHolder.get(Textures::Factory), 128, 64);
+    m_animGenerator.setTexture(m_textureHolder.get(Textures::Generator), 64, 64);
+    m_animLab.setTexture(m_textureHolder.get(Textures::Laboratory), 64, 64);
+    m_animMain.setTexture(m_textureHolder.get(Textures::MainBase), 128, 128);
+    m_animMine.setTexture(m_textureHolder.get(Textures::Mine), 64, 64);
+    m_animNSilo.setTexture(m_textureHolder.get(Textures::NuclearSilo), 64, 64);
+    m_animOil.setTexture(m_textureHolder.get(Textures::OilDerrick), 64, 64);
+
     m_fileLogger->log("Game", "Game", "END");
 }
 
@@ -40,6 +50,7 @@ void Game::run() {
 
     createMap();
     createObjects();
+    createBuildings();
 
     while (m_window.isOpen()) {
         processEvents();
@@ -78,6 +89,48 @@ void Game::createObjects() {
     m_fileLogger->log("Game", "createObjects", "END");
 }
 
+void Game::createBuildings() {
+    m_fileLogger->log("Game", "createBuildings", "BEGIN");
+
+    std::unique_ptr<Buildings::Building> arsenal = Buildings::Building::createBuilding(Buildings::arsenal);
+    arsenal->settings(m_animArsenal, rand() % Weight, rand() % Height, 0);
+    m_buildings.push_back(std::move(arsenal));
+
+    std::unique_ptr<Buildings::Building> cannon = Buildings::Building::createBuilding(Buildings::cannon);
+    cannon->settings(m_animCannon, rand() % Weight, rand() % Height, 0);
+    m_buildings.push_back(std::move(cannon));
+
+    std::unique_ptr<Buildings::Building> factory = Buildings::Building::createBuilding(Buildings::factory);
+    factory->settings(m_animFactory, rand() % Weight, rand() % Height, 0);
+    m_buildings.push_back(std::move(factory));
+
+    std::unique_ptr<Buildings::Building> generator = Buildings::Building::createBuilding(Buildings::gen);
+    generator->settings(m_animGenerator, rand() % Weight, rand() % Height, 0);
+    m_buildings.push_back(std::move(generator));
+
+    std::unique_ptr<Buildings::Building> laboratory = Buildings::Building::createBuilding(Buildings::lab);
+    laboratory->settings(m_animLab, rand() % Weight, rand() % Height, 0);
+    m_buildings.push_back(std::move(laboratory));
+
+    std::unique_ptr<Buildings::Building> main = Buildings::Building::createBuilding(Buildings::main);
+    main->settings(m_animMain, rand() % Weight, rand() % Height, 0);
+    m_buildings.push_back(std::move(main));
+
+    std::unique_ptr<Buildings::Building> mine = Buildings::Building::createBuilding(Buildings::mine);
+    mine->settings(m_animMine, rand() % Weight, rand() % Height, 0);
+    m_buildings.push_back(std::move(mine));
+
+    std::unique_ptr<Buildings::Building> nsilo = Buildings::Building::createBuilding(Buildings::nsilo);
+    nsilo->settings(m_animNSilo, rand() % Weight, rand() % Height, 0);
+    m_buildings.push_back(std::move(nsilo));
+
+    std::unique_ptr<Buildings::Building> oilderrick = Buildings::Building::createBuilding(Buildings::oil);
+    oilderrick->settings(m_animOil, rand() % Weight, rand() % Height, 0);
+    m_buildings.push_back(std::move(oilderrick));
+
+    m_fileLogger->log("Game", "createBuildings", "END");
+}
+
 void Game::updateObjects() {
     double dx = 0.0, dy = 0.0;
     // цикл обновления
@@ -106,6 +159,9 @@ void Game::renderObjects() {
 
     // отображение объектов
     for (auto const &object : m_objects)
+        object->draw(m_window);
+
+    for (auto const &object : m_buildings)
         object->draw(m_window);
 
     m_window.display();
@@ -147,8 +203,11 @@ void Game::handlePlayerKeyboardEvent(sf::Keyboard::Key key, bool isPressed) {
         m_isMovingLeft = isPressed;
     else if (key == sf::Keyboard::Right)
         m_isMovingRight = isPressed;
-    else if (key == sf::Keyboard::B && isPressed)
+    else if (key == sf::Keyboard::B && isPressed) {
         createObjects();
+        createBuildings();
+    }
+
 
     m_fileLogger->log("Game", "handlePlayerKeyboardEvent", "END");
 }

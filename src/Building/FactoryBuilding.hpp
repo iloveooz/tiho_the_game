@@ -3,8 +3,10 @@
 
 #include "Building.hpp"
 
-class FactoryBuilding : public Building {
+namespace Buildings {
+    class FactoryBuilding : public Building {
 
-};
+    };
+}
 
 #endif //TIHO_FACTORYBUILDING_HPP
