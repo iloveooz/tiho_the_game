@@ -1,9 +1,8 @@
 #include "Game.hpp"
-#include "../Character/Factory/CarFactory.hpp"
-#include "../Character/Factory/TankFactory.hpp"
-#include "../Character/SpitFire.hpp"
-#include "../Character/NuclearRocket.hpp"
-#include "../Character/Worker.hpp"
+
+#include <memory>
+
+#include "../Character/Factory/CharacterFactory.hpp"
 
 Game::Game() :
         m_window(sf::VideoMode(Weight, Height), "Tycho Planet"),
@@ -54,26 +53,25 @@ void Game::run() {
 void Game::createObjects() {
     m_fileLogger->log("Game", "createObjects", "BEGIN");
 
-    TankFactory tankFactory;
-    CarFactory carFactory;
+    Factory::CharacterFactory factory;
 
-    std::unique_ptr<Entity> car = carFactory.createEntity();
+    std::unique_ptr<Entity> car = factory.createEntity(Factory::CharID::car);
     car->settings(m_animCar, rand() % Weight, rand() % Height, 0);
     m_objects.push_back(std::move(car));
 
-    std::unique_ptr<Entity> tank = tankFactory.createEntity();
+    std::unique_ptr<Entity> tank = factory.createEntity(Factory::CharID::tank);
     tank->settings(m_animTank, rand() % Weight, rand() % Height, 0);
     m_objects.push_back(std::move(tank));
 
-    std::unique_ptr<Entity> spitfire = std::unique_ptr<Entity>(new SpitFire);
+    std::unique_ptr<Entity> spitfire = factory.createEntity(Factory::CharID::spit);
     spitfire->settings(m_animSpitFire, rand() % Weight, rand() % Height, 0);
     m_objects.push_back(std::move(spitfire));
 
-    std::unique_ptr<Entity> nuke = std::unique_ptr<Entity>(new NuclearRocket);
+    std::unique_ptr<Entity> nuke = factory.createEntity(Factory::CharID::nuke);
     nuke->settings(m_animNuke, rand() % Weight, rand() % Height, 0);
     m_objects.push_back(std::move(nuke));
 
-    std::unique_ptr<Entity> worker = std::unique_ptr<Entity>(new Worker);
+    std::unique_ptr<Entity> worker = factory.createEntity(Factory::CharID::work);
     worker->settings(m_animWorker, rand() % Weight, rand() % Height, 0);
     m_objects.push_back(std::move(worker));
 

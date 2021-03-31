@@ -35,12 +35,7 @@ set(SOURCE_FILES
         src/Game/GameState.hpp
 
         src/Character/Factory/CharacterFactory.hpp
-
-        src/Character/Factory/TankFactory.cpp
-        src/Character/Factory/TankFactory.hpp
-
-        src/Character/Factory/CarFactory.cpp
-        src/Character/Factory/CarFactory.hpp
+        src/Character/Factory/CharacterFactory.cpp
 
         src/Resource/Iron.cpp
         src/Resource/Iron.hpp
@@ -151,7 +146,7 @@ set(SOURCE_FILES
         src/Logger/FileLogger.hpp
 
         src/Logger/SocketLogger.cpp
-        src/Logger/SocketLogger.hpp)
+        src/Logger/SocketLogger.hpp )
 
 add_executable(tiho ${SOURCE_FILES})
 

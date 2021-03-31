@@ -3,12 +3,23 @@
 
 #include "../Entity.hpp"
 
-class CharacterFactory {
-public:
-    CharacterFactory() {}
-    virtual ~CharacterFactory() {}
+namespace Factory {
+    enum CharID {
+        car,
+        nuke,
+        spit,
+        tank,
+        work
+    };
 
-    virtual std::unique_ptr<Entity> createEntity() = 0;
-};
+    class CharacterFactory {
+    public:
+        CharacterFactory() {}
+
+        virtual ~CharacterFactory() {}
+
+        std::unique_ptr<Entity> createEntity(CharID charType) ;
+    };
+}
 
 #endif //TIHO_CHARACTERFACTORY_HPP
