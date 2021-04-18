@@ -49,8 +49,8 @@ void Game::run() {
     changeGameState(States::Playing);
 
     createMap();
-    createObjects();
-    createBuildings();
+    //createObjects();
+    //createBuildings();
 
     while (m_window.isOpen()) {
         processEvents();
@@ -204,10 +204,8 @@ void Game::handlePlayerKeyboardEvent(sf::Keyboard::Key key, bool isPressed) {
     else if (key == sf::Keyboard::Right)
         m_isMovingRight = isPressed;
     else if (key == sf::Keyboard::B && isPressed) {
-        createObjects();
         createBuildings();
     }
-
 
     m_fileLogger->log("Game", "handlePlayerKeyboardEvent", "END");
 }
