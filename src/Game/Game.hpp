@@ -50,8 +50,8 @@ private:
     void fillGameStates();
     void changeGameState(States::TypeState gameState);
 
-    void createObjects();
-    void createBuildings();
+    void createCharacter();
+    void createBuilding(Buildings::BuildID id, sf::Vector2i position);
 
     void createMap();
 
@@ -80,6 +80,8 @@ private:
     Animations::CharacterAnimation m_animNuke;
     Animations::CharacterAnimation m_animWorker;
 
+    std::map<Buildings::BuildID, Animations::BuildingAnimation> m_BuildAnimap;
+
     Animations::BuildingAnimation m_animArsenal;
     Animations::BuildingAnimation m_animCannon;
     Animations::BuildingAnimation m_animFactory;
@@ -101,6 +103,9 @@ private:
     std::shared_ptr<Logger> m_fileLogger;
 
     long m_amountTanks;
+
+    bool m_bBPressed;
+    Buildings::BuildID m_BuildingChoosen;
 };
 
 #endif //TIHO_GAME_HPP

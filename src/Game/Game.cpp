@@ -26,15 +26,33 @@ Game::Game() :
     m_animNuke.setTexture(m_textureHolder.get(Textures::NuclearRocket), 48, 48);
     m_animWorker.setTexture(m_textureHolder.get(Textures::Worker), 54, 54);
 
+
     m_animArsenal.setTexture(m_textureHolder.get(Textures::Arsenal), 64, 64);
+    m_BuildAnimap.insert(std::make_pair(Buildings::arsenal, m_animArsenal));
+
     m_animCannon.setTexture(m_textureHolder.get(Textures::Cannon), 64, 64);
+    m_BuildAnimap.insert(std::make_pair(Buildings::cannon, m_animCannon));
+
     m_animFactory.setTexture(m_textureHolder.get(Textures::Factory), 128, 64);
+    m_BuildAnimap.insert(std::make_pair(Buildings::factory, m_animFactory));
+
     m_animGenerator.setTexture(m_textureHolder.get(Textures::Generator), 64, 64);
+    m_BuildAnimap.insert(std::make_pair(Buildings::gen, m_animGenerator));
+
     m_animLab.setTexture(m_textureHolder.get(Textures::Laboratory), 64, 64);
+    m_BuildAnimap.insert(std::make_pair(Buildings::lab, m_animLab));
+
     m_animMain.setTexture(m_textureHolder.get(Textures::MainBase), 128, 128);
+    m_BuildAnimap.insert(std::make_pair(Buildings::main, m_animMain));
+
     m_animMine.setTexture(m_textureHolder.get(Textures::Mine), 64, 64);
+    m_BuildAnimap.insert(std::make_pair(Buildings::mine, m_animMine));
+
     m_animNSilo.setTexture(m_textureHolder.get(Textures::NuclearSilo), 64, 64);
+    m_BuildAnimap.insert(std::make_pair(Buildings::nsilo, m_animNSilo));
+
     m_animOil.setTexture(m_textureHolder.get(Textures::OilDerrick), 64, 64);
+    m_BuildAnimap.insert(std::make_pair(Buildings::oil, m_animOil));
 
     m_fileLogger->log("Game", "Game", "END");
 }
@@ -49,8 +67,6 @@ void Game::run() {
     changeGameState(States::Playing);
 
     createMap();
-    //createObjects();
-    //createBuildings();
 
     while (m_window.isOpen()) {
         processEvents();
@@ -61,8 +77,8 @@ void Game::run() {
     m_fileLogger->log("Game", "run", "END");
 }
 
-void Game::createObjects() {
-    m_fileLogger->log("Game", "createObjects", "BEGIN");
+void Game::createCharacter() {
+    m_fileLogger->log("Game", "createCharacter", "BEGIN");
 
     Factory::CharacterFactory factory;
 
@@ -86,49 +102,17 @@ void Game::createObjects() {
     worker->settings(m_animWorker, rand() % Weight, rand() % Height, 0);
     m_objects.push_back(std::move(worker));
 
-    m_fileLogger->log("Game", "createObjects", "END");
+    m_fileLogger->log("Game", "createCharacter", "END");
 }
 
-void Game::createBuildings() {
-    m_fileLogger->log("Game", "createBuildings", "BEGIN");
+void Game::createBuilding(Buildings::BuildID id, sf::Vector2i position) {
+    m_fileLogger->log("Game", "createBuilding", "BEGIN");
 
-    std::unique_ptr<Buildings::Building> arsenal = Buildings::Building::createBuilding(Buildings::arsenal);
-    arsenal->settings(m_animArsenal, rand() % Weight, rand() % Height, 0);
-    m_buildings.push_back(std::move(arsenal));
+    std::unique_ptr<Buildings::Building> building = Buildings::Building::createBuilding(id);
+    building->settings(m_BuildAnimap.find(id)->second, position.x, position.y, 0);
+    m_buildings.push_back(std::move(building));
 
-    std::unique_ptr<Buildings::Building> cannon = Buildings::Building::createBuilding(Buildings::cannon);
-    cannon->settings(m_animCannon, rand() % Weight, rand() % Height, 0);
-    m_buildings.push_back(std::move(cannon));
-
-    std::unique_ptr<Buildings::Building> factory = Buildings::Building::createBuilding(Buildings::factory);
-    factory->settings(m_animFactory, rand() % Weight, rand() % Height, 0);
-    m_buildings.push_back(std::move(factory));
-
-    std::unique_ptr<Buildings::Building> generator = Buildings::Building::createBuilding(Buildings::gen);
-    generator->settings(m_animGenerator, rand() % Weight, rand() % Height, 0);
-    m_buildings.push_back(std::move(generator));
-
-    std::unique_ptr<Buildings::Building> laboratory = Buildings::Building::createBuilding(Buildings::lab);
-    laboratory->settings(m_animLab, rand() % Weight, rand() % Height, 0);
-    m_buildings.push_back(std::move(laboratory));
-
-    std::unique_ptr<Buildings::Building> main = Buildings::Building::createBuilding(Buildings::main);
-    main->settings(m_animMain, rand() % Weight, rand() % Height, 0);
-    m_buildings.push_back(std::move(main));
-
-    std::unique_ptr<Buildings::Building> mine = Buildings::Building::createBuilding(Buildings::mine);
-    mine->settings(m_animMine, rand() % Weight, rand() % Height, 0);
-    m_buildings.push_back(std::move(mine));
-
-    std::unique_ptr<Buildings::Building> nsilo = Buildings::Building::createBuilding(Buildings::nsilo);
-    nsilo->settings(m_animNSilo, rand() % Weight, rand() % Height, 0);
-    m_buildings.push_back(std::move(nsilo));
-
-    std::unique_ptr<Buildings::Building> oilderrick = Buildings::Building::createBuilding(Buildings::oil);
-    oilderrick->settings(m_animOil, rand() % Weight, rand() % Height, 0);
-    m_buildings.push_back(std::move(oilderrick));
-
-    m_fileLogger->log("Game", "createBuildings", "END");
+    m_fileLogger->log("Game", "createBuilding", "END");
 }
 
 void Game::updateObjects() {
@@ -195,7 +179,11 @@ void Game::processEvents() {
 void Game::handlePlayerKeyboardEvent(sf::Keyboard::Key key, bool isPressed) {
     m_fileLogger->log("Game", "handlePlayerKeyboardEvent", "BEGIN");
 
-    if (key == sf::Keyboard::Up)
+    if (key == sf::Keyboard::Escape) {
+        m_bBPressed = false;
+        m_BuildingChoosen = Buildings::nothing;
+    }
+    else if (key == sf::Keyboard::Up)
         m_isMovingUp = isPressed;
     else if (key == sf::Keyboard::Down)
         m_isMovingDown = isPressed;
@@ -203,10 +191,29 @@ void Game::handlePlayerKeyboardEvent(sf::Keyboard::Key key, bool isPressed) {
         m_isMovingLeft = isPressed;
     else if (key == sf::Keyboard::Right)
         m_isMovingRight = isPressed;
-    else if (key == sf::Keyboard::B && isPressed) {
-        createObjects();
-    }
+    else if (key == sf::Keyboard::B && isPressed)
+        m_bBPressed = true;
 
+    if (isPressed && m_bBPressed) {
+        if (key == sf::Keyboard::A)
+            m_BuildingChoosen = Buildings::arsenal;
+        else if (key == sf::Keyboard::C)
+            m_BuildingChoosen = Buildings::cannon;
+        else if (key == sf::Keyboard::F)
+            m_BuildingChoosen = Buildings::factory;
+        else if (key == sf::Keyboard::G)
+            m_BuildingChoosen = Buildings::gen;
+        else if (key == sf::Keyboard::L)
+            m_BuildingChoosen = Buildings::lab;
+        else if (key == sf::Keyboard::M)
+            m_BuildingChoosen = Buildings::main;
+        else if (key == sf::Keyboard::I)
+            m_BuildingChoosen = Buildings::mine;
+        else if (key == sf::Keyboard::N)
+            m_BuildingChoosen = Buildings::nsilo;
+        else if (key == sf::Keyboard::O)
+            m_BuildingChoosen = Buildings::oil;
+    }
     m_fileLogger->log("Game", "handlePlayerKeyboardEvent", "END");
 }
 
@@ -215,14 +222,32 @@ void Game::handlePlayerMouseEvent(sf::Mouse::Button button, bool isPressed) {
 
     sf::Vector2i position = sf::Mouse::getPosition(m_window);
 
-    if (button == sf::Mouse::Right && isPressed)
-        m_consoleLogger->log("Game", "handlePlayerMouseEvent", "Right pressed! Coordinates: x = " + std::to_string(position.x) + ", y = " + std::to_string(position.y));
-    else if (button == sf::Mouse::Right && !isPressed)
-        m_consoleLogger->log("Game", "handlePlayerMouseEvent", "Right released! Coordinates: x = " + std::to_string(position.x) + ", y = " + std::to_string(position.y));
-    else if (button == sf::Mouse::Left && isPressed)
-        m_consoleLogger->log("Game", "handlePlayerMouseEvent", "Left pressed! Coordinates: x = " + std::to_string(position.x) + ", y = " + std::to_string(position.y));
-    else if (button == sf::Mouse::Left && !isPressed)
-        m_consoleLogger->log("Game", "handlePlayerMouseEvent", "Left released! Coordinates: x = " + std::to_string(position.x) + ", y = " + std::to_string(position.y));
+    if (button == sf::Mouse::Right && isPressed) {
+        m_consoleLogger->log("Game", "handlePlayerMouseEvent",
+                             "Right pressed! Coordinates: x = " + std::to_string(position.x) + ", y = " +
+                             std::to_string(position.y));
+    }
+    else if (button == sf::Mouse::Right && !isPressed) {
+        m_consoleLogger->log("Game", "handlePlayerMouseEvent",
+                             "Right released! Coordinates: x = " + std::to_string(position.x) + ", y = " +
+                             std::to_string(position.y));
+    }
+    else if (button == sf::Mouse::Left && isPressed && m_bBPressed) {
+        m_consoleLogger->log("Game", "handlePlayerMouseEvent",
+                             "Left pressed! Coordinates: x = " + std::to_string(position.x) + ", y = " +
+                             std::to_string(position.y));
+
+        if (m_BuildingChoosen != Buildings::nothing) {
+            createBuilding(m_BuildingChoosen, position);
+            m_bBPressed = false;
+            m_BuildingChoosen = Buildings::nothing;
+        }
+    }
+    else if (button == sf::Mouse::Left && !isPressed) {
+        m_consoleLogger->log("Game", "handlePlayerMouseEvent",
+                             "Left released! Coordinates: x = " + std::to_string(position.x) + ", y = " +
+                             std::to_string(position.y));
+    }
 
     m_fileLogger->log("Game", "handlePlayerMouseEvent", "END");
 }

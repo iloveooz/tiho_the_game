@@ -12,7 +12,8 @@
 
 namespace Buildings {
     enum BuildID {
-        arsenal = 0,
+        nothing = 0,
+        arsenal,
         cannon,
         factory,
         gen,
@@ -20,7 +21,8 @@ namespace Buildings {
         main,
         mine,
         nsilo,
-        oil
+        oil,
+        count
     };
 
     class Building : public IObject {
