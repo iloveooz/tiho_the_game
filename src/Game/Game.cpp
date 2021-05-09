@@ -204,7 +204,7 @@ void Game::handlePlayerKeyboardEvent(sf::Keyboard::Key key, bool isPressed) {
     else if (key == sf::Keyboard::Right)
         m_isMovingRight = isPressed;
     else if (key == sf::Keyboard::B && isPressed) {
-        createBuildings();
+        createObjects();
     }
 
     m_fileLogger->log("Game", "handlePlayerKeyboardEvent", "END");
