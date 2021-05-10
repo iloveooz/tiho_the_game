@@ -92,12 +92,17 @@ private:
     Animations::BuildingAnimation m_animNSilo;
     Animations::BuildingAnimation m_animOil;
 
-    bool m_isMovingUp;
-    bool m_isMovingDown;
-    bool m_isMovingLeft;
-    bool m_isMovingRight;
+    bool m_isViewMovingUp;
+    bool m_isViewMovingDown;
+    bool m_isViewMovingLeft;
+    bool m_isViewMovingRight;
+
+    bool m_isViewZoomingIn;
+    bool m_isViewZoomingOut;
 
     World::Map m_map;
+
+    sf::View m_camera;
 
     std::shared_ptr<Logger> m_consoleLogger;
     std::shared_ptr<Logger> m_fileLogger;

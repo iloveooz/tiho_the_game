@@ -16,6 +16,9 @@ Game::Game() :
 
     m_amountTanks = 5;
 
+    m_camera.setSize(sf::Vector2f(1600, 900));
+    m_camera.setCenter(sf::Vector2f(0, 0));
+
     m_textureHolder.init();
 
     m_sBackground.setTexture(m_textureHolder.get(Textures::Terrain));
@@ -116,29 +119,31 @@ void Game::createBuilding(Buildings::BuildID id, sf::Vector2i position) {
 }
 
 void Game::updateObjects() {
-    double dx = 0.0, dy = 0.0;
-    // цикл обновления
-    for (auto &object : m_objects) {
-        if (m_isMovingUp)
-            dy -= 1.0;
-        if (m_isMovingDown)
-            dy += 1.0;
-        if (m_isMovingLeft)
-            dx -= 1.0;
-        if (m_isMovingRight)
-            dx += 1.0;
+    double dx = 0.0, dy = 0.0, zf = 1.0;
 
-        object->update(dx, dy);
+    if (m_isViewMovingUp)
+        dy -= 10.0;
+    if (m_isViewMovingDown)
+        dy += 10.0;
+    if (m_isViewMovingLeft)
+        dx -= 10.0;
+    if (m_isViewMovingRight)
+        dx += 10.0;
+    if (m_isViewZoomingIn)
+        zf = 1.1;
+    if (m_isViewZoomingOut)
+        zf = 0.9;
 
-        if (!object->isAlive()) {
-            m_objects.remove(object);
-        }
-    }
+    m_camera.move(dx, dy);
+    m_camera.zoom(zf);
+
+    // if (!object->isAlive()) m_objects.remove(object);
 }
 
 void Game::renderObjects() {
     m_window.clear();
 
+    m_window.setView(m_camera);
     m_window.draw(m_map);
 
     // отображение объектов
@@ -183,15 +188,22 @@ void Game::handlePlayerKeyboardEvent(sf::Keyboard::Key key, bool isPressed) {
         m_bBPressed = false;
         m_BuildingChoosen = Buildings::nothing;
     }
-    else if (key == sf::Keyboard::Up)
-        m_isMovingUp = isPressed;
+
+    if (key == sf::Keyboard::Up)
+        m_isViewMovingUp = isPressed;
     else if (key == sf::Keyboard::Down)
-        m_isMovingDown = isPressed;
+        m_isViewMovingDown = isPressed;
     else if (key == sf::Keyboard::Left)
-        m_isMovingLeft = isPressed;
+        m_isViewMovingLeft = isPressed;
     else if (key == sf::Keyboard::Right)
-        m_isMovingRight = isPressed;
-    else if (key == sf::Keyboard::B && isPressed)
+        m_isViewMovingRight = isPressed;
+
+    if (key == sf::Keyboard::Add)
+        m_isViewZoomingOut = isPressed;
+    else if (key == sf::Keyboard::Subtract)
+        m_isViewZoomingIn = isPressed;
+
+    if (key == sf::Keyboard::B && isPressed)
         m_bBPressed = true;
 
     if (isPressed && m_bBPressed) {
