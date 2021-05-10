@@ -150,4 +150,8 @@ namespace World {
     void Map::draw(sf::RenderTarget &target, sf::RenderStates states) const {
         target.draw(sf::Sprite(m_renderTexture.getTexture()), states);
     }
+
+    sf::Vector2i Map::getMapSize() const {
+        return m_vMazeSize;
+    }
 }

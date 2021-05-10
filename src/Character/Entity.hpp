@@ -10,8 +10,8 @@
 #include "../IObject/IObject.hpp"
 #include "../Map/Map.hpp"
 
-const int Weight = 1600; // ширина главного окна
-const int Height = 900;  // высота главного окна
+const int Weight = 1920; // ширина главного окна
+const int Height = 1080;  // высота главного окна
 
 class Entity : public IObject {
 public:

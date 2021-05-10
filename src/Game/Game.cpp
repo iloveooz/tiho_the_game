@@ -5,7 +5,7 @@
 #include "../Character/Factory/CharacterFactory.hpp"
 
 Game::Game() :
-        m_window(sf::VideoMode(Weight, Height), "Tycho Planet"),
+        m_window(sf::VideoMode(Weight, Height), "Tycho Planet", sf::Style::Fullscreen),
         m_consoleLogger(new ConsoleLogger()),
         m_fileLogger(new FileLogger("output.log")) {
 
@@ -16,8 +16,8 @@ Game::Game() :
 
     m_amountTanks = 5;
 
-    m_camera.setSize(sf::Vector2f(1600, 900));
-    m_camera.setCenter(sf::Vector2f(0, 0));
+    m_camera.setSize(sf::Vector2f(Weight, Height));
+    m_camera.setCenter(sf::Vector2f(Weight / 2, Height / 2));
 
     m_textureHolder.init();
 
@@ -73,8 +73,9 @@ void Game::run() {
 
     while (m_window.isOpen()) {
         processEvents();
-        updateObjects();
+        updateViewOfMap();
         renderObjects();
+        checkMousePosition();
     }
 
     m_fileLogger->log("Game", "run", "END");
@@ -118,17 +119,28 @@ void Game::createBuilding(Buildings::BuildID id, sf::Vector2i position) {
     m_fileLogger->log("Game", "createBuilding", "END");
 }
 
-void Game::updateObjects() {
+void Game::checkMousePosition() {
+    sf::Vector2i mousePosition = sf::Mouse::getPosition(m_window);
+    // m_consoleLogger->log("Game", "checkMousePosition", "x = " + std::to_string(mousePosition.x) + ", y = " + std::to_string(mousePosition.y));
+
+    m_isViewMovingLeft = (mousePosition.x < 3);
+    m_isViewMovingRight = (mousePosition.x > m_window.getSize().x - 3);
+    m_isViewMovingUp = (mousePosition.y < 3);
+    m_isViewMovingDown = (mousePosition.y > m_window.getSize().y - 3);
+}
+
+void Game::updateViewOfMap() {
     double dx = 0.0, dy = 0.0, zf = 1.0;
 
-    if (m_isViewMovingUp)
-        dy -= 10.0;
-    if (m_isViewMovingDown)
-        dy += 10.0;
-    if (m_isViewMovingLeft)
-        dx -= 10.0;
-    if (m_isViewMovingRight)
-        dx += 10.0;
+    if (m_isViewMovingUp && m_camera.getCenter().y > int(Height / 2))
+        dy -= 50.0;
+    if (m_isViewMovingDown && m_camera.getCenter().y <= m_map.getMapSize().y * 128 - int(Height / 2))
+        dy += 50.0;
+    if (m_isViewMovingLeft && m_camera.getCenter().x > int(Weight / 2))
+        dx -= 50.0;
+    if (m_isViewMovingRight && m_camera.getCenter().x <= m_map.getMapSize().x * 128 - int(Height / 2))
+        dx += 50.0;
+
     if (m_isViewZoomingIn)
         zf = 1.1;
     if (m_isViewZoomingOut)
@@ -226,6 +238,10 @@ void Game::handlePlayerKeyboardEvent(sf::Keyboard::Key key, bool isPressed) {
         else if (key == sf::Keyboard::O)
             m_BuildingChoosen = Buildings::oil;
     }
+
+    if (key == sf::Keyboard::Q)
+        m_window.close();
+
     m_fileLogger->log("Game", "handlePlayerKeyboardEvent", "END");
 }
 

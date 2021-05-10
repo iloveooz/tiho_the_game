@@ -43,6 +43,8 @@ class Map : public IObject, public sf::Drawable {
 
         void loadLevel(const Textures::TextureHolder& textureHolder);
 
+        sf::Vector2i getMapSize() const;
+
     private:
         void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
