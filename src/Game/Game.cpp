@@ -134,11 +134,11 @@ void Game::updateViewOfMap() {
 
     if (m_isViewMovingUp && m_camera.getCenter().y > int(Height / 2))
         dy -= 50.0;
-    if (m_isViewMovingDown && m_camera.getCenter().y <= m_map.getMapSize().y * 128 - int(Height / 2))
+    if (m_isViewMovingDown && m_camera.getCenter().y < m_map.getMapSize().y * 128 - int(Height / 2))
         dy += 50.0;
     if (m_isViewMovingLeft && m_camera.getCenter().x > int(Weight / 2))
         dx -= 50.0;
-    if (m_isViewMovingRight && m_camera.getCenter().x <= m_map.getMapSize().x * 128 - int(Height / 2))
+    if (m_isViewMovingRight && m_camera.getCenter().x < m_map.getMapSize().x * 128 - int(Height / 2))
         dx += 50.0;
 
     if (m_isViewZoomingIn)
