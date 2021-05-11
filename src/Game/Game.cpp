@@ -109,7 +109,7 @@ void Game::createCharacter() {
     m_fileLogger->log("Game", "createCharacter", "END");
 }
 
-void Game::createBuilding(Buildings::BuildID id, sf::Vector2i position) {
+void Game::createBuilding(Buildings::BuildID id, sf::Vector2f position) {
     m_fileLogger->log("Game", "createBuilding", "BEGIN");
 
     std::unique_ptr<Buildings::Building> building = Buildings::Building::createBuilding(id);
@@ -248,33 +248,34 @@ void Game::handlePlayerKeyboardEvent(sf::Keyboard::Key key, bool isPressed) {
 void Game::handlePlayerMouseEvent(sf::Mouse::Button button, bool isPressed) {
     m_fileLogger->log("Game", "handlePlayerMouseEvent", "BEGIN");
 
-    sf::Vector2i position = sf::Mouse::getPosition(m_window);
+    sf::Vector2i windowPosition = sf::Mouse::getPosition(m_window);
+    sf::Vector2f worldPosition = m_window.mapPixelToCoords(windowPosition);
 
     if (button == sf::Mouse::Right && isPressed) {
         m_consoleLogger->log("Game", "handlePlayerMouseEvent",
-                             "Right pressed! Coordinates: x = " + std::to_string(position.x) + ", y = " +
-                             std::to_string(position.y));
+                             "Right pressed! Coordinates: x = " + std::to_string(windowPosition.x) + ", y = " +
+                             std::to_string(windowPosition.y));
     }
     else if (button == sf::Mouse::Right && !isPressed) {
         m_consoleLogger->log("Game", "handlePlayerMouseEvent",
-                             "Right released! Coordinates: x = " + std::to_string(position.x) + ", y = " +
-                             std::to_string(position.y));
+                             "Right released! Coordinates: x = " + std::to_string(windowPosition.x) + ", y = " +
+                             std::to_string(windowPosition.y));
     }
     else if (button == sf::Mouse::Left && isPressed && m_bBPressed) {
         m_consoleLogger->log("Game", "handlePlayerMouseEvent",
-                             "Left pressed! Coordinates: x = " + std::to_string(position.x) + ", y = " +
-                             std::to_string(position.y));
+                             "Left pressed! Coordinates: x = " + std::to_string(windowPosition.x) + ", y = " +
+                             std::to_string(windowPosition.y));
 
         if (m_BuildingChoosen != Buildings::nothing) {
-            createBuilding(m_BuildingChoosen, position);
+            createBuilding(m_BuildingChoosen, worldPosition);
             m_bBPressed = false;
             m_BuildingChoosen = Buildings::nothing;
         }
     }
     else if (button == sf::Mouse::Left && !isPressed) {
         m_consoleLogger->log("Game", "handlePlayerMouseEvent",
-                             "Left released! Coordinates: x = " + std::to_string(position.x) + ", y = " +
-                             std::to_string(position.y));
+                             "Left released! Coordinates: x = " + std::to_string(windowPosition.x) + ", y = " +
+                             std::to_string(windowPosition.y));
     }
 
     m_fileLogger->log("Game", "handlePlayerMouseEvent", "END");
