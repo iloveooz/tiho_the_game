@@ -75,7 +75,7 @@ void Game::run() {
 
     while (m_window.isOpen()) {
         checkMousePosition();
-        showCursorOfBuilding(m_BuildingChoosen);
+        showCursorOfBuilding();
         processEvents();
         updateViewOfMap();
         renderObjects();
@@ -143,14 +143,14 @@ void Game::setBuildingToGrid(Buildings::BuildID id, sf::Vector2f &position) {
     }
 }
 
-void Game::showCursorOfBuilding(Buildings::BuildID id) {
+void Game::showCursorOfBuilding() {
     sf::Vector2i windowPosition = sf::Mouse::getPosition(m_window);
     sf::Vector2f worldPosition = m_window.mapPixelToCoords(windowPosition);
 
     if (m_BuildingChoosen != Buildings::nothing) {
-        m_fakeBuilding = m_BuildAnimap.find(id)->second.getSprite();
-        setBuildingToGrid(id, worldPosition);
-        m_fakeBuilding.setColor(sf::Color::White);
+        m_fakeBuilding = m_BuildAnimap.find(m_BuildingChoosen)->second.getSprite();
+        setBuildingToGrid(m_BuildingChoosen, worldPosition);
+
         m_fakeBuilding.move(worldPosition);
     }
 }

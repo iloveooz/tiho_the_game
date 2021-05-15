@@ -52,8 +52,8 @@ private:
 
     void createCharacter();
 
-    void setBuildingToGrid(Buildings::BuildID id, sf::Vector2f& position);
-    void showCursorOfBuilding(Buildings::BuildID id);
+    static void setBuildingToGrid(Buildings::BuildID id, sf::Vector2f& position);
+    void showCursorOfBuilding();
     void createBuilding(Buildings::BuildID id, sf::Vector2f position);
 
     void createMap();
