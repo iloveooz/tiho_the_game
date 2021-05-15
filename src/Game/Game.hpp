@@ -53,6 +53,7 @@ private:
     void createCharacter();
 
     void setBuildingToGrid(Buildings::BuildID id, sf::Vector2f& position);
+    void showCursorOfBuilding(Buildings::BuildID id);
     void createBuilding(Buildings::BuildID id, sf::Vector2f position);
 
     void createMap();
@@ -97,6 +98,8 @@ private:
     Animations::BuildingAnimation m_animMine;
     Animations::BuildingAnimation m_animNSilo;
     Animations::BuildingAnimation m_animOil;
+
+    sf::Sprite m_fakeBuilding;
 
     bool m_isViewMovingUp;
     bool m_isViewMovingDown;

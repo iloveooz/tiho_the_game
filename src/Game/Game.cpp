@@ -19,6 +19,8 @@ Game::Game() :
     m_camera.setSize(sf::Vector2f(Weight, Height));
     m_camera.setCenter(sf::Vector2f(Weight / 2, Height / 2));
 
+    m_BuildingChoosen = Buildings::nothing;
+
     m_textureHolder.init();
 
     m_sBackground.setTexture(m_textureHolder.get(Textures::Terrain));
@@ -73,6 +75,7 @@ void Game::run() {
 
     while (m_window.isOpen()) {
         checkMousePosition();
+        showCursorOfBuilding(m_BuildingChoosen);
         processEvents();
         updateViewOfMap();
         renderObjects();
@@ -140,6 +143,18 @@ void Game::setBuildingToGrid(Buildings::BuildID id, sf::Vector2f &position) {
     }
 }
 
+void Game::showCursorOfBuilding(Buildings::BuildID id) {
+    sf::Vector2i windowPosition = sf::Mouse::getPosition(m_window);
+    sf::Vector2f worldPosition = m_window.mapPixelToCoords(windowPosition);
+
+    if (m_BuildingChoosen != Buildings::nothing) {
+        m_fakeBuilding = m_BuildAnimap.find(id)->second.getSprite();
+        setBuildingToGrid(id, worldPosition);
+        m_fakeBuilding.setColor(sf::Color::White);
+        m_fakeBuilding.move(worldPosition);
+    }
+}
+
 void Game::checkMousePosition() {
     sf::Vector2i mousePosition = sf::Mouse::getPosition(m_window);
     // m_consoleLogger->log("Game", "checkMousePosition", "x = " + std::to_string(mousePosition.x) + ", y = " + std::to_string(mousePosition.y));
@@ -187,6 +202,10 @@ void Game::renderObjects() {
 
     for (auto const &object : m_buildings)
         object->draw(m_window);
+
+    if (m_BuildingChoosen != Buildings::nothing) {
+        m_window.draw(m_fakeBuilding);
+    }
 
     m_window.display();
 }
