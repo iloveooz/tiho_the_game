@@ -112,11 +112,32 @@ void Game::createCharacter() {
 void Game::createBuilding(Buildings::BuildID id, sf::Vector2f position) {
     m_fileLogger->log("Game", "createBuilding", "BEGIN");
 
+    setBuildingToGrid(id, position);
+
     std::unique_ptr<Buildings::Building> building = Buildings::Building::createBuilding(id);
     building->settings(m_BuildAnimap.find(id)->second, position.x, position.y, 0);
     m_buildings.push_back(std::move(building));
 
     m_fileLogger->log("Game", "createBuilding", "END");
+}
+
+void Game::setBuildingToGrid(Buildings::BuildID id, sf::Vector2f &position) {
+    int inX = int(position.x) / 128;
+    int inY = int(position.y) / 128;
+
+    switch (id) {
+        case Buildings::main:
+            position.x = float(inX) * 128;
+            position.y = float(inY) * 128;
+            break;
+        case Buildings::factory:
+            position.x = float(inX) * 128;
+            position.y = float(inY) * 128 + 64;
+            break;
+        default:
+            position.x = float(inX) * 128 + 64;
+            position.y = float(inY) * 128 + 64;
+    }
 }
 
 void Game::checkMousePosition() {

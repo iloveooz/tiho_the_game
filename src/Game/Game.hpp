@@ -51,6 +51,8 @@ private:
     void changeGameState(States::TypeState gameState);
 
     void createCharacter();
+
+    void setBuildingToGrid(Buildings::BuildID id, sf::Vector2f& position);
     void createBuilding(Buildings::BuildID id, sf::Vector2f position);
 
     void createMap();

@@ -3,7 +3,7 @@
 namespace World {
 
     Map::Map() {
-        m_vMazeSize= sf::Vector2i(0, 0);
+        m_vMazeSize = sf::Vector2i(0, 0);
     }
 
     Map::~Map() {
