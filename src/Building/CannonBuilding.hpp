@@ -5,7 +5,9 @@
 
 namespace Buildings {
     class CannonBuilding : public Building {
-
+    public:
+        CannonBuilding();
+        ~CannonBuilding();
     };
 }
 

@@ -5,7 +5,9 @@
 
 namespace Buildings {
     class GeneratorBuilding : public Building {
-
+    public:
+        GeneratorBuilding();
+        ~GeneratorBuilding();
     };
 }
 

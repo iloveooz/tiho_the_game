@@ -5,7 +5,9 @@
 
 namespace Buildings {
     class NuclearSiloBuilding : public Building {
-
+    public:
+        NuclearSiloBuilding();
+        ~NuclearSiloBuilding();
     };
 }
 

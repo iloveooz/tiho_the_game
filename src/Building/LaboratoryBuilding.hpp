@@ -5,7 +5,9 @@
 
 namespace Buildings {
     class LaboratoryBuilding : public Building {
-
+    public:
+        LaboratoryBuilding();
+        ~LaboratoryBuilding();
     };
 }
 

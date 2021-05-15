@@ -317,3 +317,7 @@ std::shared_ptr<Logger> Game::getConsoleLogger() const {
 std::shared_ptr<Logger> Game::getFileLogger() const {
     return m_fileLogger;
 }
+
+World::Map& Game::getMap() {
+    return m_map;
+}

@@ -5,7 +5,9 @@
 
 namespace Buildings {
     class MainBaseBuilding : public Building {
-
+    public:
+        MainBaseBuilding();
+        ~MainBaseBuilding();
     };
 }
 

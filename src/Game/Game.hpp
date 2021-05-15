@@ -65,6 +65,8 @@ private:
 
     void checkMousePosition();
 
+    World::Map& getMap();
+
     sf::RenderWindow m_window;
     std::list<std::unique_ptr<Entity>> m_objects;
     std::list<std::unique_ptr<Buildings::Building>> m_buildings;

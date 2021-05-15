@@ -5,7 +5,9 @@
 
 namespace Buildings {
     class OilDerrickBuilding : public Building {
-
+    public:
+        OilDerrickBuilding();
+        ~OilDerrickBuilding();
     };
 }
 
