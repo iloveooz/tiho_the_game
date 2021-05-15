@@ -150,7 +150,7 @@ void Game::showCursorOfBuilding() {
     if (m_BuildingChoosen != Buildings::nothing) {
         m_fakeBuilding = m_BuildAnimap.find(m_BuildingChoosen)->second.getSprite();
         setBuildingToGrid(m_BuildingChoosen, worldPosition);
-        m_fakeBuilding.setColor(sf::Color(0, 0, 0, 128));
+        m_fakeBuilding.setColor(sf::Color(0, 0, 0, 96));
         m_fakeBuilding.move(worldPosition);
     }
 }
