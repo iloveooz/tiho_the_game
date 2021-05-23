@@ -9,7 +9,7 @@ namespace Commands {
     public:
         virtual ~GoCommand();
 
-        void execute() override {};
+        void execute() override;
     };
 
 }

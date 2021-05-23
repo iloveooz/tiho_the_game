@@ -9,7 +9,7 @@ namespace Commands {
     public:
         virtual ~AttackCommand();
 
-        void execute() override {};
+        void execute() override;
     };
 
 }

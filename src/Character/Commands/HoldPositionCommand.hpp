@@ -9,7 +9,7 @@ namespace Commands {
     public:
         virtual ~HoldPositionCommand();
 
-        void execute() override {};
+        void execute() override;
     };
 
 }

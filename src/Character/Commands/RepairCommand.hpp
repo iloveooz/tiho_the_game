@@ -9,7 +9,7 @@ namespace Commands {
     public:
         virtual ~RepairCommand();
 
-        void execute() override {};
+        void execute() override;
     };
 
 }

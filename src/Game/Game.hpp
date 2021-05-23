@@ -28,14 +28,6 @@
 #include "../Logger/SocketLogger.hpp"
 
 
-namespace States {
-    class GameState;
-}
-
-namespace Buildings {
-    class Building;
-}
-
 class Game : public IObject, public std::enable_shared_from_this<Game> {
 public:
     Game();

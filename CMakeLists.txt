@@ -146,7 +146,13 @@ set(SOURCE_FILES
         src/Logger/FileLogger.hpp
 
         src/Logger/SocketLogger.cpp
-        src/Logger/SocketLogger.hpp )
+        src/Logger/SocketLogger.hpp
+
+        src/Building/Commands/BuildingCommand.cpp
+        src/Building/Commands/BuildingCommand.hpp
+
+        src/Building/Commands/DestroyBuildingCommand.cpp
+        src/Building/Commands/DestroyBuildingCommand.hpp)
 
 add_executable(tiho ${SOURCE_FILES})
 

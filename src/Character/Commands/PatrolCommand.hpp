@@ -9,7 +9,7 @@ namespace Commands {
     public:
         virtual ~PatrolCommand();
 
-        void execute() override {};
+        void execute() override;
     };
 
 }
