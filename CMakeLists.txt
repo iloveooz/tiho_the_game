@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 project(tiho)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_COMPILER /usr/bin/g++)
 
 set(SOURCE_FILES
@@ -152,7 +152,10 @@ set(SOURCE_FILES
         src/Building/Commands/BuildingCommand.hpp
 
         src/Building/Commands/DestroyBuildingCommand.cpp
-        src/Building/Commands/DestroyBuildingCommand.hpp)
+        src/Building/Commands/DestroyBuildingCommand.hpp
+
+        src/Building/Commands/CreateBuildingCommand.cpp
+        src/Building/Commands/CreateBuildingCommand.hpp)
 
 add_executable(tiho ${SOURCE_FILES})
 
@@ -166,7 +169,7 @@ set(EXECUTABLE_NAME ${PROJECT_NAME})
 
 # detect and add SFML to the project
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
-find_package(SFML 2 REQUIRED system window graphics network audio)
+find_package(SFML 2 COMPONENTS system window graphics network audio)
 
 if (SFML_FOUND)
     include_directories(${SFML_INCLUDE_DIR})
