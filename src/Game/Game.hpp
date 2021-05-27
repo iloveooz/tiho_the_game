@@ -57,6 +57,7 @@ private:
 
     void handlePlayerKeyboardEvent(sf::Keyboard::Key key, bool isPressed);
     void handlePlayerMouseEvent(sf::Mouse::Button button, bool isPressed);
+    void handlePlayerMouseWheelEvent(sf::Event& event);
 
     void checkMousePosition();
 

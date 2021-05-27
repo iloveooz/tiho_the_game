@@ -231,6 +231,8 @@ void Game::processEvents() {
             case sf::Event::MouseButtonReleased:
                 handlePlayerMouseEvent(event.mouseButton.button, false);
                 break;
+            case sf::Event::MouseWheelScrolled:
+                handlePlayerMouseWheelEvent(event);
         }
     }
 }
@@ -321,6 +323,17 @@ void Game::handlePlayerMouseEvent(sf::Mouse::Button button, bool isPressed) {
     }
 
     m_fileLogger->log("Game", "handlePlayerMouseEvent", "END");
+}
+
+void Game::handlePlayerMouseWheelEvent(sf::Event& event) {
+    if (event.type == sf::Event::MouseWheelScrolled) {
+        if (event.mouseWheelScroll.delta >= 1) {
+            m_camera.zoom(1 - 0.25f);
+        }
+        else {
+            m_camera.zoom(1 + 0.25f);
+        }
+    }
 }
 
 void Game::changeGameState(States::TypeState gameState) {
