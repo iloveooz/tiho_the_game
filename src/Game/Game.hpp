@@ -47,6 +47,7 @@ private:
     static void setBuildingToGrid(Buildings::BuildID id, sf::Vector2f& position);
     void showCursorOfBuilding();
     void createBuilding(Buildings::BuildID id, sf::Vector2f position);
+    void destroyBuilding();
 
     void createMap();
 
@@ -112,6 +113,7 @@ private:
     long m_amountTanks;
 
     bool m_bBPressed;
+    bool m_bDPressed;
     Buildings::BuildID m_BuildingChoosen;
 };
 

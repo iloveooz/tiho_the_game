@@ -124,6 +124,10 @@ void Game::createBuilding(Buildings::BuildID id, sf::Vector2f position) {
     m_fileLogger->log("Game", "createBuilding", "END");
 }
 
+void Game::destroyBuilding() {
+
+}
+
 void Game::setBuildingToGrid(Buildings::BuildID id, sf::Vector2f &position) {
     int inX = int(position.x) / 128;
     int inY = int(position.y) / 128;
@@ -296,17 +300,17 @@ void Game::handlePlayerMouseEvent(sf::Mouse::Button button, bool isPressed) {
     sf::Vector2f worldPosition = m_window.mapPixelToCoords(windowPosition);
 
     if (button == sf::Mouse::Right && isPressed) {
-        m_consoleLogger->log("Game", "handlePlayerMouseEvent",
+        m_consoleLogger->log(__PRETTY_FUNCTION__, "",
                              "Right pressed! Coordinates: x = " + std::to_string(windowPosition.x) + ", y = " +
                              std::to_string(windowPosition.y));
     }
     else if (button == sf::Mouse::Right && !isPressed) {
-        m_consoleLogger->log("Game", "handlePlayerMouseEvent",
+        m_consoleLogger->log(__PRETTY_FUNCTION__, "",
                              "Right released! Coordinates: x = " + std::to_string(windowPosition.x) + ", y = " +
                              std::to_string(windowPosition.y));
     }
     else if (button == sf::Mouse::Left && isPressed && m_bBPressed) {
-        m_consoleLogger->log("Game", "handlePlayerMouseEvent",
+        m_consoleLogger->log(__PRETTY_FUNCTION__, "",
                              "Left pressed! Coordinates: x = " + std::to_string(windowPosition.x) + ", y = " +
                              std::to_string(windowPosition.y));
 
@@ -317,7 +321,7 @@ void Game::handlePlayerMouseEvent(sf::Mouse::Button button, bool isPressed) {
         }
     }
     else if (button == sf::Mouse::Left && !isPressed) {
-        m_consoleLogger->log("Game", "handlePlayerMouseEvent",
+        m_consoleLogger->log(__PRETTY_FUNCTION__, "",
                              "Left released! Coordinates: x = " + std::to_string(windowPosition.x) + ", y = " +
                              std::to_string(windowPosition.y));
     }
