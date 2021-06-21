@@ -19,9 +19,6 @@ set(SOURCE_FILES
         src/Character/Entity.cpp
         src/Character/Entity.hpp
 
-        src/Animation/CharacterAnimation.cpp
-        src/Animation/CharacterAnimation.hpp
-
         src/IObject/IObject.hpp
         src/IObject/IObject.cpp
 
@@ -126,6 +123,12 @@ set(SOURCE_FILES
 
         src/Animation/BuildingAnimation.cpp
         src/Animation/BuildingAnimation.hpp
+
+        src/Animation/ExplosionAnimation.cpp
+        src/Animation/ExplosionAnimation.hpp
+
+        src/Animation/CharacterAnimation.cpp
+        src/Animation/CharacterAnimation.hpp
 
         src/Cursor/Cursor.cpp
         src/Cursor/Cursor.hpp

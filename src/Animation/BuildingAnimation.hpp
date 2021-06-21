@@ -10,6 +10,7 @@ namespace Animations {
     class BuildingAnimation : public Animation {
     public:
         BuildingAnimation();
+        virtual ~BuildingAnimation();
 
         BuildingAnimation(sf::Texture &t, int wBorder, int hBorder);
 

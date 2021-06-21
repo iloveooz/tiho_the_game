@@ -4,6 +4,8 @@ namespace Animations {
 
     CharacterAnimation::CharacterAnimation() {}
 
+    CharacterAnimation::~CharacterAnimation() {}
+
     CharacterAnimation::CharacterAnimation(sf::Texture &t, int wBorder, int hBorder) {
         m_sprite.setTexture(t);
         m_sprite.setOrigin(wBorder / 2, hBorder / 2);
@@ -14,8 +16,7 @@ namespace Animations {
         m_sprite.setOrigin(wBorder / 2, hBorder / 2);
     }
 
-    sf::Sprite &CharacterAnimation::getSprite() {
+    sf::Sprite& CharacterAnimation::getSprite() {
         return m_sprite;
     }
-
 }

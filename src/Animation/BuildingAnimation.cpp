@@ -4,6 +4,8 @@ namespace Animations {
 
     BuildingAnimation::BuildingAnimation() {}
 
+    BuildingAnimation::~BuildingAnimation() {}
+
     BuildingAnimation::BuildingAnimation(sf::Texture &t, int wBorder, int hBorder) {
         m_sprite.setTexture(t);
         m_sprite.setOrigin(wBorder, hBorder);
@@ -14,8 +16,7 @@ namespace Animations {
         m_sprite.setOrigin(wBorder, hBorder);
     }
 
-    sf::Sprite &BuildingAnimation::getSprite() {
+    sf::Sprite& BuildingAnimation::getSprite() {
         return m_sprite;
     }
-
 }

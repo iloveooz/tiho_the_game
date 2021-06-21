@@ -26,11 +26,13 @@
 #include "../Logger/ConsoleLogger.hpp"
 #include "../Logger/FileLogger.hpp"
 #include "../Logger/SocketLogger.hpp"
-
+#include "../Cursor/Cursor.hpp"
 
 class Game : public IObject, public std::enable_shared_from_this<Game> {
 public:
     Game();
+    Game(const Game&) = delete;
+    Game& operator = (const Game&) = delete;
     ~Game();
 
     void run();
@@ -39,15 +41,18 @@ public:
     std::shared_ptr<Logger> getFileLogger() const;
 
 private:
+    void prepareGame();
+
     void fillGameStates();
     void changeGameState(States::TypeState gameState);
 
     void createCharacter();
 
     static void setBuildingToGrid(Buildings::BuildID id, sf::Vector2f& position);
-    void showCursorOfBuilding();
+    void showTemplateOfBuilding();
     void createBuilding(Buildings::BuildID id, sf::Vector2f position);
     void destroyBuilding();
+    void selectBuilding();
 
     void createMap();
 
@@ -65,8 +70,11 @@ private:
     World::Map& getMap();
 
     sf::RenderWindow m_window;
-    std::list<std::unique_ptr<Entity>> m_objects;
-    std::list<std::unique_ptr<Buildings::Building>> m_buildings;
+
+    std::vector<std::unique_ptr<Entity>> m_characters;
+    std::vector<std::unique_ptr<Buildings::Building>> m_buildings;
+
+    ControlGame::Cursor m_cursor;
 
     std::shared_ptr<States::GameState> m_pCurrentState;
     std::array<std::unique_ptr<States::GameState>, States::TypeState::Count> m_gameStates;
@@ -114,6 +122,8 @@ private:
 
     bool m_bBPressed;
     bool m_bDPressed;
+    bool m_bDDPressed;
+
     Buildings::BuildID m_BuildingChoosen;
 };
 

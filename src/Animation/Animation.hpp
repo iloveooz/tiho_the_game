@@ -14,7 +14,9 @@ namespace Animations {
     };
 
     class Animation : public IObject {
-
+    public:
+        Animation() {}
+        virtual ~Animation() {}
     };
 
 }

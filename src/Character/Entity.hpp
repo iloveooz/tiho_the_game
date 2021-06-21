@@ -11,7 +11,7 @@
 #include "../Map/Map.hpp"
 
 const int Weight = 1920; // ширина главного окна
-const int Height = 1080;  // высота главного окна
+const int Height = 640;  // высота главного окна
 
 class Entity : public IObject {
 public:
@@ -41,6 +41,9 @@ protected:
     // здоровье
     int m_iHealth;
     bool m_bAlive;
+
+    // выбран ли объект
+    bool m_bIsSelected;
 
     // наименование элемента
     std::string m_sName;

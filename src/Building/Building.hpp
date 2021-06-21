@@ -35,8 +35,14 @@ namespace Buildings {
         void settings(Animations::BuildingAnimation &animation, double x, double y, double angle = 0);
         virtual void update(double dx, double dy);
         void draw(sf::RenderWindow &app);
-        std::string &getName();
+
+        std::string& getName();
+        sf::Sprite& getSprite();
+
         bool isAlive() const;
+
+        void setSelected(bool value);
+        bool isSelected() const;
 
     protected:
         // координаты фигуры
@@ -53,6 +59,9 @@ namespace Buildings {
         // здоровье
         int m_iHealth;
         bool m_bAlive;
+
+        // выбран ли объект
+        bool m_bSelected;
 
         // наименование элемента
         std::string m_sName;

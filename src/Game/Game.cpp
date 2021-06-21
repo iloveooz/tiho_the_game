@@ -5,9 +5,10 @@
 #include "../Character/Factory/CharacterFactory.hpp"
 
 Game::Game() :
-        m_window(sf::VideoMode(Weight, Height), "Tycho Planet", sf::Style::Fullscreen),
+        m_window(sf::VideoMode(Weight, Height), "Tycho Planet" /*, sf::Style::Fullscreen*/ ),
         m_consoleLogger(new ConsoleLogger()),
-        m_fileLogger(new FileLogger("output.log")) {
+        m_fileLogger(new FileLogger("output.log")),
+        m_cursor(sf::Sprite()) {
 
     m_fileLogger->log("Game", "Game", "BEGIN");
 
@@ -68,20 +69,24 @@ Game::~Game() {
 void Game::run() {
     m_fileLogger->log("Game", "run", "BEGIN");
 
-    fillGameStates();
-    changeGameState(States::Playing);
-
-    createMap();
+    prepareGame();
 
     while (m_window.isOpen()) {
         checkMousePosition();
-        showCursorOfBuilding();
+        showTemplateOfBuilding();
         processEvents();
         updateViewOfMap();
         renderObjects();
     }
 
     m_fileLogger->log("Game", "run", "END");
+}
+
+void Game::prepareGame() {
+    fillGameStates();
+    changeGameState(States::Playing);
+
+    createMap();
 }
 
 void Game::createCharacter() {
@@ -91,23 +96,23 @@ void Game::createCharacter() {
 
     std::unique_ptr<Entity> car = factory.createEntity(Factory::CharID::car);
     car->settings(m_animCar, rand() % Weight, rand() % Height, 0);
-    m_objects.push_back(std::move(car));
+    m_characters.push_back(std::move(car));
 
     std::unique_ptr<Entity> tank = factory.createEntity(Factory::CharID::tank);
     tank->settings(m_animTank, rand() % Weight, rand() % Height, 0);
-    m_objects.push_back(std::move(tank));
+    m_characters.push_back(std::move(tank));
 
     std::unique_ptr<Entity> spitfire = factory.createEntity(Factory::CharID::spit);
     spitfire->settings(m_animSpitFire, rand() % Weight, rand() % Height, 0);
-    m_objects.push_back(std::move(spitfire));
+    m_characters.push_back(std::move(spitfire));
 
     std::unique_ptr<Entity> nuke = factory.createEntity(Factory::CharID::nuke);
     nuke->settings(m_animNuke, rand() % Weight, rand() % Height, 0);
-    m_objects.push_back(std::move(nuke));
+    m_characters.push_back(std::move(nuke));
 
     std::unique_ptr<Entity> worker = factory.createEntity(Factory::CharID::work);
     worker->settings(m_animWorker, rand() % Weight, rand() % Height, 0);
-    m_objects.push_back(std::move(worker));
+    m_characters.push_back(std::move(worker));
 
     m_fileLogger->log("Game", "createCharacter", "END");
 }
@@ -121,11 +126,47 @@ void Game::createBuilding(Buildings::BuildID id, sf::Vector2f position) {
     building->settings(m_BuildAnimap.find(id)->second, position.x, position.y, 0);
     m_buildings.push_back(std::move(building));
 
+    m_cursor.setVisible(false);
+
     m_fileLogger->log("Game", "createBuilding", "END");
 }
 
 void Game::destroyBuilding() {
+    m_fileLogger->log("Game", "destroyBuilding", "BEGIN");
 
+    for (unsigned int i = 0; i < m_buildings.size(); i++) {
+        if (m_buildings[i]->isSelected()) {
+            m_buildings.erase(m_buildings.begin() + i--);
+            m_cursor.setVisible(false);
+            m_consoleLogger->log("Game", "destroyBuilding", "DESTROY!");
+        }
+    }
+
+    m_fileLogger->log("Game", "destroyBuilding", "END");
+}
+
+void Game::selectBuilding() {
+    sf::Vector2i windowPosition = sf::Mouse::getPosition(m_window);
+    sf::Vector2f worldPosition = m_window.mapPixelToCoords(windowPosition);
+
+    int countBuilding = 0;
+
+    for (auto& building : m_buildings) {
+        if (building->getSprite().getGlobalBounds().contains(worldPosition.x, worldPosition.y)) {
+            m_consoleLogger->log("Game", "selectBuilding", building->getName() + " selected!");
+            building->setSelected(true);
+            countBuilding++;
+
+            m_cursor.setSprite(building->getSprite());
+            m_cursor.setVisible(true);
+        } else {
+            building->setSelected(false);
+            m_consoleLogger->log("Game", "selectBuilding", building->getName() + " deselected!");
+        }
+    }
+
+    if (countBuilding == 0)
+        m_cursor.setVisible(false);
 }
 
 void Game::setBuildingToGrid(Buildings::BuildID id, sf::Vector2f &position) {
@@ -147,7 +188,7 @@ void Game::setBuildingToGrid(Buildings::BuildID id, sf::Vector2f &position) {
     }
 }
 
-void Game::showCursorOfBuilding() {
+void Game::showTemplateOfBuilding() {
     sf::Vector2i windowPosition = sf::Mouse::getPosition(m_window);
     sf::Vector2f worldPosition = m_window.mapPixelToCoords(windowPosition);
 
@@ -191,7 +232,7 @@ void Game::updateViewOfMap() {
     if (zf != 1.0)
         m_camera.zoom(zf);
 
-    // if (!object->isAlive()) m_objects.remove(object);
+    // if (!object->isAlive()) m_characters.remove(object);
 }
 
 void Game::renderObjects() {
@@ -200,12 +241,16 @@ void Game::renderObjects() {
     m_window.setView(m_camera);
     m_window.draw(m_map);
 
-    // отображение объектов
-    for (auto const &object : m_objects)
+    // отображение юнитов
+    for (auto const &object : m_characters)
         object->draw(m_window);
 
+    // отображение зданий
     for (auto const &object : m_buildings)
         object->draw(m_window);
+
+    // отображение курсора
+    m_cursor.draw(m_window);
 
     if (m_BuildingChoosen != Buildings::nothing) {
         m_window.draw(m_fakeBuilding);
@@ -246,6 +291,10 @@ void Game::handlePlayerKeyboardEvent(sf::Keyboard::Key key, bool isPressed) {
 
     if (key == sf::Keyboard::Escape) {
         m_bBPressed = false;
+
+        m_bDPressed = false;
+        m_bDDPressed = false;
+
         m_BuildingChoosen = Buildings::nothing;
     }
 
@@ -265,6 +314,18 @@ void Game::handlePlayerKeyboardEvent(sf::Keyboard::Key key, bool isPressed) {
 
     if (key == sf::Keyboard::B && isPressed)
         m_bBPressed = true;
+
+    if (m_bDDPressed) {
+        destroyBuilding();
+        m_bDPressed = false;
+        m_bDDPressed = false;
+    }
+
+    if (key == sf::Keyboard::D && isPressed && m_bDPressed)
+        m_bDDPressed = true;
+
+    if (key == sf::Keyboard::D && isPressed)
+        m_bDPressed = true;
 
     if (isPressed && m_bBPressed) {
         if (key == sf::Keyboard::A)
@@ -319,6 +380,13 @@ void Game::handlePlayerMouseEvent(sf::Mouse::Button button, bool isPressed) {
             m_bBPressed = false;
             m_BuildingChoosen = Buildings::nothing;
         }
+    }
+    else if (button == sf::Mouse::Left && isPressed) {
+        m_consoleLogger->log(__PRETTY_FUNCTION__, "",
+                             "Left pressed! Coordinates: x = " + std::to_string(windowPosition.x) + ", y = " +
+                             std::to_string(windowPosition.y));
+
+        selectBuilding();
     }
     else if (button == sf::Mouse::Left && !isPressed) {
         m_consoleLogger->log(__PRETTY_FUNCTION__, "",

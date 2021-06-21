@@ -10,6 +10,7 @@ namespace Animations {
     class CharacterAnimation : public Animation {
     public:
         CharacterAnimation();
+        virtual ~CharacterAnimation();
 
         CharacterAnimation(sf::Texture &t, int wBorder, int hBorder);
 

@@ -53,11 +53,23 @@ namespace Buildings {
         app.draw(m_aAnimation.getSprite());
     }
 
-    std::string &Building::getName() {
+    std::string& Building::getName() {
         return m_sName;
     }
 
     bool Building::isAlive() const {
         return m_bAlive;
+    }
+
+    void Building::setSelected(bool value) {
+        m_bSelected = value;
+    }
+
+    bool Building::isSelected() const {
+        return m_bSelected;
+    }
+
+    sf::Sprite& Building::getSprite() {
+        return m_aAnimation.getSprite();
     }
 }
