@@ -158,7 +158,10 @@ set(SOURCE_FILES
         src/Building/Commands/DestroyBuildingCommand.hpp
 
         src/Building/Commands/CreateBuildingCommand.cpp
-        src/Building/Commands/CreateBuildingCommand.hpp)
+        src/Building/Commands/CreateBuildingCommand.hpp
+
+        src/Explosion/Explosion.cpp
+        src/Explosion/Explosion.hpp)
 
 add_executable(tiho ${SOURCE_FILES})
 

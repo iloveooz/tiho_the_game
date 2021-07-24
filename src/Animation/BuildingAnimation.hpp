@@ -19,7 +19,6 @@ namespace Animations {
         sf::Sprite &getSprite();
 
     private:
-        sf::Sprite m_sprite;
     };
 
 }

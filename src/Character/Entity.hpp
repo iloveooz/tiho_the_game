@@ -18,12 +18,15 @@ public:
     Entity();
     virtual ~Entity() {};
 
-    void settings (Animations::CharacterAnimation &animation, double x, double y, double angle = 0);
+    void settings (Animations::Animation &animation, double x, double y, double angle = 0);
     virtual void update(double dx, double dy);
     void draw(sf::RenderWindow &app);
 
+    void setName(const std::string& name);
     std::string& getName();
     bool isAlive() const;
+
+    Animations::Animation& getAnimation();
 
 protected:
     // координаты фигуры
@@ -49,7 +52,7 @@ protected:
     std::string m_sName;
 
     // анимация или спрайт
-    Animations::CharacterAnimation m_aAnimation;
+    Animations::Animation m_aAnimation;
 
 private:
     std::unique_ptr<World::Map> m_pMap;

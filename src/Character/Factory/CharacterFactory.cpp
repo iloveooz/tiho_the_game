@@ -8,15 +8,15 @@
 namespace Factory {
     std::unique_ptr<Entity> CharacterFactory::createEntity(CharID charType) {
         switch (charType) {
-            case car:
+            case CharID::car:
                 return std::unique_ptr<Entity>(new Car);
-            case nuke:
+            case CharID::nuke:
                 return std::unique_ptr<Entity>(new NuclearRocket);
-            case spit:
+            case CharID::spit:
                 return std::unique_ptr<Entity>(new SpitFire);
-            case tank:
+            case CharID::tank:
                 return std::unique_ptr<Entity>(new Tank);
-            case work:
+            case CharID::work:
                 return std::unique_ptr<Entity>(new Worker);
             default:
                 assert(false);

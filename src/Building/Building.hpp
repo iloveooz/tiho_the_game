@@ -11,7 +11,7 @@
 #include "../Animation/BuildingAnimation.hpp"
 
 namespace Buildings {
-    enum BuildID {
+    enum class BuildID {
         nothing = 0,
         arsenal,
         cannon,

@@ -27,39 +27,39 @@ namespace Textures {
     }
 
     void TextureHolder::init() {
-        load(Arsenal, "images/buildings/ArsenalBuilding.png");
-        load(Cannon, "images/buildings/CannonBuilding.png");
-        load(Factory, "images/buildings/FactoryBuilding.png");
-        load(Generator, "images/buildings/GeneratorBuilding.png");
-        load(Laboratory, "images/buildings/LaboratoryBuilding.png");
-        load(MainBase, "images/buildings/MainBaseBuilding.png");
-        load(Mine, "images/buildings/MineBuilding.png");
-        load(NuclearSilo, "images/buildings/NuclearSiloBuilding.png");
-        load(OilDerrick, "images/buildings/OilDerrickBuilding.png");
+        load(ID::Arsenal, "images/buildings/ArsenalBuilding.png");
+        load(ID::Cannon, "images/buildings/CannonBuilding.png");
+        load(ID::Factory, "images/buildings/FactoryBuilding.png");
+        load(ID::Generator, "images/buildings/GeneratorBuilding.png");
+        load(ID::Laboratory, "images/buildings/LaboratoryBuilding.png");
+        load(ID::MainBase, "images/buildings/MainBaseBuilding.png");
+        load(ID::Mine, "images/buildings/MineBuilding.png");
+        load(ID::NuclearSilo, "images/buildings/NuclearSiloBuilding.png");
+        load(ID::OilDerrick, "images/buildings/OilDerrickBuilding.png");
 
-        load(Car, "images/characters/CarCharacter.png");
-        load(NuclearRocket, "images/characters/NuclearRocketCharacter.png");
-        load(SpitFire, "images/characters/SpitFireCharacter.png");
-        load(Tank, "images/characters/TankCharacter.png");
-        load(Worker, "images/characters/WorkerCharacter.png");
+        load(ID::Car, "images/characters/CarCharacter.png");
+        load(ID::NuclearRocket, "images/characters/NuclearRocketCharacter.png");
+        load(ID::SpitFire, "images/characters/SpitFireCharacter.png");
+        load(ID::Tank, "images/characters/TankCharacter.png");
+        load(ID::Worker, "images/characters/WorkerCharacter.png");
 
-        load(Water, "images/tiles/water.png");
-        load(Meadow, "images/tiles/meadow.png");
-        load(Desert, "images/tiles/desert.png");
-        load(Mountain, "images/tiles/mountain.png");
-        load(OilSpot, "images/tiles/oilspot.png");
-        load(IronSpot, "images/tiles/ironspot.png");
+        load(ID::Water, "images/tiles/water.png");
+        load(ID::Meadow, "images/tiles/meadow.png");
+        load(ID::Desert, "images/tiles/desert.png");
+        load(ID::Mountain, "images/tiles/mountain.png");
+        load(ID::OilSpot, "images/tiles/oilspot.png");
+        load(ID::IronSpot, "images/tiles/ironspot.png");
 
-        load(Map, "images/maps/LostTemple.png");
-        load(Terrain, "images/tiles/terrain.png");
+        load(ID::Map, "images/maps/LostTemple.png");
+        load(ID::Terrain, "images/tiles/terrain.png");
 
-        load(FireBlueCarShot, "images/shots/FireBlueCar.png");
-        load(FireRedTankShot, "images/shots/FireRedTank.png");
-        load(FireSpitFireShot, "images/shots/FireSpitFire.png");
-        load(FireWorkerShot, "images/shots/FireWorker.png");
+        load(ID::FireBlueCarShot, "images/shots/FireBlueCar.png");
+        load(ID::FireRedTankShot, "images/shots/FireRedTank.png");
+        load(ID::FireSpitFireShot, "images/shots/FireSpitFire.png");
+        load(ID::FireWorkerShot, "images/shots/FireWorker.png");
 
-        load(SmallExplosion, "images/explosions/SmallExplosion.png");
-        load(MiddleExplosion, "images/explosions/MiddleExplosion.png");
-        load(BigExplosion, "images/explosions/BigExplosion.png");
+        load(ID::SmallExplosion, "images/explosions/SmallExplosion.png");
+        load(ID::MiddleExplosion, "images/explosions/MiddleExplosion.png");
+        load(ID::BigExplosion, "images/explosions/BigExplosion.png");
     }
 }

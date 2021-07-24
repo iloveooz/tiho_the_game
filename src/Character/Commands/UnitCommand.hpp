@@ -2,7 +2,7 @@
 #define TIHO_UNITCOMMAND_HPP
 
 namespace Commands {
-    enum UnitAction {
+    enum class UnitAction {
         Nothing,
         Go,
         Stop,

@@ -9,7 +9,7 @@ class Game;
 
 namespace States {
 
-    enum TypeState {
+    enum class TypeState {
         Menu,
         Playing,
         Won,

@@ -6,7 +6,7 @@
 using Buildings::Building;
 
 namespace Commands {
-    enum BuildingAction {
+    enum class BuildingAction {
         Nothing,
         Destroy,
         Count

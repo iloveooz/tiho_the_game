@@ -14,23 +14,23 @@ namespace Buildings {
 
     std::unique_ptr<Building> Building::createBuilding(BuildID id) {
         switch (id) {
-            case arsenal:
+            case BuildID::arsenal:
                 return std::unique_ptr<Building>(new ArsenalBuilding);
-            case cannon:
+            case BuildID::cannon:
                 return std::unique_ptr<Building>(new CannonBuilding);
-            case factory:
+            case BuildID::factory:
                 return std::unique_ptr<Building>(new FactoryBuilding);
-            case gen:
+            case BuildID::gen:
                 return std::unique_ptr<Building>(new GeneratorBuilding);
-            case lab:
+            case BuildID::lab:
                 return std::unique_ptr<Building>(new LaboratoryBuilding);
-            case main:
+            case BuildID::main:
                 return std::unique_ptr<Building>(new MainBaseBuilding);
-            case mine:
+            case BuildID::mine:
                 return std::unique_ptr<Building>(new MineBuilding);
-            case nsilo:
+            case BuildID::nsilo:
                 return std::unique_ptr<Building>(new NuclearSiloBuilding);
-            case oil:
+            case BuildID::oil:
                 return std::unique_ptr<Building>(new OilDerrickBuilding);
             default:
                 assert(false);

@@ -14,6 +14,7 @@
 #include "../Building/Building.hpp"
 
 #include "../Animation/CharacterAnimation.hpp"
+#include "../Animation/ExplosionAnimation.hpp"
 
 #include "../TextureHolder/TextureHolder.hpp"
 
@@ -52,6 +53,7 @@ private:
     void showTemplateOfBuilding();
     void createBuilding(Buildings::BuildID id, sf::Vector2f position);
     void destroyBuilding();
+    void explodeBuilding(sf::Vector2f position);
     void selectBuilding();
 
     void createMap();
@@ -77,7 +79,7 @@ private:
     ControlGame::Cursor m_cursor;
 
     std::shared_ptr<States::GameState> m_pCurrentState;
-    std::array<std::unique_ptr<States::GameState>, States::TypeState::Count> m_gameStates;
+    std::array<std::unique_ptr<States::GameState>, static_cast<int>(States::TypeState::Count)> m_gameStates;
 
     Textures::TextureHolder m_textureHolder;
 
@@ -100,6 +102,12 @@ private:
     Animations::BuildingAnimation m_animMine;
     Animations::BuildingAnimation m_animNSilo;
     Animations::BuildingAnimation m_animOil;
+
+    std::map<Animations::ExplodeType, Animations::ExplosionAnimation> m_ExplodeAnimap;
+
+    Animations::ExplosionAnimation m_animSmallExpl;
+    Animations::ExplosionAnimation m_animMiddleExpl;
+    Animations::ExplosionAnimation m_animBigExpl;
 
     sf::Sprite m_fakeBuilding;
 

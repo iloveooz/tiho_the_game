@@ -7,6 +7,14 @@
 
 namespace Animations {
 
+    enum class ExplodeType {
+        Empty = 0,
+        SmallExplode,   // for battle
+        MiddleExplode,  // for units
+        BigExplode,     // for buildings
+        Count
+    };
+
     class ExplosionAnimation : public Animation {
     public:
         ExplosionAnimation();
@@ -14,12 +22,14 @@ namespace Animations {
 
         ExplosionAnimation(sf::Texture &t, int wBorder, int hBorder);
 
-        void setTexture(sf::Texture &t, int wBorder, int hBorder);
+        void setTexture(sf::Texture &t, ExplodeType type);
+
+        void update() override;
+        bool isEnd();
 
         sf::Sprite &getSprite();
 
     private:
-        sf::Sprite m_Sprite;
         std::vector<sf::IntRect> m_vFrames;
 
         double m_dFrame;

@@ -10,7 +10,7 @@
 #include "../IObject/IObject.hpp"
 
 namespace Textures {
-    enum ID {
+    enum class ID {
         Empty,
 
         /*  Buildings  */

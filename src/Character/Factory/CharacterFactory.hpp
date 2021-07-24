@@ -4,7 +4,7 @@
 #include "../Entity.hpp"
 
 namespace Factory {
-    enum CharID {
+    enum class CharID {
         car = 0,
         nuke,
         spit,

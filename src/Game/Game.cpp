@@ -20,45 +20,55 @@ Game::Game() :
     m_camera.setSize(sf::Vector2f(Weight, Height));
     m_camera.setCenter(sf::Vector2f(Weight / 2, Height / 2));
 
-    m_BuildingChoosen = Buildings::nothing;
+    m_BuildingChoosen = Buildings::BuildID::nothing;
 
     m_textureHolder.init();
 
-    m_sBackground.setTexture(m_textureHolder.get(Textures::Terrain));
+    m_sBackground.setTexture(m_textureHolder.get(Textures::ID::Terrain));
 
-    m_animTank.setTexture(m_textureHolder.get(Textures::Tank), 108, 108);
-    m_animCar.setTexture(m_textureHolder.get(Textures::Car), 45, 45);
-    m_animSpitFire.setTexture(m_textureHolder.get(Textures::SpitFire), 48, 48);
-    m_animNuke.setTexture(m_textureHolder.get(Textures::NuclearRocket), 48, 48);
-    m_animWorker.setTexture(m_textureHolder.get(Textures::Worker), 54, 54);
+    m_animTank.setTexture(m_textureHolder.get(Textures::ID::Tank), 108, 108);
+    m_animCar.setTexture(m_textureHolder.get(Textures::ID::Car), 45, 45);
+    m_animSpitFire.setTexture(m_textureHolder.get(Textures::ID::SpitFire), 48, 48);
+    m_animNuke.setTexture(m_textureHolder.get(Textures::ID::NuclearRocket), 48, 48);
+    m_animWorker.setTexture(m_textureHolder.get(Textures::ID::Worker), 54, 54);
 
 
-    m_animArsenal.setTexture(m_textureHolder.get(Textures::Arsenal), 64, 64);
-    m_BuildAnimap.insert(std::make_pair(Buildings::arsenal, m_animArsenal));
+    m_animArsenal.setTexture(m_textureHolder.get(Textures::ID::Arsenal), 64, 64);
+    m_BuildAnimap.insert(std::make_pair(Buildings::BuildID::arsenal, m_animArsenal));
 
-    m_animCannon.setTexture(m_textureHolder.get(Textures::Cannon), 64, 64);
-    m_BuildAnimap.insert(std::make_pair(Buildings::cannon, m_animCannon));
+    m_animCannon.setTexture(m_textureHolder.get(Textures::ID::Cannon), 64, 64);
+    m_BuildAnimap.insert(std::make_pair(Buildings::BuildID::cannon, m_animCannon));
 
-    m_animFactory.setTexture(m_textureHolder.get(Textures::Factory), 128, 64);
-    m_BuildAnimap.insert(std::make_pair(Buildings::factory, m_animFactory));
+    m_animFactory.setTexture(m_textureHolder.get(Textures::ID::Factory), 128, 64);
+    m_BuildAnimap.insert(std::make_pair(Buildings::BuildID::factory, m_animFactory));
 
-    m_animGenerator.setTexture(m_textureHolder.get(Textures::Generator), 64, 64);
-    m_BuildAnimap.insert(std::make_pair(Buildings::gen, m_animGenerator));
+    m_animGenerator.setTexture(m_textureHolder.get(Textures::ID::Generator), 64, 64);
+    m_BuildAnimap.insert(std::make_pair(Buildings::BuildID::gen, m_animGenerator));
 
-    m_animLab.setTexture(m_textureHolder.get(Textures::Laboratory), 64, 64);
-    m_BuildAnimap.insert(std::make_pair(Buildings::lab, m_animLab));
+    m_animLab.setTexture(m_textureHolder.get(Textures::ID::Laboratory), 64, 64);
+    m_BuildAnimap.insert(std::make_pair(Buildings::BuildID::lab, m_animLab));
 
-    m_animMain.setTexture(m_textureHolder.get(Textures::MainBase), 128, 128);
-    m_BuildAnimap.insert(std::make_pair(Buildings::main, m_animMain));
+    m_animMain.setTexture(m_textureHolder.get(Textures::ID::MainBase), 128, 128);
+    m_BuildAnimap.insert(std::make_pair(Buildings::BuildID::main, m_animMain));
 
-    m_animMine.setTexture(m_textureHolder.get(Textures::Mine), 64, 64);
-    m_BuildAnimap.insert(std::make_pair(Buildings::mine, m_animMine));
+    m_animMine.setTexture(m_textureHolder.get(Textures::ID::Mine), 64, 64);
+    m_BuildAnimap.insert(std::make_pair(Buildings::BuildID::mine, m_animMine));
 
-    m_animNSilo.setTexture(m_textureHolder.get(Textures::NuclearSilo), 64, 64);
-    m_BuildAnimap.insert(std::make_pair(Buildings::nsilo, m_animNSilo));
+    m_animNSilo.setTexture(m_textureHolder.get(Textures::ID::NuclearSilo), 64, 64);
+    m_BuildAnimap.insert(std::make_pair(Buildings::BuildID::nsilo, m_animNSilo));
 
-    m_animOil.setTexture(m_textureHolder.get(Textures::OilDerrick), 64, 64);
-    m_BuildAnimap.insert(std::make_pair(Buildings::oil, m_animOil));
+    m_animOil.setTexture(m_textureHolder.get(Textures::ID::OilDerrick), 64, 64);
+    m_BuildAnimap.insert(std::make_pair(Buildings::BuildID::oil, m_animOil));
+
+
+    m_animSmallExpl.setTexture(m_textureHolder.get(Textures::ID::SmallExplosion), Animations::ExplodeType::SmallExplode);
+    m_ExplodeAnimap.insert(std::make_pair(Animations::ExplodeType::SmallExplode, m_animSmallExpl));
+
+    m_animMiddleExpl.setTexture(m_textureHolder.get(Textures::ID::MiddleExplosion), Animations::ExplodeType::MiddleExplode);
+    m_ExplodeAnimap.insert(std::make_pair(Animations::ExplodeType::MiddleExplode, m_animMiddleExpl));
+
+    m_animBigExpl.setTexture(m_textureHolder.get(Textures::ID::BigExplosion), Animations::ExplodeType::BigExplode);
+    m_ExplodeAnimap.insert(std::make_pair(Animations::ExplodeType::BigExplode, m_animBigExpl));
 
     m_fileLogger->log("Game", "Game", "END");
 }
@@ -84,7 +94,7 @@ void Game::run() {
 
 void Game::prepareGame() {
     fillGameStates();
-    changeGameState(States::Playing);
+    changeGameState(States::TypeState::Playing);
 
     createMap();
 }
@@ -136,13 +146,28 @@ void Game::destroyBuilding() {
 
     for (unsigned int i = 0; i < m_buildings.size(); i++) {
         if (m_buildings[i]->isSelected()) {
+
+            sf::Vector2f position = m_buildings[i]->getSprite().getPosition();
+
             m_buildings.erase(m_buildings.begin() + i--);
             m_cursor.setVisible(false);
             m_consoleLogger->log("Game", "destroyBuilding", "DESTROY!");
+            explodeBuilding(position);
         }
     }
 
     m_fileLogger->log("Game", "destroyBuilding", "END");
+}
+
+void Game::explodeBuilding(sf::Vector2f position) {
+    m_fileLogger->log("Game", "explodeBuilding", "BEGIN");
+
+    std::unique_ptr<Entity> explode = std::make_unique<Entity>();
+    explode->settings(m_ExplodeAnimap.find(Animations::ExplodeType::BigExplode)->second, position.x, position.y, 0);
+    explode->setName("explosion");
+    m_characters.push_back(std::move(explode));
+
+    m_fileLogger->log("Game", "explodeBuilding", "END");
 }
 
 void Game::selectBuilding() {
@@ -174,11 +199,11 @@ void Game::setBuildingToGrid(Buildings::BuildID id, sf::Vector2f &position) {
     int inY = int(position.y) / 128;
 
     switch (id) {
-        case Buildings::main:
+        case Buildings::BuildID::main:
             position.x = float(inX) * 128;
             position.y = float(inY) * 128;
             break;
-        case Buildings::factory:
+        case Buildings::BuildID::factory:
             position.x = float(inX) * 128;
             position.y = float(inY) * 128 + 64;
             break;
@@ -192,7 +217,7 @@ void Game::showTemplateOfBuilding() {
     sf::Vector2i windowPosition = sf::Mouse::getPosition(m_window);
     sf::Vector2f worldPosition = m_window.mapPixelToCoords(windowPosition);
 
-    if (m_BuildingChoosen != Buildings::nothing) {
+    if (m_BuildingChoosen != Buildings::BuildID::nothing) {
         m_fakeBuilding = m_BuildAnimap.find(m_BuildingChoosen)->second.getSprite();
         setBuildingToGrid(m_BuildingChoosen, worldPosition);
         m_fakeBuilding.setColor(sf::Color(0, 0, 0, 96));
@@ -242,8 +267,11 @@ void Game::renderObjects() {
     m_window.draw(m_map);
 
     // отображение юнитов
-    for (auto const &object : m_characters)
+    for (auto const &object : m_characters) {
+        if (object->getName() == "explosion")
+            object->getAnimation().update();
         object->draw(m_window);
+    }
 
     // отображение зданий
     for (auto const &object : m_buildings)
@@ -252,7 +280,7 @@ void Game::renderObjects() {
     // отображение курсора
     m_cursor.draw(m_window);
 
-    if (m_BuildingChoosen != Buildings::nothing) {
+    if (m_BuildingChoosen != Buildings::BuildID::nothing) {
         m_window.draw(m_fakeBuilding);
     }
 
@@ -295,7 +323,7 @@ void Game::handlePlayerKeyboardEvent(sf::Keyboard::Key key, bool isPressed) {
         m_bDPressed = false;
         m_bDDPressed = false;
 
-        m_BuildingChoosen = Buildings::nothing;
+        m_BuildingChoosen = Buildings::BuildID::nothing;
     }
 
     if (key == sf::Keyboard::Up)
@@ -329,23 +357,23 @@ void Game::handlePlayerKeyboardEvent(sf::Keyboard::Key key, bool isPressed) {
 
     if (isPressed && m_bBPressed) {
         if (key == sf::Keyboard::A)
-            m_BuildingChoosen = Buildings::arsenal;
+            m_BuildingChoosen = Buildings::BuildID::arsenal;
         else if (key == sf::Keyboard::C)
-            m_BuildingChoosen = Buildings::cannon;
+            m_BuildingChoosen = Buildings::BuildID::cannon;
         else if (key == sf::Keyboard::F)
-            m_BuildingChoosen = Buildings::factory;
+            m_BuildingChoosen = Buildings::BuildID::factory;
         else if (key == sf::Keyboard::G)
-            m_BuildingChoosen = Buildings::gen;
+            m_BuildingChoosen = Buildings::BuildID::gen;
         else if (key == sf::Keyboard::L)
-            m_BuildingChoosen = Buildings::lab;
+            m_BuildingChoosen = Buildings::BuildID::lab;
         else if (key == sf::Keyboard::M)
-            m_BuildingChoosen = Buildings::main;
+            m_BuildingChoosen = Buildings::BuildID::main;
         else if (key == sf::Keyboard::I)
-            m_BuildingChoosen = Buildings::mine;
+            m_BuildingChoosen = Buildings::BuildID::mine;
         else if (key == sf::Keyboard::N)
-            m_BuildingChoosen = Buildings::nsilo;
+            m_BuildingChoosen = Buildings::BuildID::nsilo;
         else if (key == sf::Keyboard::O)
-            m_BuildingChoosen = Buildings::oil;
+            m_BuildingChoosen = Buildings::BuildID::oil;
     }
 
     if (key == sf::Keyboard::Q)
@@ -375,10 +403,10 @@ void Game::handlePlayerMouseEvent(sf::Mouse::Button button, bool isPressed) {
                              "Left pressed! Coordinates: x = " + std::to_string(windowPosition.x) + ", y = " +
                              std::to_string(windowPosition.y));
 
-        if (m_BuildingChoosen != Buildings::nothing) {
+        if (m_BuildingChoosen != Buildings::BuildID::nothing) {
             createBuilding(m_BuildingChoosen, worldPosition);
             m_bBPressed = false;
-            m_BuildingChoosen = Buildings::nothing;
+            m_BuildingChoosen = Buildings::BuildID::nothing;
         }
     }
     else if (button == sf::Mouse::Left && isPressed) {
@@ -411,7 +439,7 @@ void Game::handlePlayerMouseWheelEvent(sf::Event& event) {
 void Game::changeGameState(States::TypeState gameState) {
     m_fileLogger->log("Game", "changeGameState", "BEGIN");
 
-    m_pCurrentState = std::move(m_gameStates[gameState]);
+    m_pCurrentState = std::move(m_gameStates[static_cast<int>(gameState)]);
 
     m_fileLogger->log("Game", "changeGameState", "END");
 }
@@ -419,10 +447,10 @@ void Game::changeGameState(States::TypeState gameState) {
 void Game::fillGameStates() {
     m_fileLogger->log("Game", "fillGameStates", "BEGIN");
 
-    m_gameStates[States::Menu] = std::make_unique<States::MenuState>(shared_from_this());
-    m_gameStates[States::Playing] = std::make_unique<States::PlayingState>(shared_from_this());
-    m_gameStates[States::Won] = std::make_unique<States::WonState>(shared_from_this());
-    m_gameStates[States::Lost] = std::make_unique<States::LostState>(shared_from_this());
+    m_gameStates[static_cast<int>(States::TypeState::Menu)] = std::make_unique<States::MenuState>(shared_from_this());
+    m_gameStates[static_cast<int>(States::TypeState::Playing)] = std::make_unique<States::PlayingState>(shared_from_this());
+    m_gameStates[static_cast<int>(States::TypeState::Won)] = std::make_unique<States::WonState>(shared_from_this());
+    m_gameStates[static_cast<int>(States::TypeState::Lost)] = std::make_unique<States::LostState>(shared_from_this());
 
     m_fileLogger->log("Game", "fillGameStates", "END");
 }

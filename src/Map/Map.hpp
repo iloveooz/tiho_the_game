@@ -8,7 +8,7 @@
 
 namespace World {
 
-    enum CellType {
+    enum class CellType {
         Empty,
         Water,
         Meadow,

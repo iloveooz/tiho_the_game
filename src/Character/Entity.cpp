@@ -2,7 +2,7 @@
 
 Entity::Entity() : m_bAlive(true), m_dX(0.0), m_dY(0.0), m_dDx(0.0), m_dDy(0.0), m_dAngle(0.0) {}
 
-void Entity::settings(Animations::CharacterAnimation &animation, double x, double y, double angle) {
+void Entity::settings(Animations::Animation &animation, double x, double y, double angle) {
     m_dX = x;
     m_dY = y;
     m_dAngle = angle;
@@ -18,10 +18,18 @@ void Entity::draw(sf::RenderWindow &app) {
     app.draw(m_aAnimation.getSprite());
 }
 
+void Entity::setName(const std::string& name) {
+    m_sName = name;
+}
+
 std::string& Entity::getName() {
     return m_sName;
 }
 
 bool Entity::isAlive() const {
     return m_bAlive;
+}
+
+Animations::Animation &Entity::getAnimation() {
+    return m_aAnimation;
 }
