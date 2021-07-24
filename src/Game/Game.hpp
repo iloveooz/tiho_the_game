@@ -136,12 +136,14 @@ private:
 
     long m_amountTanks;
 
-    bool m_bWPressed;
-    bool m_bCPressed;
-    bool m_bTPressed;
-    bool m_bSPressed;
-    bool m_bRPressed;
-
+    enum class eKeyPressed {
+        empty = 0,
+        WPressed,
+        CPressed,
+        TPressed,
+        SPressed,
+        RPressed
+    } m_ePressedProperty;
 
     bool m_bBPressed;
     bool m_bDPressed;

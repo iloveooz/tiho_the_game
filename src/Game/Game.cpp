@@ -360,11 +360,7 @@ void Game::handlePlayerKeyboardEvent(sf::Keyboard::Key key, bool isPressed) {
     if (key == sf::Keyboard::Escape) {
         m_bBPressed = false;
 
-        m_bWPressed = false;
-        m_bCPressed = false;
-        m_bTPressed = false;
-        m_bSPressed = false;
-        m_bRPressed = false;
+        m_ePressedProperty = eKeyPressed::empty;
 
         m_bDPressed = false;
         m_bDDPressed = false;
@@ -399,19 +395,19 @@ void Game::handlePlayerKeyboardEvent(sf::Keyboard::Key key, bool isPressed) {
     }
 
     if (key == sf::Keyboard::W && isPressed)
-        m_bWPressed = true;
+        m_ePressedProperty = eKeyPressed::WPressed;
 
     if (key == sf::Keyboard::C && isPressed)
-        m_bCPressed = true;
+        m_ePressedProperty = eKeyPressed::CPressed;
 
     if (key == sf::Keyboard::T && isPressed)
-        m_bTPressed = true;
+        m_ePressedProperty = eKeyPressed::TPressed;
 
     if (key == sf::Keyboard::S && isPressed)
-        m_bSPressed = true;
+        m_ePressedProperty = eKeyPressed::SPressed;
 
     if (key == sf::Keyboard::R && isPressed)
-        m_bRPressed = true;
+        m_ePressedProperty = eKeyPressed::RPressed;
 
     if (key == sf::Keyboard::D && isPressed && m_bDPressed)
         m_bDDPressed = true;
@@ -440,26 +436,26 @@ void Game::handlePlayerKeyboardEvent(sf::Keyboard::Key key, bool isPressed) {
             m_BuildingChoosen = Buildings::BuildID::oil;
     }
 
-    if ((m_bWPressed || m_bTPressed || m_bSPressed || m_bCPressed || m_bRPressed) && isPressed) {
+    if (m_ePressedProperty != eKeyPressed::empty && isPressed) {
         for (auto& building : m_buildings) {
-            if (building->getName() == "main" && building->isSelected() && m_bWPressed)
+            if (building->getName() == "main" && building->isSelected() && m_ePressedProperty == eKeyPressed::WPressed)
                 createCharacter(Factory::CharID::work, building->getPosition());
 
             if (building->getName() == "factory" && building->isSelected()) {
-                if (m_bCPressed)
+                if (m_ePressedProperty == eKeyPressed::CPressed)
                     createCharacter(Factory::CharID::car, building->getPosition());
-                if (m_bTPressed)
+                if (m_ePressedProperty == eKeyPressed::TPressed)
                     createCharacter(Factory::CharID::tank, building->getPosition());
-                if (m_bSPressed)
+                if (m_ePressedProperty == eKeyPressed::SPressed)
                     createCharacter(Factory::CharID::spit, building->getPosition());
             }
 
             if (building->getName() == "nsilo" && building->isSelected()) {
-                if (m_bRPressed)
+                if (m_ePressedProperty == eKeyPressed::RPressed)
                     createCharacter(Factory::CharID::nuke, building->getPosition());
             }
         }
-        m_bWPressed = m_bTPressed = m_bSPressed = m_bCPressed = m_bRPressed = false;
+        m_ePressedProperty = eKeyPressed::empty;
     }
 
     if (key == sf::Keyboard::Q)
