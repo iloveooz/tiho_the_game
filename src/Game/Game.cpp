@@ -125,8 +125,13 @@ void Game::placeCharacter(Factory::CharID id, sf::Vector2f& position) {
     int inX = int(position.x) / 128;
     int inY = int(position.y) / 128;
 
-    position.x = float(inX - 1) * 128 + 64;
-    position.y = float(inY + 1) * 128 + 64;
+    if (id == Factory::CharID::nuke) {
+        position.x = float(inX) * 128 + 64;
+        position.y = float(inY) * 128 + 64;
+    } else {
+        position.x = float(inX - 1) * 128 + 64;
+        position.y = float(inY + 1) * 128 + 64;
+    }
 }
 
 void Game::createBuilding(Buildings::BuildID id, sf::Vector2f position) {
@@ -359,6 +364,7 @@ void Game::handlePlayerKeyboardEvent(sf::Keyboard::Key key, bool isPressed) {
         m_bCPressed = false;
         m_bTPressed = false;
         m_bSPressed = false;
+        m_bRPressed = false;
 
         m_bDPressed = false;
         m_bDDPressed = false;
@@ -404,6 +410,9 @@ void Game::handlePlayerKeyboardEvent(sf::Keyboard::Key key, bool isPressed) {
     if (key == sf::Keyboard::S && isPressed)
         m_bSPressed = true;
 
+    if (key == sf::Keyboard::R && isPressed)
+        m_bRPressed = true;
+
     if (key == sf::Keyboard::D && isPressed && m_bDPressed)
         m_bDDPressed = true;
 
@@ -431,7 +440,7 @@ void Game::handlePlayerKeyboardEvent(sf::Keyboard::Key key, bool isPressed) {
             m_BuildingChoosen = Buildings::BuildID::oil;
     }
 
-    if ((m_bWPressed || m_bTPressed || m_bSPressed || m_bCPressed) && isPressed) {
+    if ((m_bWPressed || m_bTPressed || m_bSPressed || m_bCPressed || m_bRPressed) && isPressed) {
         for (auto& building : m_buildings) {
             if (building->getName() == "main" && building->isSelected() && m_bWPressed)
                 createCharacter(Factory::CharID::work, building->getPosition());
@@ -444,8 +453,13 @@ void Game::handlePlayerKeyboardEvent(sf::Keyboard::Key key, bool isPressed) {
                 if (m_bSPressed)
                     createCharacter(Factory::CharID::spit, building->getPosition());
             }
+
+            if (building->getName() == "nsilo" && building->isSelected()) {
+                if (m_bRPressed)
+                    createCharacter(Factory::CharID::nuke, building->getPosition());
+            }
         }
-        m_bWPressed = m_bTPressed = m_bSPressed = m_bCPressed = false;
+        m_bWPressed = m_bTPressed = m_bSPressed = m_bCPressed = m_bRPressed = false;
     }
 
     if (key == sf::Keyboard::Q)

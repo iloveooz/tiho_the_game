@@ -140,6 +140,7 @@ private:
     bool m_bCPressed;
     bool m_bTPressed;
     bool m_bSPressed;
+    bool m_bRPressed;
 
 
     bool m_bBPressed;
