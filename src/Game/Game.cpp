@@ -417,12 +417,14 @@ void Game::handlePlayerKeyboardEvent(sf::Keyboard::Key key, bool isPressed) {
             if (building->getName() == "main" && building->isSelected() && m_bWPressed)
                 createCharacter(Factory::CharID::work, building->getPosition());
 
-            if (building->getName() == "factory" && building->isSelected() && m_bCPressed)
-                createCharacter(Factory::CharID::car, building->getPosition());
-            if (building->getName() == "factory" && building->isSelected() && m_bTPressed)
-                createCharacter(Factory::CharID::tank, building->getPosition());
-            if (building->getName() == "factory" && building->isSelected() && m_bSPressed)
-                createCharacter(Factory::CharID::spit, building->getPosition());
+            if (building->getName() == "factory" && building->isSelected()) {
+                if (m_bCPressed)
+                    createCharacter(Factory::CharID::car, building->getPosition());
+                if (m_bTPressed)
+                    createCharacter(Factory::CharID::tank, building->getPosition());
+                if (m_bSPressed)
+                    createCharacter(Factory::CharID::spit, building->getPosition());
+            }
         }
         m_bWPressed = m_bTPressed = m_bSPressed = m_bCPressed = false;
     }
