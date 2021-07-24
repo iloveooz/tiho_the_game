@@ -10,8 +10,8 @@ FileLogger::FileLogger(const std::string& fileName) :
 FileLogger::~FileLogger() {
 }
 
-void FileLogger::log(const std::string& cls, const std::string& meth, const std::string &event) {
-    m_plogImpl->file_log(cls, meth, m_sFileName, event);
+void FileLogger::log(const std::string& place, const std::string &event) {
+    m_plogImpl->file_log(place, m_sFileName, event);
 }
 
 

@@ -11,9 +11,9 @@ class LoggerImpl {
 public:
     LoggerImpl();
     virtual ~LoggerImpl();
-    virtual void console_log(const std::string& cls, const std::string& meth, const std::string& event);
-    virtual void    file_log(const std::string& cls, const std::string& meth, const std::string& fileName, const std::string & event);
-    virtual void  socket_log(const std::string& cls, const std::string& meth, const std::string& host, long port, const std::string& event);
+    virtual void console_log(const std::string& place, const std::string& event);
+    virtual void    file_log(const std::string& place, const std::string& fileName, const std::string & event);
+    virtual void  socket_log(const std::string& place, const std::string& host, long port, const std::string& event);
 
 private:
     static void getTime(std::string& time);

@@ -8,6 +8,6 @@ SocketLogger::SocketLogger(const std::string &remoteHost, long remotePort) :
 
 }
 
-void SocketLogger::log(const std::string& cls, const std::string& meth, const std::string &event) {
-    m_plogImpl->socket_log(cls, meth, m_sHost, m_lPort, event);
+void SocketLogger::log(const std::string& place, const std::string &event) {
+    m_plogImpl->socket_log(place, m_sHost, m_lPort, event);
 }

@@ -10,7 +10,7 @@ Game::Game() :
         m_fileLogger(new FileLogger("output.log")),
         m_cursor(sf::Sprite()) {
 
-    m_fileLogger->log("Game", "Game", "BEGIN");
+    m_fileLogger->log(__PRETTY_FUNCTION__, "BEGIN");
 
     m_window.setFramerateLimit(60);
     m_window.setVerticalSyncEnabled(true);
@@ -79,14 +79,14 @@ Game::Game() :
     m_animBigExpl.setTexture(m_textureHolder.get(Textures::ID::BigExplosion), Animations::ExplodeType::BigExplode);
     m_ExplodeAnimap.insert(std::make_pair(Animations::ExplodeType::BigExplode, m_animBigExpl));
 
-    m_fileLogger->log("Game", "Game", "END");
+    m_fileLogger->log(__PRETTY_FUNCTION__, "END");
 }
 
 Game::~Game() {
 }
 
 void Game::run() {
-    m_fileLogger->log("Game", "run", "BEGIN");
+    m_fileLogger->log(__PRETTY_FUNCTION__, "BEGIN");
 
     prepareGame();
 
@@ -98,7 +98,7 @@ void Game::run() {
         renderObjects();
     }
 
-    m_fileLogger->log("Game", "run", "END");
+    m_fileLogger->log(__PRETTY_FUNCTION__, "END");
 }
 
 void Game::prepareGame() {
@@ -109,7 +109,7 @@ void Game::prepareGame() {
 }
 
 void Game::createCharacter(Factory::CharID id, sf::Vector2f position) {
-    m_fileLogger->log("Game", "createCharacter", "BEGIN");
+    m_fileLogger->log(__PRETTY_FUNCTION__, "BEGIN");
 
     Factory::CharacterFactory factory;
 
@@ -118,7 +118,7 @@ void Game::createCharacter(Factory::CharID id, sf::Vector2f position) {
     character->settings(m_CharAnimap.find(id)->second, position.x, position.y, 0);
     m_characters.push_back(std::move(character));
 
-    m_fileLogger->log("Game", "createCharacter", "END");
+    m_fileLogger->log(__PRETTY_FUNCTION__, "END");
 }
 
 void Game::placeCharacter(Factory::CharID id, sf::Vector2f& position) {
@@ -135,7 +135,7 @@ void Game::placeCharacter(Factory::CharID id, sf::Vector2f& position) {
 }
 
 void Game::createBuilding(Buildings::BuildID id, sf::Vector2f position) {
-    m_fileLogger->log("Game", "createBuilding", "BEGIN");
+    m_fileLogger->log(__PRETTY_FUNCTION__, "BEGIN");
 
     setBuildingToGrid(id, position);
 
@@ -145,11 +145,11 @@ void Game::createBuilding(Buildings::BuildID id, sf::Vector2f position) {
 
     m_cursor.setVisible(false);
 
-    m_fileLogger->log("Game", "createBuilding", "END");
+    m_fileLogger->log(__PRETTY_FUNCTION__, "END");
 }
 
 void Game::destroyBuilding() {
-    m_fileLogger->log("Game", "destroyBuilding", "BEGIN");
+    m_fileLogger->log(__PRETTY_FUNCTION__, "BEGIN");
 
     for (unsigned int i = 0; i < m_buildings.size(); i++) {
         if (m_buildings[i]->isSelected()) {
@@ -158,23 +158,23 @@ void Game::destroyBuilding() {
 
             m_buildings.erase(m_buildings.begin() + i--);
             m_cursor.setVisible(false);
-            m_consoleLogger->log("Game", "destroyBuilding", "DESTROY!");
+            m_consoleLogger->log(__PRETTY_FUNCTION__, "DESTROY!");
             explodeBuilding(position);
         }
     }
 
-    m_fileLogger->log("Game", "destroyBuilding", "END");
+    m_fileLogger->log(__PRETTY_FUNCTION__, "END");
 }
 
 void Game::explodeBuilding(sf::Vector2f position) {
-    m_fileLogger->log("Game", "explodeBuilding", "BEGIN");
+    m_fileLogger->log(__PRETTY_FUNCTION__, "BEGIN");
 
     std::unique_ptr<Entity> explode = std::make_unique<Entity>();
     explode->settings(m_ExplodeAnimap.find(Animations::ExplodeType::BigExplode)->second, position.x, position.y, 0);
     explode->setName("explosion");
     m_characters.push_back(std::move(explode));
 
-    m_fileLogger->log("Game", "explodeBuilding", "END");
+    m_fileLogger->log(__PRETTY_FUNCTION__, "END");
 }
 
 void Game::selectObjectOnMap() {
@@ -185,7 +185,7 @@ void Game::selectObjectOnMap() {
 
     for (auto& building : m_buildings) {
         if (building->getSprite().getGlobalBounds().contains(worldPosition.x, worldPosition.y)) {
-            m_consoleLogger->log("Game", "selectBuilding", building->getName() + " selected!");
+            m_consoleLogger->log(__PRETTY_FUNCTION__, building->getName() + " selected!");
             building->setSelected(true);
             countBuilding++;
 
@@ -193,13 +193,13 @@ void Game::selectObjectOnMap() {
             m_cursor.setVisible(true);
         } else {
             building->setSelected(false);
-            m_consoleLogger->log("Game", "selectBuilding", building->getName() + " deselected!");
+            m_consoleLogger->log(__PRETTY_FUNCTION__, building->getName() + " deselected!");
         }
     }
 
     for (auto& character : m_characters) {
         if (character->getSprite().getGlobalBounds().contains(worldPosition.x, worldPosition.y)) {
-            m_consoleLogger->log("Game", "selectCharacter", character->getName() + " selected!");
+            m_consoleLogger->log(__PRETTY_FUNCTION__, character->getName() + " selected!");
             character->setSelected(true);
             countBuilding++;
 
@@ -207,7 +207,7 @@ void Game::selectObjectOnMap() {
             m_cursor.setVisible(true);
         } else {
             character->setSelected(false);
-            m_consoleLogger->log("Game", "selectBuilding", character->getName() + " deselected!");
+            m_consoleLogger->log(__PRETTY_FUNCTION__, character->getName() + " deselected!");
         }
     }
 
@@ -257,7 +257,7 @@ void Game::checkMousePosition() {
 }
 
 void Game::centerViewOfMap() {
-    m_fileLogger->log("Game", "centerViewOfMap", "BEGIN");
+    m_fileLogger->log(__PRETTY_FUNCTION__, "BEGIN");
 
     for (auto& building : m_buildings) {
         if (building->isSelected())
@@ -269,7 +269,7 @@ void Game::centerViewOfMap() {
             m_camera.setCenter(character->getPosition());
     }
 
-    m_fileLogger->log("Game", "centerViewOfMap", "END");
+    m_fileLogger->log(__PRETTY_FUNCTION__, "END");
 }
 
 void Game::updateViewOfMap() {
@@ -355,7 +355,7 @@ void Game::processEvents() {
 }
 
 void Game::handlePlayerKeyboardEvent(sf::Keyboard::Key key, bool isPressed) {
-    m_fileLogger->log("Game", "handlePlayerKeyboardEvent", "BEGIN");
+    m_fileLogger->log(__PRETTY_FUNCTION__, "BEGIN");
 
     if (key == sf::Keyboard::Escape) {
         m_bBPressed = false;
@@ -461,27 +461,27 @@ void Game::handlePlayerKeyboardEvent(sf::Keyboard::Key key, bool isPressed) {
     if (key == sf::Keyboard::Q)
         m_window.close();
 
-    m_fileLogger->log("Game", "handlePlayerKeyboardEvent", "END");
+    m_fileLogger->log(__PRETTY_FUNCTION__, "END");
 }
 
 void Game::handlePlayerMouseEvent(sf::Mouse::Button button, bool isPressed) {
-    m_fileLogger->log("Game", "handlePlayerMouseEvent", "BEGIN");
+    m_fileLogger->log(__PRETTY_FUNCTION__, "BEGIN");
 
     sf::Vector2i windowPosition = sf::Mouse::getPosition(m_window);
     sf::Vector2f worldPosition = m_window.mapPixelToCoords(windowPosition);
 
     if (button == sf::Mouse::Right && isPressed) {
-        m_consoleLogger->log(__PRETTY_FUNCTION__, "",
+        m_consoleLogger->log(__PRETTY_FUNCTION__,
                              "Right pressed! Coordinates: x = " + std::to_string(windowPosition.x) + ", y = " +
                              std::to_string(windowPosition.y));
     }
     else if (button == sf::Mouse::Right && !isPressed) {
-        m_consoleLogger->log(__PRETTY_FUNCTION__, "",
+        m_consoleLogger->log(__PRETTY_FUNCTION__,
                              "Right released! Coordinates: x = " + std::to_string(windowPosition.x) + ", y = " +
                              std::to_string(windowPosition.y));
     }
     else if (button == sf::Mouse::Left && isPressed && m_bBPressed) {
-        m_consoleLogger->log(__PRETTY_FUNCTION__, "",
+        m_consoleLogger->log(__PRETTY_FUNCTION__,
                              "Left pressed! Coordinates: x = " + std::to_string(windowPosition.x) + ", y = " +
                              std::to_string(windowPosition.y));
 
@@ -492,18 +492,18 @@ void Game::handlePlayerMouseEvent(sf::Mouse::Button button, bool isPressed) {
         }
     }
     else if (button == sf::Mouse::Left && isPressed) {
-        m_consoleLogger->log(__PRETTY_FUNCTION__, "",
+        m_consoleLogger->log(__PRETTY_FUNCTION__,
                              "Left pressed! Coordinates: x = " + std::to_string(windowPosition.x) + ", y = " +
                              std::to_string(windowPosition.y));
         selectObjectOnMap();
     }
     else if (button == sf::Mouse::Left && !isPressed) {
-        m_consoleLogger->log(__PRETTY_FUNCTION__, "",
+        m_consoleLogger->log(__PRETTY_FUNCTION__,
                              "Left released! Coordinates: x = " + std::to_string(windowPosition.x) + ", y = " +
                              std::to_string(windowPosition.y));
     }
 
-    m_fileLogger->log("Game", "handlePlayerMouseEvent", "END");
+    m_fileLogger->log(__PRETTY_FUNCTION__, "END");
 }
 
 void Game::handlePlayerMouseWheelEvent(sf::Event& event) {
@@ -518,30 +518,30 @@ void Game::handlePlayerMouseWheelEvent(sf::Event& event) {
 }
 
 void Game::changeGameState(States::TypeState gameState) {
-    m_fileLogger->log("Game", "changeGameState", "BEGIN");
+    m_fileLogger->log(__PRETTY_FUNCTION__, "BEGIN");
 
     m_pCurrentState = std::move(m_gameStates[static_cast<int>(gameState)]);
 
-    m_fileLogger->log("Game", "changeGameState", "END");
+    m_fileLogger->log(__PRETTY_FUNCTION__, "END");
 }
 
 void Game::fillGameStates() {
-    m_fileLogger->log("Game", "fillGameStates", "BEGIN");
+    m_fileLogger->log(__PRETTY_FUNCTION__, "BEGIN");
 
     m_gameStates[static_cast<int>(States::TypeState::Menu)] = std::make_unique<States::MenuState>(shared_from_this());
     m_gameStates[static_cast<int>(States::TypeState::Playing)] = std::make_unique<States::PlayingState>(shared_from_this());
     m_gameStates[static_cast<int>(States::TypeState::Won)] = std::make_unique<States::WonState>(shared_from_this());
     m_gameStates[static_cast<int>(States::TypeState::Lost)] = std::make_unique<States::LostState>(shared_from_this());
 
-    m_fileLogger->log("Game", "fillGameStates", "END");
+    m_fileLogger->log(__PRETTY_FUNCTION__, "END");
 }
 
 void Game::createMap() {
-    m_fileLogger->log("Game", "createMap", "BEGIN");
+    m_fileLogger->log(__PRETTY_FUNCTION__, "BEGIN");
 
     m_map.loadLevel(m_textureHolder);
 
-    m_fileLogger->log("Game", "createMap", "END");
+    m_fileLogger->log(__PRETTY_FUNCTION__, "END");
 }
 
 std::shared_ptr<Logger> Game::getConsoleLogger() const {

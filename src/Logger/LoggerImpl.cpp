@@ -19,15 +19,15 @@ LoggerImpl::~LoggerImpl() noexcept {
     catch (...) {}
 }
 
-void LoggerImpl::console_log(const std::string& cls, const std::string& meth, const std::string &event) {
+void LoggerImpl::console_log(const std::string& place, const std::string &event) {
     // Дата: Время: Класс: Метод: Событие
     std::string time(21, ' ');
     getTime(time);
 
-    std::cout << time << cls << "::" << meth << ", event: " << event << std::endl;
+    std::cout << time << place << ", event: " << event << std::endl;
 }
 
-void LoggerImpl::file_log(const std::string& cls, const std::string& meth, const std::string &fileName, const std::string &event) {
+void LoggerImpl::file_log(const std::string& place, const std::string &fileName, const std::string &event) {
 
     if (!out) {
         std::cerr << "\nError opening file!" << std::endl;
@@ -37,15 +37,15 @@ void LoggerImpl::file_log(const std::string& cls, const std::string& meth, const
     std::string time(21, ' ');
     getTime(time);
 
-    out << time << ", " << cls.c_str() << "::" << meth << ", event: " << event.c_str() << std::endl;
+    out << time << ", " << place.c_str() << ", event: " << event.c_str() << std::endl;
 }
 
-void LoggerImpl::socket_log(const std::string& cls, const std::string& meth, const std::string &host, long port, const std::string &event) {
+void LoggerImpl::socket_log(const std::string& place, const std::string &host, long port, const std::string &event) {
     // Дата: Время: Класс: Метод: Событие
     std::string time;
     getTime(time);
 
-    std::cout << time << ", " << cls << "::" << meth << ", event: " << event << std::endl;
+    std::cout << time << ", " << place << ", event: " << event << std::endl;
 }
 
 void LoggerImpl::getTime(std::string &time) {

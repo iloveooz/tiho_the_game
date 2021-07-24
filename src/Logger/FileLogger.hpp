@@ -7,7 +7,7 @@ class FileLogger : public Logger {
 public:
     explicit FileLogger(const std::string& fileName);
     ~FileLogger();
-    void log(const std::string& cls, const std::string& meth, const std::string& event) override;
+    void log(const std::string& place, const std::string& event) override;
 
 private:
     std::string m_sFileName;
