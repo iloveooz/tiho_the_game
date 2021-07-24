@@ -49,7 +49,7 @@ namespace Buildings {
     void Building::draw(sf::RenderWindow &app) {
         m_aAnimation.getSprite().setPosition((float) m_position.x, (float) m_position.y);
         m_aAnimation.getSprite().setRotation(m_dAngle);
-        m_aAnimation.getSprite().setColor(sf::Color::Red);
+        m_aAnimation.getSprite().setColor(sf::Color(0,128,128));
         app.draw(m_aAnimation.getSprite());
     }
 
