@@ -8,12 +8,12 @@ namespace Animations {
 
     BuildingAnimation::BuildingAnimation(sf::Texture &t, int wBorder, int hBorder) {
         m_sprite.setTexture(t);
-        m_sprite.setOrigin(wBorder, hBorder);
+        m_sprite.setOrigin(wBorder / 2, hBorder / 2);
     }
 
     void BuildingAnimation::setTexture(sf::Texture &t, int wBorder, int hBorder) {
         m_sprite.setTexture(t);
-        m_sprite.setOrigin(wBorder, hBorder);
+        m_sprite.setOrigin(wBorder / 2, hBorder / 2);
     }
 
     sf::Sprite& BuildingAnimation::getSprite() {

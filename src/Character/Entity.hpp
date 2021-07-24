@@ -25,7 +25,12 @@ public:
     void setName(const std::string& name);
     std::string& getName();
 
+    sf::Sprite& getSprite();
+
     bool isAlive() const;
+
+    void setSelected(bool value);
+    bool isSelected() const;
 
     sf::Vector2f& getPosition();
 
@@ -48,7 +53,7 @@ protected:
     bool m_bAlive;
 
     // выбран ли объект
-    bool m_bIsSelected;
+    bool m_bSelected;
 
     // наименование элемента
     std::string m_sName;

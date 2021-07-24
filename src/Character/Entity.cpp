@@ -37,3 +37,15 @@ Animations::Animation &Entity::getAnimation() {
 sf::Vector2f &Entity::getPosition() {
     return m_position;
 }
+
+sf::Sprite &Entity::getSprite() {
+    return m_aAnimation.getSprite();
+}
+
+void Entity::setSelected(bool value) {
+    m_bSelected = value;
+}
+
+bool Entity::isSelected() const {
+    return m_bSelected;
+}

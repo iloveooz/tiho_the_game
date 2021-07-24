@@ -50,14 +50,15 @@ private:
     void changeGameState(States::TypeState gameState);
 
     void createCharacter(Factory::CharID id, sf::Vector2f position);
-    void placeCharacter(Factory::CharID id, sf::Vector2f& position);
+    static void placeCharacter(Factory::CharID id, sf::Vector2f& position);
 
     static void setBuildingToGrid(Buildings::BuildID id, sf::Vector2f& position);
     void showTemplateOfBuilding();
     void createBuilding(Buildings::BuildID id, sf::Vector2f position);
     void destroyBuilding();
     void explodeBuilding(sf::Vector2f position);
-    void selectBuilding();
+
+    void selectObjectOnMap();
 
     void createMap();
 
@@ -133,7 +134,12 @@ private:
 
     long m_amountTanks;
 
+    bool m_bWPressed;
     bool m_bCPressed;
+    bool m_bTPressed;
+    bool m_bSPressed;
+
+
     bool m_bBPressed;
     bool m_bDPressed;
     bool m_bDDPressed;
