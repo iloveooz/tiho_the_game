@@ -27,10 +27,19 @@ Game::Game() :
     m_sBackground.setTexture(m_textureHolder.get(Textures::ID::Terrain));
 
     m_animTank.setTexture(m_textureHolder.get(Textures::ID::Tank), 108, 108);
+    m_CharAnimap.insert(std::make_pair(Factory::CharID::tank, m_animTank));
+
     m_animCar.setTexture(m_textureHolder.get(Textures::ID::Car), 45, 45);
+    m_CharAnimap.insert(std::make_pair(Factory::CharID::car, m_animCar));
+
     m_animSpitFire.setTexture(m_textureHolder.get(Textures::ID::SpitFire), 48, 48);
+    m_CharAnimap.insert(std::make_pair(Factory::CharID::spit, m_animSpitFire));
+
     m_animNuke.setTexture(m_textureHolder.get(Textures::ID::NuclearRocket), 48, 48);
+    m_CharAnimap.insert(std::make_pair(Factory::CharID::nuke, m_animNuke));
+
     m_animWorker.setTexture(m_textureHolder.get(Textures::ID::Worker), 54, 54);
+    m_CharAnimap.insert(std::make_pair(Factory::CharID::work, m_animWorker));
 
 
     m_animArsenal.setTexture(m_textureHolder.get(Textures::ID::Arsenal), 64, 64);
@@ -99,32 +108,27 @@ void Game::prepareGame() {
     createMap();
 }
 
-void Game::createCharacter() {
+void Game::createCharacter(Factory::CharID id, sf::Vector2f position) {
     m_fileLogger->log("Game", "createCharacter", "BEGIN");
 
     Factory::CharacterFactory factory;
 
-    std::unique_ptr<Entity> car = factory.createEntity(Factory::CharID::car);
-    car->settings(m_animCar, rand() % Weight, rand() % Height, 0);
-    m_characters.push_back(std::move(car));
-
-    std::unique_ptr<Entity> tank = factory.createEntity(Factory::CharID::tank);
-    tank->settings(m_animTank, rand() % Weight, rand() % Height, 0);
-    m_characters.push_back(std::move(tank));
-
-    std::unique_ptr<Entity> spitfire = factory.createEntity(Factory::CharID::spit);
-    spitfire->settings(m_animSpitFire, rand() % Weight, rand() % Height, 0);
-    m_characters.push_back(std::move(spitfire));
-
-    std::unique_ptr<Entity> nuke = factory.createEntity(Factory::CharID::nuke);
-    nuke->settings(m_animNuke, rand() % Weight, rand() % Height, 0);
-    m_characters.push_back(std::move(nuke));
-
-    std::unique_ptr<Entity> worker = factory.createEntity(Factory::CharID::work);
-    worker->settings(m_animWorker, rand() % Weight, rand() % Height, 0);
-    m_characters.push_back(std::move(worker));
+    std::unique_ptr<Entity> character = factory.createEntity(id);
+    placeCharacter(id, position);
+    character->settings(m_CharAnimap.find(id)->second, position.x, position.y, 0);
+    m_characters.push_back(std::move(character));
 
     m_fileLogger->log("Game", "createCharacter", "END");
+}
+
+void Game::placeCharacter(Factory::CharID id, sf::Vector2f& position) {
+    int inX = int(position.x) / 128;
+    int inY = int(position.y) / 128;
+
+    if (id == Factory::CharID::work) {
+        position.x = float(inX) * 128 - 86;
+        position.y = float(inY) * 128 + 170;
+    }
 }
 
 void Game::createBuilding(Buildings::BuildID id, sf::Vector2f position) {
@@ -268,8 +272,11 @@ void Game::renderObjects() {
 
     // отображение юнитов
     for (auto const &object : m_characters) {
-        if (object->getName() == "explosion")
-            object->getAnimation().update();
+        if (object->getName() == "explosion") {
+            // m_consoleLogger->log("Game", "renderObjects", "Explosion!");
+            (reinterpret_cast<Animations::ExplosionAnimation &>(object->getAnimation())).update();
+            // m_consoleLogger->log("Game", "renderObjects", "Doned!");
+        }
         object->draw(m_window);
     }
 
@@ -319,6 +326,7 @@ void Game::handlePlayerKeyboardEvent(sf::Keyboard::Key key, bool isPressed) {
 
     if (key == sf::Keyboard::Escape) {
         m_bBPressed = false;
+        m_bCPressed = false;
 
         m_bDPressed = false;
         m_bDDPressed = false;
@@ -349,6 +357,9 @@ void Game::handlePlayerKeyboardEvent(sf::Keyboard::Key key, bool isPressed) {
         m_bDDPressed = false;
     }
 
+    if (key == sf::Keyboard::C && isPressed)
+        m_bCPressed = true;
+
     if (key == sf::Keyboard::D && isPressed && m_bDPressed)
         m_bDDPressed = true;
 
@@ -374,6 +385,13 @@ void Game::handlePlayerKeyboardEvent(sf::Keyboard::Key key, bool isPressed) {
             m_BuildingChoosen = Buildings::BuildID::nsilo;
         else if (key == sf::Keyboard::O)
             m_BuildingChoosen = Buildings::BuildID::oil;
+    }
+
+    if (m_bCPressed) {
+        for (auto& building : m_buildings) {
+            if (building->getName() == "main" && building->isSelected())
+                createCharacter(Factory::CharID::work, building->getPosition());
+        }
     }
 
     if (key == sf::Keyboard::Q)
@@ -413,7 +431,6 @@ void Game::handlePlayerMouseEvent(sf::Mouse::Button button, bool isPressed) {
         m_consoleLogger->log(__PRETTY_FUNCTION__, "",
                              "Left pressed! Coordinates: x = " + std::to_string(windowPosition.x) + ", y = " +
                              std::to_string(windowPosition.y));
-
         selectBuilding();
     }
     else if (button == sf::Mouse::Left && !isPressed) {

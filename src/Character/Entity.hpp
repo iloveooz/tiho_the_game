@@ -24,14 +24,16 @@ public:
 
     void setName(const std::string& name);
     std::string& getName();
+
     bool isAlive() const;
+
+    sf::Vector2f& getPosition();
 
     Animations::Animation& getAnimation();
 
 protected:
     // координаты фигуры
-    double m_dX;
-    double m_dY;
+    sf::Vector2f m_position;
 
     // смещение
     double m_dDx;

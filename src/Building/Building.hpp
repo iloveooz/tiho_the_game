@@ -38,6 +38,7 @@ namespace Buildings {
 
         std::string& getName();
         sf::Sprite& getSprite();
+        sf::Vector2f& getPosition();
 
         bool isAlive() const;
 
@@ -46,8 +47,7 @@ namespace Buildings {
 
     protected:
         // координаты фигуры
-        double m_dX;
-        double m_dY;
+        sf::Vector2f m_position;
 
         // смещение
         double m_dDx;

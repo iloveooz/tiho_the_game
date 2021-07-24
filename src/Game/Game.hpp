@@ -11,6 +11,8 @@
 #include "../IObject/IObject.hpp"
 
 #include "../Character/Entity.hpp"
+#include "../Character/Factory/CharacterFactory.hpp"
+
 #include "../Building/Building.hpp"
 
 #include "../Animation/CharacterAnimation.hpp"
@@ -47,7 +49,8 @@ private:
     void fillGameStates();
     void changeGameState(States::TypeState gameState);
 
-    void createCharacter();
+    void createCharacter(Factory::CharID id, sf::Vector2f position);
+    void placeCharacter(Factory::CharID id, sf::Vector2f& position);
 
     static void setBuildingToGrid(Buildings::BuildID id, sf::Vector2f& position);
     void showTemplateOfBuilding();
@@ -84,6 +87,8 @@ private:
     Textures::TextureHolder m_textureHolder;
 
     sf::Sprite m_sBackground;
+
+    std::map<Factory::CharID, Animations::CharacterAnimation> m_CharAnimap;
 
     Animations::CharacterAnimation m_animTank;
     Animations::CharacterAnimation m_animCar;
@@ -128,6 +133,7 @@ private:
 
     long m_amountTanks;
 
+    bool m_bCPressed;
     bool m_bBPressed;
     bool m_bDPressed;
     bool m_bDDPressed;
