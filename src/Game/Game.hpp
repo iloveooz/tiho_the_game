@@ -62,7 +62,9 @@ private:
 
     void createMap();
 
+    void centerViewOfMap();
     void updateViewOfMap();
+
     void renderObjects();
 
     void processEvents();

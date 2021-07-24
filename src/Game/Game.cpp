@@ -251,6 +251,22 @@ void Game::checkMousePosition() {
     m_isViewMovingDown = (mousePosition.y > m_window.getSize().y - 3);
 }
 
+void Game::centerViewOfMap() {
+    m_fileLogger->log("Game", "centerViewOfMap", "BEGIN");
+
+    for (auto& building : m_buildings) {
+        if (building->isSelected())
+            m_camera.setCenter(building->getPosition());
+    }
+
+    for (auto& character : m_characters) {
+        if (character->isSelected())
+            m_camera.setCenter(character->getPosition());
+    }
+
+    m_fileLogger->log("Game", "centerViewOfMap", "END");
+}
+
 void Game::updateViewOfMap() {
     double dx = 0.0, dy = 0.0, zf = 1.0;
 
@@ -363,6 +379,9 @@ void Game::handlePlayerKeyboardEvent(sf::Keyboard::Key key, bool isPressed) {
         m_isViewZoomingOut = isPressed;
     else if (key == sf::Keyboard::Subtract)
         m_isViewZoomingIn = isPressed;
+
+    if (key == sf::Keyboard::Space && isPressed)
+        centerViewOfMap();
 
     if (key == sf::Keyboard::B && isPressed)
         m_bBPressed = true;
