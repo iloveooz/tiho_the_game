@@ -13,13 +13,16 @@
 const int Weight = 1920; // ширина главного окна
 const int Height = 640;  // высота главного окна
 
+const double PI = 3.14159265;
+const double angleAdjust = 270;
+
 class Entity : public IObject {
 public:
     Entity();
     virtual ~Entity() {};
 
     void settings (Animations::Animation &animation, double x, double y, double angle = 0);
-    virtual void update(double dx, double dy);
+    virtual void update();
     void draw(sf::RenderWindow &app);
 
     void setName(const std::string& name);
@@ -32,21 +35,30 @@ public:
     void setSelected(bool value);
     bool isSelected() const;
 
+    bool isMoving() const;
+
     sf::Vector2f& getPosition();
 
     Animations::Animation& getAnimation();
 
+    virtual void doGo(sf::Vector2f& position);
+
 protected:
     // координаты фигуры
     sf::Vector2f m_position;
+    sf::Vector2f m_targetPosition;
 
     // смещение
     double m_dDx;
     double m_dDy;
 
     // угол поворота
-    double m_dSpeed;
     double m_dAngle;
+
+    double m_dRadius;
+
+    // скорость юнита
+    double m_dSpeed;
 
     // здоровье
     int m_iHealth;
@@ -54,6 +66,7 @@ protected:
 
     // выбран ли объект
     bool m_bSelected;
+    bool m_bIsMoving;
 
     // наименование элемента
     std::string m_sName;

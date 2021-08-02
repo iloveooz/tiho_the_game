@@ -7,7 +7,9 @@ class Car : public Entity {
 public:
     Car();
 
-    void update(double dx, double dy) override;
+    void doGo(sf::Vector2f& position) override;
+
+    void update() override;
 };
 
 #endif //TIHO_CAR_HPP

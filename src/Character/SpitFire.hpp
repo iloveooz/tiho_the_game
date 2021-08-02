@@ -7,7 +7,9 @@ class SpitFire : public Entity {
 public:
     SpitFire();
 
-    void update(double dx, double dy) override;
+    void doGo(sf::Vector2f& position) override;
+
+    void update() override;
 };
 
 #endif //TIHO_SPITFIRE_HPP

@@ -5,11 +5,11 @@
 
 namespace Commands {
 
-    class PatrolCommand : UnitCommand {
+    class PatrolCommand : public UnitCommand {
     public:
         virtual ~PatrolCommand();
 
-        void execute() override;
+        void execute(std::unique_ptr<Entity>& character, sf::Vector2f position) override;
     };
 
 }

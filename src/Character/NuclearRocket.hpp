@@ -7,7 +7,9 @@ class NuclearRocket : public Entity {
 public:
     NuclearRocket();
 
-    void update(double dx, double dy) override;
+    void doGo(sf::Vector2f& position) override;
+
+    void update() override;
 };
 
 #endif //TIHO_NUCLEARROCKET_HPP

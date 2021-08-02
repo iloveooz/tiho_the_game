@@ -94,6 +94,9 @@ set(SOURCE_FILES
         src/Character/Commands/UnitCommand.cpp
         src/Character/Commands/UnitCommand.hpp
 
+        src/Character/Commands/UnitCommandsManager.cxx
+        src/Character/Commands/UnitCommandsManager.hxx
+
         src/Character/Commands/GoCommand.cpp
         src/Character/Commands/GoCommand.hpp
 

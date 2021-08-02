@@ -30,6 +30,7 @@
 #include "../Logger/FileLogger.hpp"
 #include "../Logger/SocketLogger.hpp"
 #include "../Cursor/Cursor.hpp"
+#include "../Character/Commands/UnitCommandsManager.hxx"
 
 class Game : public IObject, public std::enable_shared_from_this<Game> {
 public:
@@ -80,6 +81,8 @@ private:
     sf::RenderWindow m_window;
 
     std::vector<std::unique_ptr<Entity>> m_characters;
+    Commands::UnitCommandsManager m_comManager;
+
     std::vector<std::unique_ptr<Buildings::Building>> m_buildings;
 
     ControlGame::Cursor m_cursor;

@@ -248,7 +248,7 @@ void Game::showTemplateOfBuilding() {
 
 void Game::checkMousePosition() {
     sf::Vector2i mousePosition = sf::Mouse::getPosition(m_window);
-    // m_consoleLogger->log("Game", "checkMousePosition", "x = " + std::to_string(mousePosition.x) + ", y = " + std::to_string(mousePosition.y));
+    // m_consoleLogger->log(__PRETTY_FUNCTION__, "x = " + std::to_string(mousePosition.x) + ", y = " + std::to_string(mousePosition.y));
 
     m_isViewMovingLeft = (mousePosition.x < 3);
     m_isViewMovingRight = (mousePosition.x > m_window.getSize().x - 3);
@@ -308,8 +308,12 @@ void Game::renderObjects() {
         if (object->getName() == "explosion") {
             // m_consoleLogger->log("Game", "renderObjects", "Explosion!");
             (reinterpret_cast<Animations::ExplosionAnimation &>(object->getAnimation())).update();
-            // m_consoleLogger->log("Game", "renderObjects", "Doned!");
+            // m_consoleLogger->log("Game", "renderObjects", "Done!");
         }
+        if (object->isMoving()) {
+            object->update();
+        }
+
         object->draw(m_window);
     }
 
@@ -474,6 +478,11 @@ void Game::handlePlayerMouseEvent(sf::Mouse::Button button, bool isPressed) {
         m_consoleLogger->log(__PRETTY_FUNCTION__,
                              "Right pressed! Coordinates: x = " + std::to_string(windowPosition.x) + ", y = " +
                              std::to_string(windowPosition.y));
+        for (auto& character : m_characters) {
+            if (character->isSelected()) {
+                m_comManager.handleCommand(Commands::UnitAction::Go, character, worldPosition);
+            }
+        }
     }
     else if (button == sf::Mouse::Right && !isPressed) {
         m_consoleLogger->log(__PRETTY_FUNCTION__,

@@ -7,7 +7,9 @@ class Tank : public Entity {
 public:
     Tank();
 
-    void update(double dx, double dy) override;
+    void doGo(sf::Vector2f& position) override;
+
+    void update() override;
 };
 
 #endif //TIHO_TANK_HPP

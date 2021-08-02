@@ -7,7 +7,9 @@ class Worker : public Entity {
 public:
     Worker();
 
-    void update(double dx, double dy) override;
+    void doGo(sf::Vector2f& position) override;
+
+    void update() override;
 };
 
 #endif //TIHO_WORKER_HPP
