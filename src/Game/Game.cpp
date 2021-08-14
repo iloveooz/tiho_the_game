@@ -22,6 +22,9 @@ Game::Game() :
 
     m_BuildingChoosen = Buildings::BuildID::nothing;
 
+    m_isViewZoomingIn = false;
+    m_isViewZoomingOut = false;
+
     m_textureHolder.init();
 
     m_sBackground.setTexture(m_textureHolder.get(Textures::ID::Terrain));
