@@ -23,14 +23,17 @@ namespace ControlGame {
         return m_sprite;
     }
 
-    void Cursor::draw(sf::RenderWindow &app) {
-        if (m_bVisible) {
+    void Cursor::update() {
             m_rect.setSize(sf::Vector2f(m_sprite.getTexture()->getSize().x, m_sprite.getTexture()->getSize().y));
             m_rect.setPosition(m_sprite.getPosition().x - m_sprite.getTexture()->getSize().x / 2,
                                m_sprite.getPosition().y - m_sprite.getTexture()->getSize().y / 2);
             m_rect.setFillColor(sf::Color::Transparent);
             m_rect.setOutlineThickness(1);
             m_rect.setOutlineColor(sf::Color::Cyan);
+    }
+
+    void Cursor::draw(sf::RenderWindow &app) {
+        if (m_bVisible) {
             app.draw(m_rect);
         }
     }

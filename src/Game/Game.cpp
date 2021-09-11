@@ -329,6 +329,9 @@ void Game::renderObjects() {
         object->draw(m_window);
 
     // отображение курсора
+    if (m_cursor.getVisible())
+        m_cursor.update();
+
     m_cursor.draw(m_window);
 
     if (m_BuildingChoosen != Buildings::BuildID::nothing) {

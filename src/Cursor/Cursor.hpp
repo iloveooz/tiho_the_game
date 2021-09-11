@@ -14,6 +14,8 @@ namespace ControlGame {
 
         virtual ~Cursor();
 
+        void update();
+
         void setSprite(sf::Sprite& mSprite);
         sf::Sprite& getSprite();
 
