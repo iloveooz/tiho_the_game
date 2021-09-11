@@ -15,8 +15,4 @@ namespace Animations {
         m_sprite.setTexture(t);
         m_sprite.setOrigin(wBorder / 2, hBorder / 2);
     }
-
-    sf::Sprite& BuildingAnimation::getSprite() {
-        return m_sprite;
-    }
 }

@@ -57,6 +57,10 @@ bool Entity::isAlive() const {
     return m_bAlive;
 }
 
+void Entity::setDead() {
+    m_bAlive = false;
+}
+
 Animations::Animation &Entity::getAnimation() {
     return m_aAnimation;
 }

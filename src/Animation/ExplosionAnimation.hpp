@@ -23,17 +23,6 @@ namespace Animations {
         ExplosionAnimation(sf::Texture &t, int wBorder, int hBorder);
 
         void setTexture(sf::Texture &t, ExplodeType type);
-
-        void update() override;
-        bool isEnd();
-
-        sf::Sprite &getSprite();
-
-    private:
-        std::vector<sf::IntRect> m_vFrames;
-
-        double m_dFrame;
-        double m_dSpeed;
     };
 
 }

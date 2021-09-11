@@ -3,6 +3,7 @@
 #include <memory>
 
 #include "../Character/Factory/CharacterFactory.hpp"
+#include "../Explosion/Explosion.hpp"
 
 Game::Game() :
         m_window(sf::VideoMode(Weight, Height), "Tycho Planet" /*, sf::Style::Fullscreen*/ ),
@@ -99,6 +100,7 @@ void Game::run() {
         processEvents();
         updateViewOfMap();
         renderObjects();
+        checkAliveEntities();
     }
 
     m_fileLogger->log(__PRETTY_FUNCTION__, "END");
@@ -172,7 +174,7 @@ void Game::destroyBuilding() {
 void Game::explodeBuilding(sf::Vector2f position) {
     m_fileLogger->log(__PRETTY_FUNCTION__, "BEGIN");
 
-    std::unique_ptr<Entity> explode = std::make_unique<Entity>();
+    std::unique_ptr<Entity> explode = std::make_unique<Explosion>();
     explode->settings(m_ExplodeAnimap.find(Animations::ExplodeType::BigExplode)->second, position.x, position.y, 0);
     explode->setName("explosion");
     m_characters.push_back(std::move(explode));
@@ -308,10 +310,12 @@ void Game::renderObjects() {
 
     // отображение юнитов
     for (auto const &object : m_characters) {
-        if (object->getName() == "explosion") {
-            // m_consoleLogger->log("Game", "renderObjects", "Explosion!");
-            (reinterpret_cast<Animations::ExplosionAnimation &>(object->getAnimation())).update();
-            // m_consoleLogger->log("Game", "renderObjects", "Done!");
+        if (object->getName() == "explosion" && object->isAlive()) {
+            object->getAnimation().update();
+
+            if (object->getAnimation().isEnd()) {
+                object->setDead();
+            }
         }
         if (object->isMoving()) {
             object->update();
@@ -332,6 +336,14 @@ void Game::renderObjects() {
     }
 
     m_window.display();
+}
+
+void Game::checkAliveEntities() {
+    for (unsigned int i = 0; i < m_characters.size(); i++) {
+        if (!m_characters[i]->isAlive()) {
+            m_characters.erase(m_characters.begin() + i--);
+        }
+    }
 }
 
 void Game::processEvents() {

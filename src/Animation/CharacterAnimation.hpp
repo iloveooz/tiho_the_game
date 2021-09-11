@@ -15,10 +15,6 @@ namespace Animations {
         CharacterAnimation(sf::Texture &t, int wBorder, int hBorder);
 
         void setTexture(sf::Texture &t, int wBorder, int hBorder);
-
-        sf::Sprite &getSprite();
-
-    private:
     };
 
 }

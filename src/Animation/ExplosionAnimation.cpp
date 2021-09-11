@@ -54,21 +54,4 @@ namespace Animations {
         m_sprite.setOrigin(w / 2, h / 2);
         m_sprite.setTextureRect(m_vFrames[0]);
     }
-
-    bool ExplosionAnimation::isEnd() {
-        return m_dFrame + m_dSpeed >= m_vFrames.size();
-    }
-
-    void ExplosionAnimation::update() {
-        m_dFrame += m_dSpeed;
-        int n = m_vFrames.size();
-        if (m_dFrame >= n)
-            m_dFrame -= n;
-        if (n > 0)
-            m_sprite.setTextureRect(m_vFrames[int(m_dFrame)]);
-    }
-
-    sf::Sprite& ExplosionAnimation::getSprite() {
-        return m_sprite;
-    }
 }

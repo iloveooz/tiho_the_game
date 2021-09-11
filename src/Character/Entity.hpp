@@ -30,6 +30,7 @@ public:
 
     sf::Sprite& getSprite();
 
+    void setDead();
     bool isAlive() const;
 
     void setSelected(bool value);

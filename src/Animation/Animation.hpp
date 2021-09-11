@@ -18,14 +18,20 @@ namespace Animations {
 
     class Animation : public IObject {
     public:
-        Animation() {}
+        Animation();
         virtual ~Animation() {}
 
         virtual void update();
+        bool isEnd();
+
         virtual sf::Sprite& getSprite() { return m_sprite; }
 
     protected:
         sf::Sprite m_sprite;
+        std::vector<sf::IntRect> m_vFrames;
+
+        double m_dFrame;
+        double m_dSpeed;
     };
 
 }
