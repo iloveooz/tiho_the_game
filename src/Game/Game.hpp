@@ -94,8 +94,6 @@ private:
 
     Textures::TextureHolder m_textureHolder;
 
-    sf::Sprite m_sBackground;
-
     std::map<Factory::CharID, Animations::CharacterAnimation> m_CharAnimap;
 
     Animations::CharacterAnimation m_animTank;

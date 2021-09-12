@@ -28,8 +28,6 @@ Game::Game() :
 
     m_textureHolder.init();
 
-    m_sBackground.setTexture(m_textureHolder.get(Textures::ID::Terrain));
-
     m_animTank.setTexture(m_textureHolder.get(Textures::ID::Tank), 128, 128);
     m_CharAnimap.insert(std::make_pair(Factory::CharID::tank, m_animTank));
 
