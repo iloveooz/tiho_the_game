@@ -45,6 +45,7 @@ public:
     Animations::Animation& getAnimation();
 
     virtual void doGo(sf::Vector2f& position);
+    virtual void doStop(sf::Vector2f& position);
 
 protected:
     // координаты фигуры

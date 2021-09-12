@@ -22,6 +22,10 @@ void Entity::doGo(sf::Vector2f& position) {
     m_aAnimation.getSprite().setRotation(m_dAngle);
 }
 
+void Entity::doStop(sf::Vector2f& position) {
+    m_bIsMoving = false;
+}
+
 void Entity::update() {
     if (m_bIsMoving) {
 

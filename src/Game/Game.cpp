@@ -387,6 +387,9 @@ void Game::processEvents() {
 void Game::handlePlayerKeyboardEvent(sf::Keyboard::Key key, bool isPressed) {
     m_fileLogger->log(__PRETTY_FUNCTION__, "BEGIN");
 
+    sf::Vector2i windowPosition = sf::Mouse::getPosition(m_window);
+    sf::Vector2f worldPosition = m_window.mapPixelToCoords(windowPosition);
+
     if (key == sf::Keyboard::Escape) {
         m_bBPressed = false;
 
@@ -485,6 +488,13 @@ void Game::handlePlayerKeyboardEvent(sf::Keyboard::Key key, bool isPressed) {
                     createCharacter(Factory::CharID::nuke, building->getPosition());
             }
         }
+
+        for (auto& character : m_characters) {
+            if (character->isSelected() && m_ePressedProperty == eKeyPressed::SPressed) {
+                m_comManager.handleCommand(Commands::UnitAction::Stop, character, worldPosition);
+            }
+        }
+
         m_ePressedProperty = eKeyPressed::empty;
     }
 
