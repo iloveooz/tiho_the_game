@@ -8,8 +8,7 @@
 Game::Game() :
         m_window(sf::VideoMode(Weight, Height), "Tycho Planet" /*, sf::Style::Fullscreen*/ ),
         m_consoleLogger(new ConsoleLogger()),
-        m_fileLogger(new FileLogger("output.log")),
-        m_cursor(sf::Sprite()) {
+        m_fileLogger(new FileLogger("output.log")) {
 
     m_fileLogger->log(__PRETTY_FUNCTION__, "BEGIN");
 
@@ -144,9 +143,8 @@ void Game::createBuilding(Buildings::BuildID id, sf::Vector2f position) {
 
     std::unique_ptr<Buildings::Building> building = Buildings::Building::createBuilding(id);
     building->settings(m_BuildAnimap.find(id)->second, position.x, position.y, 0);
+    building->getCursor().setVisible(false);
     m_buildings.push_back(std::move(building));
-
-    m_cursor.setVisible(false);
 
     m_fileLogger->log(__PRETTY_FUNCTION__, "END");
 }
@@ -158,9 +156,9 @@ void Game::destroyBuilding() {
         if (m_buildings[i]->isSelected()) {
 
             sf::Vector2f position = m_buildings[i]->getSprite().getPosition();
-
+            m_buildings[i]->getCursor().setVisible(false);
             m_buildings.erase(m_buildings.begin() + i--);
-            m_cursor.setVisible(false);
+
             m_consoleLogger->log(__PRETTY_FUNCTION__, "DESTROY!");
             explodeBuilding(position);
         }
@@ -192,10 +190,11 @@ void Game::selectObjectOnMap() {
             building->setSelected(true);
             countBuilding++;
 
-            m_cursor.setSprite(building->getSprite());
-            m_cursor.setVisible(true);
+            building->getCursor().setSprite(building->getSprite());
+            building->getCursor().setVisible(true);
         } else {
             building->setSelected(false);
+            building->getCursor().setVisible(false);
             m_consoleLogger->log(__PRETTY_FUNCTION__, building->getName() + " deselected!");
         }
     }
@@ -206,16 +205,17 @@ void Game::selectObjectOnMap() {
             character->setSelected(true);
             countBuilding++;
 
-            m_cursor.setSprite(character->getSprite());
-            m_cursor.setVisible(true);
+            character->getCursor().setSprite(character->getSprite());
+            character->getCursor().setVisible(true);
         } else {
             character->setSelected(false);
+            character->getCursor().setVisible(false);
             m_consoleLogger->log(__PRETTY_FUNCTION__, character->getName() + " deselected!");
         }
     }
 
-    if (countBuilding == 0)
-        m_cursor.setVisible(false);
+    if (countBuilding == 0) {}
+        // m_cursor.setVisible(false);
 }
 
 void Game::setBuildingToGrid(Buildings::BuildID id, sf::Vector2f &position) {
@@ -316,21 +316,31 @@ void Game::renderObjects() {
             }
         }
         if (object->isMoving()) {
+            // TODO - сделать по-человечески, выглядит стрёмно
+            object->getCursor().setSprite(object->getSprite());
+            object->getCursor().update();
             object->update();
         }
+
+        // отображение курсора
+        if (object->getCursor().getVisible())
+            object->getCursor().update();
+
+        object->getCursor().draw(m_window);
 
         object->draw(m_window);
     }
 
     // отображение зданий
-    for (auto const &object : m_buildings)
+    for (auto const &object : m_buildings) {
         object->draw(m_window);
 
-    // отображение курсора
-    if (m_cursor.getVisible())
-        m_cursor.update();
+        // отображение курсора
+        if (object->getCursor().getVisible())
+            object->getCursor().update();
 
-    m_cursor.draw(m_window);
+        object->getCursor().draw(m_window);
+    }
 
     if (m_BuildingChoosen != Buildings::BuildID::nothing) {
         m_window.draw(m_fakeBuilding);

@@ -1,6 +1,6 @@
 #include "Entity.hpp"
 
-Entity::Entity() : m_bAlive(true), m_position(0.0, 0.0), m_dDx(0.0), m_dDy(0.0), m_dAngle(0.0) {}
+Entity::Entity() : m_bAlive(true), m_position(0.0, 0.0), m_dDx(0.0), m_dDy(0.0), m_dAngle(0.0), m_cursor(sf::Sprite()) {}
 
 void Entity::settings(Animations::Animation &animation, double x, double y, double angle) {
     m_position.x = x;
@@ -81,7 +81,11 @@ bool Entity::isSelected() const {
     return m_bSelected;
 }
 
-bool Entity:: isMoving() const {
+bool Entity::isMoving() const {
     return m_bIsMoving;
+}
+
+ControlGame::Cursor& Entity::getCursor() {
+    return m_cursor;
 }
 

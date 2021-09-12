@@ -87,8 +87,6 @@ private:
 
     std::vector<std::unique_ptr<Buildings::Building>> m_buildings;
 
-    ControlGame::Cursor m_cursor;
-
     std::shared_ptr<States::GameState> m_pCurrentState;
     std::array<std::unique_ptr<States::GameState>, static_cast<int>(States::TypeState::Count)> m_gameStates;
 

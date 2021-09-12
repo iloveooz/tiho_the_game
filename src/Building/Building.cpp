@@ -10,7 +10,7 @@
 #include "OilDerrickBuilding.hpp"
 
 namespace Buildings {
-    Building::Building() : m_bAlive(true), m_position(0.0, 0.0), m_dDx(0.0), m_dDy(0.0), m_dAngle(0.0) {}
+    Building::Building() : m_bAlive(true), m_position(0.0, 0.0), m_dDx(0.0), m_dDy(0.0), m_dAngle(0.0), m_cursor(sf::Sprite()) {}
 
     std::unique_ptr<Building> Building::createBuilding(BuildID id) {
         switch (id) {
@@ -75,5 +75,9 @@ namespace Buildings {
 
     sf::Vector2f& Building::getPosition() {
         return m_position;
+    }
+
+    ControlGame::Cursor& Building::getCursor() {
+        return m_cursor;
     }
 }

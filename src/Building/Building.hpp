@@ -9,6 +9,7 @@
 
 #include "../IObject/IObject.hpp"
 #include "../Animation/BuildingAnimation.hpp"
+#include "../Cursor/Cursor.hpp"
 
 namespace Buildings {
     enum class BuildID {
@@ -37,7 +38,10 @@ namespace Buildings {
         void draw(sf::RenderWindow &app);
 
         std::string& getName();
+
         sf::Sprite& getSprite();
+        ControlGame::Cursor& getCursor();
+
         sf::Vector2f& getPosition();
 
         bool isAlive() const;
@@ -68,6 +72,8 @@ namespace Buildings {
 
         // анимация или спрайт
         Animations::BuildingAnimation m_aAnimation;
+
+        ControlGame::Cursor m_cursor;
     };
 }
 #endif //TIHO_BUILDING_HPP

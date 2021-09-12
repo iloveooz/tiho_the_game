@@ -9,6 +9,7 @@
 #include "../Animation/CharacterAnimation.hpp"
 #include "../IObject/IObject.hpp"
 #include "../Map/Map.hpp"
+#include "../Cursor/Cursor.hpp"
 
 const int Weight = 1920; // ширина главного окна
 const int Height = 640;  // высота главного окна
@@ -29,6 +30,7 @@ public:
     std::string& getName();
 
     sf::Sprite& getSprite();
+    ControlGame::Cursor& getCursor();
 
     void setDead();
     bool isAlive() const;
@@ -74,6 +76,8 @@ protected:
 
     // анимация или спрайт
     Animations::Animation m_aAnimation;
+
+    ControlGame::Cursor m_cursor;
 
 private:
     std::unique_ptr<World::Map> m_pMap;
