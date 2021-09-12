@@ -490,7 +490,7 @@ void Game::handlePlayerKeyboardEvent(sf::Keyboard::Key key, bool isPressed) {
         }
 
         for (auto& character : m_characters) {
-            if (character->isSelected() && m_ePressedProperty == eKeyPressed::SPressed) {
+            if (character->isSelected() && character->getName() != "nuclearrocket" && m_ePressedProperty == eKeyPressed::SPressed) {
                 m_comManager.handleCommand(Commands::UnitAction::Stop, character, worldPosition);
             }
         }
