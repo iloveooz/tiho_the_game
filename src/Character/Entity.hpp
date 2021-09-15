@@ -74,10 +74,11 @@ protected:
     // выбран ли объект
     bool m_bSelected;
 
-
-    // TODO - заменить на enum class
-    bool m_bIsMoving;
-    bool m_bIsPatrolling;
+    enum class eMovingType {
+        NO_MOVE,
+        MOVING,
+        PATROLLING
+    } m_eMovingType;
 
     // наименование элемента
     std::string m_sName;

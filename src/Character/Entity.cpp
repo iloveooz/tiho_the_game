@@ -7,8 +7,7 @@ void Entity::settings(Animations::Animation &animation, double x, double y, doub
     m_position.y = y;
     m_dAngle = angle;
     m_aAnimation = animation;
-    m_bIsMoving = false;
-    m_bIsPatrolling = false;
+    m_eMovingType = eMovingType::NO_MOVE;
 }
 
 void Entity::setAngle() {
@@ -22,30 +21,23 @@ void Entity::setAngle() {
 
 void Entity::doGo(sf::Vector2f& position) {
     m_targetPosition = position;
-
-    m_bIsMoving = true;
-    m_bIsPatrolling = false;
-
+    m_eMovingType = eMovingType::MOVING;
     setAngle();
 }
 
 void Entity::doPatrol(sf::Vector2f& position) {
     m_targetPosition = position;
     m_beginPosition = m_position;
-
-    m_bIsPatrolling = true;
-    m_bIsMoving = false;
-
+    m_eMovingType = eMovingType::PATROLLING;
     setAngle();
 }
 
 void Entity::doStop(sf::Vector2f& position) {
-    m_bIsMoving = false;
-    m_bIsPatrolling = false;
+    m_eMovingType = eMovingType::NO_MOVE;
 }
 
 void Entity::update() {
-    if (m_bIsMoving) {
+    if (m_eMovingType == eMovingType::MOVING) {
         m_dDx = cos((angleAdjust + m_dAngle) * PI / 180) * m_dSpeed;
         m_dDy = sin((angleAdjust + m_dAngle) * PI / 180) * m_dSpeed;
 
@@ -55,12 +47,11 @@ void Entity::update() {
         double distance = sqrt(pow((m_targetPosition.x - m_position.x), 2) + pow((m_targetPosition.y - m_position.y), 2));
 
         if (distance < m_dRadius) {
-            m_bIsMoving = false;
-            m_bIsPatrolling = false;
+            m_eMovingType = eMovingType::NO_MOVE;
         }
     }
 
-    if (m_bIsPatrolling) {
+    if (m_eMovingType == eMovingType::PATROLLING) {
         m_dDx = cos((angleAdjust + m_dAngle) * PI / 180) * m_dSpeed;
         m_dDy = sin((angleAdjust + m_dAngle) * PI / 180) * m_dSpeed;
 
@@ -120,7 +111,10 @@ bool Entity::isSelected() const {
 }
 
 bool Entity::isMoving() const {
-    return m_bIsMoving || m_bIsPatrolling;
+    if (m_eMovingType == eMovingType::NO_MOVE)
+        return false;
+    else
+        return true;
 }
 
 ControlGame::Cursor& Entity::getCursor() {
