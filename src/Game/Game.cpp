@@ -136,6 +136,33 @@ void Game::placeCharacter(Factory::CharID id, sf::Vector2f& position) {
     }
 }
 
+void Game::destroyCharacter() {
+    m_fileLogger->log(__PRETTY_FUNCTION__, "BEGIN");
+
+    for (auto& character : m_characters) {
+        if (character->isSelected()) {
+            sf::Vector2f position = character->getSprite().getPosition();
+            character->getCursor().setVisible(false);
+            character->setDead();
+            m_consoleLogger->log(__PRETTY_FUNCTION__, "DESTROY!");
+            explodeCharacter(position);
+        }
+    }
+
+    m_fileLogger->log(__PRETTY_FUNCTION__, "END");
+}
+
+void Game::explodeCharacter(sf::Vector2f position) {
+    m_fileLogger->log(__PRETTY_FUNCTION__, "BEGIN");
+
+    std::unique_ptr<Entity> explode = std::make_unique<Explosion>();
+    explode->settings(m_ExplodeAnimap.find(Animations::ExplodeType::MiddleExplode)->second, position.x, position.y, 0);
+    explode->setName("explosion");
+    m_characters.push_back(std::move(explode));
+
+    m_fileLogger->log(__PRETTY_FUNCTION__, "END");
+}
+
 void Game::createBuilding(Buildings::BuildID id, sf::Vector2f position) {
     m_fileLogger->log(__PRETTY_FUNCTION__, "BEGIN");
 
@@ -423,6 +450,7 @@ void Game::handlePlayerKeyboardEvent(sf::Keyboard::Key key, bool isPressed) {
 
     if (m_bDDPressed) {
         destroyBuilding();
+        destroyCharacter();
         m_bDPressed = false;
         m_bDDPressed = false;
     }
@@ -511,9 +539,8 @@ void Game::handlePlayerMouseEvent(sf::Mouse::Button button, bool isPressed) {
     sf::Vector2f worldPosition = m_window.mapPixelToCoords(windowPosition);
 
     if (button == sf::Mouse::Right && isPressed) {
-        m_consoleLogger->log(__PRETTY_FUNCTION__,
-                             "Right pressed! Coordinates: x = " + std::to_string(windowPosition.x) + ", y = " +
-                             std::to_string(windowPosition.y));
+        m_consoleLogger->log(__PRETTY_FUNCTION__, "Right pressed! Coordinates: x = " + std::to_string(windowPosition.x) + ", y = " + std::to_string(windowPosition.y));
+
         for (auto& character : m_characters) {
             if (character->isSelected()) {
                 m_comManager.handleCommand(Commands::UnitAction::Go, character, worldPosition);
@@ -521,14 +548,10 @@ void Game::handlePlayerMouseEvent(sf::Mouse::Button button, bool isPressed) {
         }
     }
     else if (button == sf::Mouse::Right && !isPressed) {
-        m_consoleLogger->log(__PRETTY_FUNCTION__,
-                             "Right released! Coordinates: x = " + std::to_string(windowPosition.x) + ", y = " +
-                             std::to_string(windowPosition.y));
+        m_consoleLogger->log(__PRETTY_FUNCTION__, "Right released! Coordinates: x = " + std::to_string(windowPosition.x) + ", y = " + std::to_string(windowPosition.y));
     }
     else if (button == sf::Mouse::Left && isPressed && m_bBPressed) {
-        m_consoleLogger->log(__PRETTY_FUNCTION__,
-                             "Left pressed! Coordinates: x = " + std::to_string(windowPosition.x) + ", y = " +
-                             std::to_string(windowPosition.y));
+        m_consoleLogger->log(__PRETTY_FUNCTION__, "Left pressed! Coordinates: x = " + std::to_string(windowPosition.x) + ", y = " + std::to_string(windowPosition.y));
 
         if (m_BuildingChoosen != Buildings::BuildID::nothing) {
             createBuilding(m_BuildingChoosen, worldPosition);
@@ -537,15 +560,11 @@ void Game::handlePlayerMouseEvent(sf::Mouse::Button button, bool isPressed) {
         }
     }
     else if (button == sf::Mouse::Left && isPressed) {
-        m_consoleLogger->log(__PRETTY_FUNCTION__,
-                             "Left pressed! Coordinates: x = " + std::to_string(windowPosition.x) + ", y = " +
-                             std::to_string(windowPosition.y));
+        m_consoleLogger->log(__PRETTY_FUNCTION__, "Left pressed! Coordinates: x = " + std::to_string(windowPosition.x) + ", y = " + std::to_string(windowPosition.y));
         selectObjectOnMap();
     }
     else if (button == sf::Mouse::Left && !isPressed) {
-        m_consoleLogger->log(__PRETTY_FUNCTION__,
-                             "Left released! Coordinates: x = " + std::to_string(windowPosition.x) + ", y = " +
-                             std::to_string(windowPosition.y));
+        m_consoleLogger->log(__PRETTY_FUNCTION__, "Left released! Coordinates: x = " + std::to_string(windowPosition.x) + ", y = " + std::to_string(windowPosition.y));
     }
 
     m_fileLogger->log(__PRETTY_FUNCTION__, "END");

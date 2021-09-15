@@ -52,9 +52,12 @@ private:
 
     void createCharacter(Factory::CharID id, sf::Vector2f position);
     static void placeCharacter(Factory::CharID id, sf::Vector2f& position);
+    void destroyCharacter();
+    void explodeCharacter(sf::Vector2f position);
 
     static void setBuildingToGrid(Buildings::BuildID id, sf::Vector2f& position);
     void showTemplateOfBuilding();
+
     void createBuilding(Buildings::BuildID id, sf::Vector2f position);
     void destroyBuilding();
     void explodeBuilding(sf::Vector2f position);
