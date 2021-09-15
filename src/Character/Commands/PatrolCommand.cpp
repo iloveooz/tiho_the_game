@@ -6,6 +6,6 @@ namespace Commands {
     }
 
     void PatrolCommand::execute(std::unique_ptr<Entity>& character, sf::Vector2f position) {
-
+        character->doPatrol(position);
     }
 }

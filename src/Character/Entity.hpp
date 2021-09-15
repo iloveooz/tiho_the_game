@@ -46,10 +46,13 @@ public:
 
     virtual void doGo(sf::Vector2f& position);
     virtual void doStop(sf::Vector2f& position);
+    virtual void doPatrol(sf::Vector2f& position);
 
 protected:
+    void setAngle();
     // координаты фигуры
     sf::Vector2f m_position;
+    sf::Vector2f m_beginPosition;
     sf::Vector2f m_targetPosition;
 
     // смещение
@@ -70,7 +73,11 @@ protected:
 
     // выбран ли объект
     bool m_bSelected;
+
+
+    // TODO - заменить на enum class
     bool m_bIsMoving;
+    bool m_bIsPatrolling;
 
     // наименование элемента
     std::string m_sName;

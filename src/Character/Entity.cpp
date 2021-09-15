@@ -8,12 +8,10 @@ void Entity::settings(Animations::Animation &animation, double x, double y, doub
     m_dAngle = angle;
     m_aAnimation = animation;
     m_bIsMoving = false;
+    m_bIsPatrolling = false;
 }
 
-void Entity::doGo(sf::Vector2f& position) {
-    m_targetPosition = position;
-    m_bIsMoving = true;
-
+void Entity::setAngle() {
     double a = m_position.x - m_targetPosition.x;
     double b = m_position.y - m_targetPosition.y;
 
@@ -22,24 +20,60 @@ void Entity::doGo(sf::Vector2f& position) {
     m_aAnimation.getSprite().setRotation(m_dAngle);
 }
 
+void Entity::doGo(sf::Vector2f& position) {
+    m_targetPosition = position;
+
+    m_bIsMoving = true;
+    m_bIsPatrolling = false;
+
+    setAngle();
+}
+
+void Entity::doPatrol(sf::Vector2f& position) {
+    m_targetPosition = position;
+    m_beginPosition = m_position;
+
+    m_bIsPatrolling = true;
+    m_bIsMoving = false;
+
+    setAngle();
+}
+
 void Entity::doStop(sf::Vector2f& position) {
     m_bIsMoving = false;
+    m_bIsPatrolling = false;
 }
 
 void Entity::update() {
     if (m_bIsMoving) {
-
         m_dDx = cos((angleAdjust + m_dAngle) * PI / 180) * m_dSpeed;
         m_dDy = sin((angleAdjust + m_dAngle) * PI / 180) * m_dSpeed;
 
         m_position.x += m_dDx;
         m_position.y += m_dDy;
+
+        double distance = sqrt(pow((m_targetPosition.x - m_position.x), 2) + pow((m_targetPosition.y - m_position.y), 2));
+
+        if (distance < m_dRadius) {
+            m_bIsMoving = false;
+            m_bIsPatrolling = false;
+        }
     }
 
-    double distance = sqrt(pow((m_targetPosition.x - m_position.x), 2) + pow((m_targetPosition.y - m_position.y), 2));
+    if (m_bIsPatrolling) {
+        m_dDx = cos((angleAdjust + m_dAngle) * PI / 180) * m_dSpeed;
+        m_dDy = sin((angleAdjust + m_dAngle) * PI / 180) * m_dSpeed;
 
-    if (distance < m_dRadius)
-        m_bIsMoving = false;
+        m_position.x += m_dDx;
+        m_position.y += m_dDy;
+
+        double distance = sqrt(pow((m_targetPosition.x - m_position.x), 2) + pow((m_targetPosition.y - m_position.y), 2));
+
+        if (distance < m_dRadius) {
+            std::swap(m_beginPosition, m_targetPosition);
+            setAngle();
+        }
+    }
 }
 
 void Entity::draw(sf::RenderWindow &app) {
@@ -86,7 +120,7 @@ bool Entity::isSelected() const {
 }
 
 bool Entity::isMoving() const {
-    return m_bIsMoving;
+    return m_bIsMoving || m_bIsPatrolling;
 }
 
 ControlGame::Cursor& Entity::getCursor() {

@@ -470,6 +470,9 @@ void Game::handlePlayerKeyboardEvent(sf::Keyboard::Key key, bool isPressed) {
     if (key == sf::Keyboard::R && isPressed)
         m_ePressedProperty = eKeyPressed::RPressed;
 
+    if (key == sf::Keyboard::P && isPressed)
+        m_ePressedProperty = eKeyPressed::PPressed;
+
     if (key == sf::Keyboard::D && isPressed && m_bDPressed)
         m_bDDPressed = true;
 
@@ -523,7 +526,8 @@ void Game::handlePlayerKeyboardEvent(sf::Keyboard::Key key, bool isPressed) {
             }
         }
 
-        m_ePressedProperty = eKeyPressed::empty;
+        if (m_ePressedProperty != eKeyPressed::PPressed)
+            m_ePressedProperty = eKeyPressed::empty;
     }
 
     if (key == sf::Keyboard::Q)
@@ -542,14 +546,23 @@ void Game::handlePlayerMouseEvent(sf::Mouse::Button button, bool isPressed) {
         m_consoleLogger->log(__PRETTY_FUNCTION__, "Right pressed! Coordinates: x = " + std::to_string(windowPosition.x) + ", y = " + std::to_string(windowPosition.y));
 
         for (auto& character : m_characters) {
-            if (character->isSelected()) {
+            if (character->isSelected() && m_ePressedProperty != eKeyPressed::PPressed) {
+                m_consoleLogger->log(__PRETTY_FUNCTION__, "Go command");
                 m_comManager.handleCommand(Commands::UnitAction::Go, character, worldPosition);
+            }
+
+            if (character->isSelected() && m_ePressedProperty == eKeyPressed::PPressed) {
+                m_consoleLogger->log(__PRETTY_FUNCTION__, "Patrol command");
+                m_comManager.handleCommand(Commands::UnitAction::Patrol, character, worldPosition);
+                m_ePressedProperty = eKeyPressed::empty;
             }
         }
     }
+
     else if (button == sf::Mouse::Right && !isPressed) {
         m_consoleLogger->log(__PRETTY_FUNCTION__, "Right released! Coordinates: x = " + std::to_string(windowPosition.x) + ", y = " + std::to_string(windowPosition.y));
     }
+
     else if (button == sf::Mouse::Left && isPressed && m_bBPressed) {
         m_consoleLogger->log(__PRETTY_FUNCTION__, "Left pressed! Coordinates: x = " + std::to_string(windowPosition.x) + ", y = " + std::to_string(windowPosition.y));
 
@@ -559,10 +572,12 @@ void Game::handlePlayerMouseEvent(sf::Mouse::Button button, bool isPressed) {
             m_BuildingChoosen = Buildings::BuildID::nothing;
         }
     }
+
     else if (button == sf::Mouse::Left && isPressed) {
         m_consoleLogger->log(__PRETTY_FUNCTION__, "Left pressed! Coordinates: x = " + std::to_string(windowPosition.x) + ", y = " + std::to_string(windowPosition.y));
         selectObjectOnMap();
     }
+
     else if (button == sf::Mouse::Left && !isPressed) {
         m_consoleLogger->log(__PRETTY_FUNCTION__, "Left released! Coordinates: x = " + std::to_string(windowPosition.x) + ", y = " + std::to_string(windowPosition.y));
     }
