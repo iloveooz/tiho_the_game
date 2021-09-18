@@ -417,6 +417,8 @@ void Game::handlePlayerKeyboardEvent(sf::Keyboard::Key key, bool isPressed) {
     sf::Vector2i windowPosition = sf::Mouse::getPosition(m_window);
     sf::Vector2f worldPosition = m_window.mapPixelToCoords(windowPosition);
 
+    sf::Vector2f mainBasePosition;
+
     if (key == sf::Keyboard::Escape) {
         m_bBPressed = false;
 
@@ -449,6 +451,7 @@ void Game::handlePlayerKeyboardEvent(sf::Keyboard::Key key, bool isPressed) {
         m_bBPressed = true;
 
     if (m_bDDPressed) {
+        m_consoleLogger->log(__PRETTY_FUNCTION__, "Destroy command");
         destroyBuilding();
         destroyCharacter();
         m_bDPressed = false;
@@ -472,6 +475,10 @@ void Game::handlePlayerKeyboardEvent(sf::Keyboard::Key key, bool isPressed) {
 
     if (key == sf::Keyboard::P && isPressed)
         m_ePressedProperty = eKeyPressed::PPressed;
+
+    if (key == sf::Keyboard::H && isPressed)
+        m_ePressedProperty = eKeyPressed::HPressed;
+
 
     if (key == sf::Keyboard::D && isPressed && m_bDPressed)
         m_bDDPressed = true;
@@ -502,8 +509,12 @@ void Game::handlePlayerKeyboardEvent(sf::Keyboard::Key key, bool isPressed) {
 
     if (m_ePressedProperty != eKeyPressed::empty && isPressed) {
         for (auto& building : m_buildings) {
-            if (building->getName() == "main" && building->isSelected() && m_ePressedProperty == eKeyPressed::WPressed)
-                createCharacter(Factory::CharID::work, building->getPosition());
+            if (building->getName() == "main")
+                mainBasePosition = building->getPosition();
+
+            if (building->getName() == "main" && building->isSelected() && m_ePressedProperty == eKeyPressed::WPressed) {
+                createCharacter(Factory::CharID::work, mainBasePosition);
+            }
 
             if (building->getName() == "factory" && building->isSelected()) {
                 if (m_ePressedProperty == eKeyPressed::CPressed)
@@ -522,7 +533,13 @@ void Game::handlePlayerKeyboardEvent(sf::Keyboard::Key key, bool isPressed) {
 
         for (auto& character : m_characters) {
             if (character->isSelected() && character->getName() != "nuclearrocket" && m_ePressedProperty == eKeyPressed::SPressed) {
+                m_consoleLogger->log(__PRETTY_FUNCTION__, "Stop command");
                 m_comManager.handleCommand(Commands::UnitAction::Stop, character, worldPosition);
+            }
+
+            if (character->isSelected() && character->getName() != "nuclearrocket" && m_ePressedProperty == eKeyPressed::HPressed) {
+                m_consoleLogger->log(__PRETTY_FUNCTION__, "Hold command");
+                m_comManager.handleCommand(Commands::UnitAction::Hold, character, mainBasePosition);
             }
         }
 

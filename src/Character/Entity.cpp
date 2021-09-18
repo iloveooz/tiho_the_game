@@ -14,7 +14,7 @@ void Entity::setAngle() {
     double a = m_position.x - m_targetPosition.x;
     double b = m_position.y - m_targetPosition.y;
 
-    m_dAngle = angleAdjust + ((atan2(b, a)) * 180) / PI;
+    m_dAngle = ((m_eMovingType == eMovingType::HOLDING) ? -angleAdjust : angleAdjust) + ((atan2(b, a)) * 180) / PI;
 
     m_aAnimation.getSprite().setRotation(m_dAngle);
 }
@@ -30,6 +30,15 @@ void Entity::doPatrol(sf::Vector2f& position) {
     m_beginPosition = m_position;
     m_eMovingType = eMovingType::PATROLLING;
     setAngle();
+}
+
+void Entity::doHold(sf::Vector2f& position) {
+    m_eMovingType = eMovingType::HOLDING;
+
+    if (position.x != 0 && position.y != 0) {
+        m_targetPosition = position;
+        setAngle();
+    }
 }
 
 void Entity::doStop(sf::Vector2f& position) {
@@ -64,6 +73,10 @@ void Entity::update() {
             std::swap(m_beginPosition, m_targetPosition);
             setAngle();
         }
+    }
+
+    if (m_eMovingType == eMovingType::HOLDING) {
+        m_eMovingType = eMovingType::NO_MOVE;
     }
 }
 

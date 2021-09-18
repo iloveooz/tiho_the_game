@@ -47,6 +47,7 @@ public:
     virtual void doGo(sf::Vector2f& position);
     virtual void doStop(sf::Vector2f& position);
     virtual void doPatrol(sf::Vector2f& position);
+    virtual void doHold(sf::Vector2f& position);
 
 protected:
     void setAngle();
@@ -77,7 +78,8 @@ protected:
     enum class eMovingType {
         NO_MOVE,
         MOVING,
-        PATROLLING
+        PATROLLING,
+        HOLDING
     } m_eMovingType;
 
     // наименование элемента
