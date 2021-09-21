@@ -8,6 +8,7 @@ Tank::Tank() {
     m_dRadius = 4;
 
     m_iHealth = 180;
+    m_iMaxHealth = 180;
     m_sName = "tank";
 }
 

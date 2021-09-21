@@ -8,6 +8,7 @@ Worker::Worker() {
     m_dRadius = 4;
 
     m_iHealth = 60;
+    m_iMaxHealth = 60;
     m_sName = "worker";
 }
 

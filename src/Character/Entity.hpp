@@ -70,6 +70,7 @@ protected:
 
     // здоровье
     int m_iHealth;
+    int m_iMaxHealth;
     bool m_bAlive;
 
     // выбран ли объект
@@ -89,6 +90,7 @@ protected:
     Animations::Animation m_aAnimation;
 
     ControlGame::Cursor m_cursor;
+    sf::RectangleShape m_healthBar;
 
 private:
     std::unique_ptr<World::Map> m_pMap;

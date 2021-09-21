@@ -8,6 +8,11 @@ void Entity::settings(Animations::Animation &animation, double x, double y, doub
     m_dAngle = angle;
     m_aAnimation = animation;
     m_eMovingType = eMovingType::NO_MOVE;
+
+    if (m_sName != "explosion") {
+        m_healthBar.setSize(sf::Vector2f(100.f, 4.f));
+        m_healthBar.setFillColor(sf::Color::Red);
+    }
 }
 
 void Entity::setAngle() {
@@ -78,13 +83,22 @@ void Entity::update() {
     if (m_eMovingType == eMovingType::HOLDING) {
         m_eMovingType = eMovingType::NO_MOVE;
     }
+
+    if (m_sName != "explosion")
+        m_healthBar.setSize(sf::Vector2f((m_iHealth * 100 / m_iMaxHealth), 4.f));
 }
 
 void Entity::draw(sf::RenderWindow &app) {
     m_aAnimation.getSprite().setPosition((float) m_position.x, (float) m_position.y);
     m_aAnimation.getSprite().setRotation(m_dAngle);
     m_aAnimation.getSprite().setColor(sf::Color(0,128,128));
+
+    m_healthBar.setPosition(m_position.x - 50, m_position.y + 56);
+
     app.draw(m_aAnimation.getSprite());
+
+    if (m_bAlive)
+        app.draw(m_healthBar);
 }
 
 void Entity::setName(const std::string& name) {
@@ -100,6 +114,7 @@ bool Entity::isAlive() const {
 }
 
 void Entity::setDead() {
+    m_iHealth = 0;
     m_bAlive = false;
 }
 
