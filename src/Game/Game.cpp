@@ -194,7 +194,7 @@ void Game::destroyBuilding() {
     m_fileLogger->log(__PRETTY_FUNCTION__, "END");
 }
 
-void Game::explodeBuilding(sf::Vector2f position) {
+void Game::explodeBuilding(sf::Vector2f& position) {
     m_fileLogger->log(__PRETTY_FUNCTION__, "BEGIN");
 
     std::unique_ptr<Entity> explode = std::make_unique<Explosion>();
@@ -323,8 +323,6 @@ void Game::updateViewOfMap() {
 
     if (zf != 1.0)
         m_camera.zoom(zf);
-
-    // if (!object->isAlive()) m_characters.remove(object);
 }
 
 void Game::renderObjects() {
@@ -342,6 +340,7 @@ void Game::renderObjects() {
                 object->setDead();
             }
         }
+
         if (object->isMoving()) {
             // TODO - сделать по-человечески, выглядит стрёмно
             object->getCursor().setSprite(object->getSprite());

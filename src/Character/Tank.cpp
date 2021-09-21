@@ -7,6 +7,7 @@ Tank::Tank() {
     m_dSpeed = 1;
     m_dRadius = 4;
 
+    m_iHealth = 180;
     m_sName = "tank";
 }
 

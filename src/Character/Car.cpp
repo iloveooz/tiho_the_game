@@ -7,6 +7,7 @@ Car::Car() {
     m_dSpeed = 3;
     m_dRadius = 4;
 
+    m_iHealth = 100;
     m_sName = "car";
 }
 

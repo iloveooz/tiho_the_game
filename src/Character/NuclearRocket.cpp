@@ -7,6 +7,7 @@ NuclearRocket::NuclearRocket() {
     m_dSpeed = 10;
     m_dRadius = 20;
 
+    m_iHealth = 10;
     m_sName = "nuclearrocket";
 }
 

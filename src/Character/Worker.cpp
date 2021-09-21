@@ -7,6 +7,7 @@ Worker::Worker() {
     m_dSpeed = 2;
     m_dRadius = 4;
 
+    m_iHealth = 60;
     m_sName = "worker";
 }
 

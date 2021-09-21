@@ -7,6 +7,7 @@ SpitFire::SpitFire() {
     m_dSpeed = 2;
     m_dRadius = 4;
 
+    m_iHealth = 200;
     m_sName = "spitfire";
 }
 

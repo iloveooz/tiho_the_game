@@ -60,7 +60,7 @@ private:
 
     void createBuilding(Buildings::BuildID id, sf::Vector2f position);
     void destroyBuilding();
-    void explodeBuilding(sf::Vector2f position);
+    void explodeBuilding(sf::Vector2f& position);
 
     void selectObjectOnMap();
 
