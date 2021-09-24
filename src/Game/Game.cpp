@@ -359,6 +359,7 @@ void Game::renderObjects() {
 
     // отображение зданий
     for (auto const &object : m_buildings) {
+        object->update();
         object->draw(m_window);
 
         // отображение курсора

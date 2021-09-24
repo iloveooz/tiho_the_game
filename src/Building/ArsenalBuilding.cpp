@@ -3,6 +3,8 @@
 namespace Buildings {
     ArsenalBuilding::ArsenalBuilding() {
         m_iHealth = 600;
+        m_iMaxHealth = 600;
+
         m_sName = "arsenal";
     }
 

@@ -34,7 +34,7 @@ namespace Buildings {
         static std::unique_ptr<Building> createBuilding(BuildID);
 
         void settings(Animations::BuildingAnimation &animation, double x, double y, double angle = 0);
-        virtual void update(double dx, double dy);
+        virtual void update();
         void draw(sf::RenderWindow &app);
 
         std::string& getName();
@@ -62,6 +62,7 @@ namespace Buildings {
 
         // здоровье
         int m_iHealth;
+        int m_iMaxHealth;
         bool m_bAlive;
 
         // выбран ли объект
@@ -74,6 +75,7 @@ namespace Buildings {
         Animations::BuildingAnimation m_aAnimation;
 
         ControlGame::Cursor m_cursor;
+        sf::RectangleShape m_healthBar;
     };
 }
 #endif //TIHO_BUILDING_HPP
