@@ -73,7 +73,7 @@ private:
 
     void processEvents();
 
-    void checkAliveEntities();
+    void checkAliveObjects();
 
     void handlePlayerKeyboardEvent(sf::Keyboard::Key key, bool isPressed);
     void handlePlayerMouseEvent(sf::Mouse::Button button, bool isPressed);

@@ -70,6 +70,11 @@ namespace Buildings {
         return m_bAlive;
     }
 
+    void Building::setDead() {
+        m_iHealth = 0;
+        m_bAlive = false;
+    }
+
     void Building::setSelected(bool value) {
         m_bSelected = value;
     }

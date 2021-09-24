@@ -97,7 +97,7 @@ void Game::run() {
         processEvents();
         updateViewOfMap();
         renderObjects();
-        checkAliveEntities();
+        checkAliveObjects();
     }
 
     m_fileLogger->log(__PRETTY_FUNCTION__, "END");
@@ -179,13 +179,11 @@ void Game::createBuilding(Buildings::BuildID id, sf::Vector2f position) {
 void Game::destroyBuilding() {
     m_fileLogger->log(__PRETTY_FUNCTION__, "BEGIN");
 
-    for (unsigned int i = 0; i < m_buildings.size(); i++) {
-        if (m_buildings[i]->isSelected()) {
-
-            sf::Vector2f position = m_buildings[i]->getSprite().getPosition();
-            m_buildings[i]->getCursor().setVisible(false);
-            m_buildings.erase(m_buildings.begin() + i--);
-
+    for (auto& building : m_buildings) {
+        if (building->isSelected()) {
+            sf::Vector2f position = building->getSprite().getPosition();
+            building->getCursor().setVisible(false);
+            building->setDead();
             m_consoleLogger->log(__PRETTY_FUNCTION__, "DESTROY!");
             explodeBuilding(position);
         }
@@ -376,10 +374,16 @@ void Game::renderObjects() {
     m_window.display();
 }
 
-void Game::checkAliveEntities() {
+void Game::checkAliveObjects() {
     for (unsigned int i = 0; i < m_characters.size(); i++) {
         if (!m_characters[i]->isAlive()) {
             m_characters.erase(m_characters.begin() + i--);
+        }
+    }
+
+    for (unsigned int i = 0; i < m_buildings.size(); i++) {
+        if (!m_buildings[i]->isAlive()) {
+            m_buildings.erase(m_buildings.begin() + i--);
         }
     }
 }

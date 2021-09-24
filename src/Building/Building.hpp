@@ -45,6 +45,7 @@ namespace Buildings {
         sf::Vector2f& getPosition();
 
         bool isAlive() const;
+        void setDead();
 
         void setSelected(bool value);
         bool isSelected() const;
