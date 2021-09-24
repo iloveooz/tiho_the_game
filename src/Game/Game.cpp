@@ -140,7 +140,7 @@ void Game::destroyCharacter() {
     m_fileLogger->log(__PRETTY_FUNCTION__, "BEGIN");
 
     for (auto& character : m_characters) {
-        if (character->isSelected()) {
+        if (character->isSelected() && character->getName() != "explosion") {
             sf::Vector2f position = character->getSprite().getPosition();
             character->getCursor().setVisible(false);
             character->setDead();
