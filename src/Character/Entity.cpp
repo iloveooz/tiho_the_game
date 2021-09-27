@@ -11,7 +11,7 @@ void Entity::settings(Animations::Animation &animation, double x, double y, doub
 
     if (m_sName != "explosion") {
         m_healthBar.setSize(sf::Vector2f(100.f, 4.f));
-        m_healthBar.setFillColor(sf::Color::Red);
+        m_healthBar.setFillColor(sf::Color(255, 0, 0, 192));
     }
 }
 

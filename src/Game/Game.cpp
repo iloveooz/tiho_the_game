@@ -168,6 +168,12 @@ void Game::createBuilding(Buildings::BuildID id, sf::Vector2f position) {
 
     setBuildingToGrid(id, position);
 
+    for (auto& building : m_buildings) {
+        if (building->getSprite().getGlobalBounds().contains(position)) {
+            return;
+        }
+    }
+
     std::unique_ptr<Buildings::Building> building = Buildings::Building::createBuilding(id);
     building->settings(m_BuildAnimap.find(id)->second, position.x, position.y, 0);
     building->getCursor().setVisible(false);
@@ -270,6 +276,15 @@ void Game::showTemplateOfBuilding() {
         m_fakeBuilding = m_BuildAnimap.find(m_BuildingChoosen)->second.getSprite();
         setBuildingToGrid(m_BuildingChoosen, worldPosition);
         m_fakeBuilding.setColor(sf::Color(0, 0, 0, 96));
+
+        for (auto &building: m_buildings) {
+            if (building->getSprite().getGlobalBounds().contains(worldPosition)) {
+                m_fakeBuilding.setColor(sf::Color(255, 0, 0, 96));
+            }
+            if (m_fakeBuilding.getGlobalBounds().intersects(building->getSprite().getGlobalBounds())) {
+                m_fakeBuilding.setColor(sf::Color(255, 0, 0, 96));
+            }
+        }
         m_fakeBuilding.move(worldPosition);
     }
 }
