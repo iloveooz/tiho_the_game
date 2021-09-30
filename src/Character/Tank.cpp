@@ -9,6 +9,8 @@ Tank::Tank() {
 
     m_iHealth = 180;
     m_iMaxHealth = 180;
+
+    m_eRadiusType = Entity::eRadiusType::far;
     m_sName = "tank";
 }
 

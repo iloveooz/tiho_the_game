@@ -9,6 +9,8 @@ Worker::Worker() {
 
     m_iHealth = 60;
     m_iMaxHealth = 60;
+
+    m_eRadiusType = Entity::eRadiusType::close;
     m_sName = "worker";
 }
 

@@ -9,6 +9,8 @@ NuclearRocket::NuclearRocket() {
 
     m_iHealth = 10;
     m_iMaxHealth = 10;
+
+    m_eRadiusType = Entity::eRadiusType::anyplace;
     m_sName = "nuclearrocket";
 }
 

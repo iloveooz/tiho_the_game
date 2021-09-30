@@ -9,6 +9,8 @@ Car::Car() {
 
     m_iHealth = 100;
     m_iMaxHealth = 100;
+
+    m_eRadiusType = Entity::eRadiusType::small;
     m_sName = "car";
 }
 

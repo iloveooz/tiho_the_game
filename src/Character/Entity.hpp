@@ -83,6 +83,17 @@ protected:
         HOLDING
     } m_eMovingType;
 
+    enum class eRadiusType {
+        empty,
+        close,
+        small,
+        middle,
+        far,
+        huge, // для ракетниц
+        anyplace,
+        count
+    } m_eRadiusType;
+
     // наименование элемента
     std::string m_sName;
 

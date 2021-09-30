@@ -9,6 +9,8 @@ SpitFire::SpitFire() {
 
     m_iHealth = 200;
     m_iMaxHealth = 200;
+
+    m_eRadiusType = Entity::eRadiusType::middle;
     m_sName = "spitfire";
 }
 
