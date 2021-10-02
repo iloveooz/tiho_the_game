@@ -84,15 +84,21 @@ protected:
     } m_eMovingType;
 
     enum class eRadiusType {
-        empty,
-        close,
-        small,
-        middle,
-        far,
-        huge, // для ракетниц
-        anyplace,
-        count
+        empty,      // = 0, неатакующий юнит
+        close,      // = 1, рабочий
+        small,      // = 2, машинка
+        middle,     // = 3, пожарка
+        far,        // = 5, танк
+        huge,       // = 9, ракетница
+        anyplace,   // = no, ядерная ракета
+        count       // all
     } m_eRadiusType;
+
+    enum class eRelationType {
+        MINE,
+        ALLY,
+        ENEMY
+    };
 
     // наименование элемента
     std::string m_sName;
