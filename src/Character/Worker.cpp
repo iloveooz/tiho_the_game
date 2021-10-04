@@ -5,7 +5,7 @@ Worker::Worker() {
     m_dDy = 0.0;
 
     m_dSpeed = 2;
-    m_dRadius = 4;
+    m_dRadius = 16;
 
     m_iHealth = 60;
     m_iMaxHealth = 60;

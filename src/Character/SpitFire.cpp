@@ -5,7 +5,7 @@ SpitFire::SpitFire() {
     m_dDy = 0.0;
 
     m_dSpeed = 2;
-    m_dRadius = 4;
+    m_dRadius = 16;
 
     m_iHealth = 200;
     m_iMaxHealth = 200;

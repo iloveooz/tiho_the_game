@@ -5,7 +5,7 @@ Car::Car() {
     m_dDy = 1.0;
 
     m_dSpeed = 3;
-    m_dRadius = 4;
+    m_dRadius = 16;
 
     m_iHealth = 100;
     m_iMaxHealth = 100;

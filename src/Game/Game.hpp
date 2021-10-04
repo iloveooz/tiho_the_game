@@ -54,6 +54,7 @@ private:
     static void placeCharacter(Factory::CharID id, sf::Vector2f& position);
     void destroyCharacter();
     void explodeCharacter(sf::Vector2f position);
+    void checkUnitPosition();
 
     static void setBuildingToGrid(Buildings::BuildID id, sf::Vector2f& position);
     void showTemplateOfBuilding();

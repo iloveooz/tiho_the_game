@@ -5,7 +5,7 @@ NuclearRocket::NuclearRocket() {
     m_dDy = 0.0;
 
     m_dSpeed = 10;
-    m_dRadius = 20;
+    m_dRadius = 32;
 
     m_iHealth = 10;
     m_iMaxHealth = 10;

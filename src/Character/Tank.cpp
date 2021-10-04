@@ -5,7 +5,7 @@ Tank::Tank() {
     m_dDy = 0.0;
 
     m_dSpeed = 1;
-    m_dRadius = 4;
+    m_dRadius = 16;
 
     m_iHealth = 180;
     m_iMaxHealth = 180;

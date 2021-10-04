@@ -365,6 +365,8 @@ void Game::renderObjects() {
         if (object->getCursor().getVisible())
             object->getCursor().update();
 
+        checkUnitPosition();
+
         object->getCursor().draw(m_window);
 
         object->draw(m_window);
@@ -387,6 +389,24 @@ void Game::renderObjects() {
     }
 
     m_window.display();
+}
+
+void Game::checkUnitPosition() {
+    for (unsigned int i = 0; i < m_characters.size(); i++) {
+        for (unsigned int j = 0; j < m_characters.size(); j++) {
+            if (m_characters[i]->getName() != "nuclearrocket" && m_characters[j]->getName() != "nuclearrocket") {
+                long dx = m_characters[i]->getPosition().x - m_characters[j]->getPosition().x;
+                long dy = m_characters[i]->getPosition().y - m_characters[j]->getPosition().y;
+
+                if (dx * dx + dy * dy < 4 * 64 * 64) {
+                    m_characters[i]->getPosition().x += dx / 128.0;
+                    m_characters[i]->getPosition().x += dy / 128.0;
+                    m_characters[j]->getPosition().x -= dx / 128.0;
+                    m_characters[j]->getPosition().y -= dy / 128.0;
+                }
+            }
+        }
+    }
 }
 
 void Game::checkAliveObjects() {

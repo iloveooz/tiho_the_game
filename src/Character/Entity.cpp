@@ -62,6 +62,7 @@ void Entity::doStop(sf::Vector2f& position) {
 
 void Entity::update() {
     if (m_eMovingType == eMovingType::MOVING) {
+        setAngle();
         m_dDx = cos((angleAdjust + m_dAngle) * PI / 180) * m_dSpeed;
         m_dDy = sin((angleAdjust + m_dAngle) * PI / 180) * m_dSpeed;
 
@@ -76,6 +77,7 @@ void Entity::update() {
     }
 
     if (m_eMovingType == eMovingType::PATROLLING) {
+        setAngle();
         m_dDx = cos((angleAdjust + m_dAngle) * PI / 180) * m_dSpeed;
         m_dDy = sin((angleAdjust + m_dAngle) * PI / 180) * m_dSpeed;
 
