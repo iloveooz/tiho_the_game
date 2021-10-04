@@ -498,6 +498,11 @@ void Game::handlePlayerKeyboardEvent(sf::Keyboard::Key key, bool isPressed) {
     if (key == sf::Keyboard::H && isPressed)
         m_ePressedProperty = eKeyPressed::HPressed;
 
+    if (key == sf::Keyboard::E && isPressed)
+        m_ePressedProperty = eKeyPressed::EPressed;
+
+    if (key == sf::Keyboard::A && isPressed)
+        m_ePressedProperty = eKeyPressed::APressed;
 
     if (key == sf::Keyboard::D && isPressed && m_bDPressed)
         m_bDDPressed = true;
@@ -559,6 +564,16 @@ void Game::handlePlayerKeyboardEvent(sf::Keyboard::Key key, bool isPressed) {
             if (character->isSelected() && character->getName() != "nuclearrocket" && m_ePressedProperty == eKeyPressed::HPressed) {
                 m_consoleLogger->log(__PRETTY_FUNCTION__, "Hold command");
                 m_comManager.handleCommand(Commands::UnitAction::Hold, character, mainBasePosition);
+            }
+
+            if (character->isSelected() && m_ePressedProperty == eKeyPressed::EPressed) {
+                m_consoleLogger->log(__PRETTY_FUNCTION__, "Make enemy!");
+                character->setRelation(eRelationType::ENEMY);
+            }
+
+            if (character->isSelected() && m_ePressedProperty == eKeyPressed::APressed) {
+                m_consoleLogger->log(__PRETTY_FUNCTION__, "Make ally!");
+                character->setRelation(eRelationType::ALLY);
             }
         }
 

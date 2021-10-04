@@ -17,6 +17,12 @@ const int Height = 640;  // высота главного окна
 const double PI = 3.14159265;
 const double angleAdjust = 270;
 
+enum class eRelationType {
+    MINE,
+    ALLY,
+    ENEMY
+};
+
 class Entity : public IObject {
 public:
     Entity();
@@ -38,6 +44,9 @@ public:
     void setSelected(bool value);
     bool isSelected() const;
 
+    void setRelation(eRelationType type);
+    eRelationType getRelation() const;
+
     bool isMoving() const;
 
     sf::Vector2f& getPosition();
@@ -51,6 +60,7 @@ public:
 
 protected:
     void setAngle();
+    void setColor();
     // координаты фигуры
     sf::Vector2f m_position;
     sf::Vector2f m_beginPosition;
@@ -94,11 +104,7 @@ protected:
         count       // all
     } m_eRadiusType;
 
-    enum class eRelationType {
-        MINE,
-        ALLY,
-        ENEMY
-    };
+    eRelationType m_eRelationType;
 
     // наименование элемента
     std::string m_sName;

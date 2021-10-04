@@ -8,6 +8,7 @@ void Entity::settings(Animations::Animation &animation, double x, double y, doub
     m_dAngle = angle;
     m_aAnimation = animation;
     m_eMovingType = eMovingType::NO_MOVE;
+    m_eRelationType = eRelationType::MINE;
 
     if (m_sName != "explosion") {
         m_healthBar.setSize(sf::Vector2f(100.f, 4.f));
@@ -22,6 +23,15 @@ void Entity::setAngle() {
     m_dAngle = ((m_eMovingType == eMovingType::HOLDING) ? -angleAdjust : angleAdjust) + ((atan2(b, a)) * 180) / PI;
 
     m_aAnimation.getSprite().setRotation(m_dAngle);
+}
+
+void Entity::setColor() {
+    if (m_eRelationType == eRelationType::ENEMY)
+        m_aAnimation.getSprite().setColor(sf::Color(255,0,0, 192));
+    else if (m_eRelationType == eRelationType::ALLY)
+        m_aAnimation.getSprite().setColor(sf::Color(0,0,255, 192));
+    else if (m_eRelationType == eRelationType::MINE)
+        m_aAnimation.getSprite().setColor(sf::Color(0,128,128));
 }
 
 void Entity::doGo(sf::Vector2f& position) {
@@ -91,7 +101,7 @@ void Entity::update() {
 void Entity::draw(sf::RenderWindow &app) {
     m_aAnimation.getSprite().setPosition((float) m_position.x, (float) m_position.y);
     m_aAnimation.getSprite().setRotation(m_dAngle);
-    m_aAnimation.getSprite().setColor(sf::Color(0,128,128));
+    setColor();
 
     m_healthBar.setPosition(m_position.x - 50, m_position.y + 56);
 
@@ -149,3 +159,10 @@ ControlGame::Cursor& Entity::getCursor() {
     return m_cursor;
 }
 
+void Entity::setRelation(eRelationType type) {
+    m_eRelationType = type;
+}
+
+eRelationType Entity::getRelation() const {
+    return m_eRelationType;
+}

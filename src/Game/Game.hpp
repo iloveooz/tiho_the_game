@@ -148,7 +148,9 @@ private:
         SPressed,
         RPressed,
         PPressed,
-        HPressed
+        HPressed,
+        EPressed,
+        APressed
     } m_ePressedProperty;
 
     bool m_bBPressed;
