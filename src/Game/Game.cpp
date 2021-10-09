@@ -392,17 +392,17 @@ void Game::renderObjects() {
 }
 
 void Game::checkUnitPosition() {
-    for (unsigned int i = 0; i < m_characters.size(); i++) {
-        for (unsigned int j = 0; j < m_characters.size(); j++) {
-            if (m_characters[i]->getName() != "nuclearrocket" && m_characters[j]->getName() != "nuclearrocket") {
-                long dx = m_characters[i]->getPosition().x - m_characters[j]->getPosition().x;
-                long dy = m_characters[i]->getPosition().y - m_characters[j]->getPosition().y;
+    for (auto& i : m_characters) {
+        for (auto& j : m_characters) {
+            if (i->getName() != "nuclearrocket" && j->getName() != "nuclearrocket") {
+                long dx = i->getPosition().x - j->getPosition().x;
+                long dy = i->getPosition().y - j->getPosition().y;
 
                 if (dx * dx + dy * dy < 4 * 64 * 64) {
-                    m_characters[i]->getPosition().x += dx / 128.0;
-                    m_characters[i]->getPosition().x += dy / 128.0;
-                    m_characters[j]->getPosition().x -= dx / 128.0;
-                    m_characters[j]->getPosition().y -= dy / 128.0;
+                    i->getPosition().x += dx / 128.0;
+                    i->getPosition().x += dy / 128.0;
+                    j->getPosition().x -= dx / 128.0;
+                    j->getPosition().y -= dy / 128.0;
                 }
             }
         }
