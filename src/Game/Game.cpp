@@ -2,7 +2,6 @@
 
 #include <memory>
 
-#include "../Character/Factory/CharacterFactory.hpp"
 #include "../Explosion/Explosion.hpp"
 
 Game::Game() :
@@ -113,9 +112,7 @@ void Game::prepareGame() {
 void Game::createCharacter(Factory::CharID id, sf::Vector2f position) {
     m_fileLogger->log(__PRETTY_FUNCTION__, "BEGIN");
 
-    Factory::CharacterFactory factory;
-
-    std::unique_ptr<Entity> character = factory.createEntity(id);
+    std::unique_ptr<Entity> character = m_factory.createEntity(id);
     placeCharacter(id, position);
     character->settings(m_CharAnimap.find(id)->second, position.x, position.y, 0);
     m_characters.push_back(std::move(character));

@@ -96,6 +96,8 @@ private:
 
     Textures::TextureHolder m_textureHolder;
 
+    Factory::CharacterFactory m_factory;
+
     std::map<Factory::CharID, Animations::CharacterAnimation> m_CharAnimap;
 
     Animations::CharacterAnimation m_animTank;
