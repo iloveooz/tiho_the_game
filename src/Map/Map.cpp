@@ -151,6 +151,10 @@ namespace World {
         target.draw(sf::Sprite(m_renderTexture.getTexture()), states);
     }
 
+    std::vector<CellType>& Map::getMazeData() {
+        return m_vMazeData;
+    }
+
     sf::Vector2i Map::getMapSize() const {
         return m_vMazeSize;
     }

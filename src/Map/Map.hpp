@@ -43,6 +43,7 @@ class Map : public IObject, public sf::Drawable {
 
         void loadLevel(const Textures::TextureHolder& textureHolder);
 
+        std::vector<CellType>& getMazeData();
         sf::Vector2i getMapSize() const;
 
     private:
