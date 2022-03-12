@@ -1,6 +1,6 @@
 #include "Entity.hpp"
 
-Entity::Entity() : m_bAlive(true), m_position(0.0, 0.0), m_dDx(0.0), m_dDy(0.0), m_dAngle(0.0), m_cursor(sf::Sprite()) {}
+Entity::Entity() : m_bAlive(true), m_position(0.0, 0.0), m_dDx(0.0), m_dDy(0.0), m_dAngle(0.0), m_cursor(sf::Sprite()), m_iDamage(0) {}
 
 void Entity::settings(Animations::Animation &animation, double x, double y, double angle) {
     m_position.x = x;
@@ -167,4 +167,16 @@ void Entity::setRelation(eRelationType type) {
 
 eRelationType Entity::getRelation() const {
     return m_eRelationType;
+}
+
+void Entity::setTarget(bool value) {
+    m_bIsTarget = value;
+}
+
+bool Entity::getTarget() const {
+    return m_bIsTarget;
+}
+
+int Entity::getDamage() const {
+    return m_iDamage;
 }

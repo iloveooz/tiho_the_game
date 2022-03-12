@@ -26,6 +26,13 @@ namespace Buildings {
         count
     };
 
+    enum class eRelationType {
+        NOTHING,
+        MINE,
+        ALLY,
+        ENEMY
+    };
+
     class Building : public IObject {
     public:
         Building();
@@ -47,8 +54,13 @@ namespace Buildings {
         bool isAlive() const;
         void setDead();
 
+        void setHealth(int value);
+
         void setSelected(bool value);
         bool isSelected() const;
+
+        void setRelation(eRelationType type);
+        eRelationType getRelation() const;
 
     protected:
         // координаты фигуры
@@ -77,6 +89,8 @@ namespace Buildings {
 
         ControlGame::Cursor m_cursor;
         sf::RectangleShape m_healthBar;
+
+        eRelationType m_eRelationType;
     };
 }
 #endif //TIHO_BUILDING_HPP

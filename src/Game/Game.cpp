@@ -96,6 +96,7 @@ void Game::run() {
         processEvents();
         updateViewOfMap();
         renderObjects();
+        checkCollisionShotsAndEntities();
         checkAliveObjects();
     }
 
@@ -366,13 +367,16 @@ void Game::renderObjects() {
 
         object->getCursor().draw(m_window);
 
-        object->draw(m_window);
+        // if (getVisible().intersects(object->getSprite().getGlobalBounds()))
+            object->draw(m_window);
     }
 
     // отображение зданий
     for (auto const &object : m_buildings) {
         object->update();
-        object->draw(m_window);
+
+        // if (getVisible().intersects(object->getSprite().getGlobalBounds()))
+            object->draw(m_window);
 
         // отображение курсора
         if (object->getCursor().getVisible())
@@ -388,10 +392,17 @@ void Game::renderObjects() {
     m_window.display();
 }
 
+sf::FloatRect Game::getVisible() {
+    sf::Vector2f center = m_window.getView().getCenter();
+    sf::Vector2f size = m_window.getView().getSize();
+    return sf::FloatRect(center.x - size.x / 2, center.y - size.y / 2, size.x, size.y);
+}
+
 void Game::checkUnitPosition() {
     for (auto& i : m_characters) {
         for (auto& j : m_characters) {
-            if (i->getName() != "nuclearrocket" && j->getName() != "nuclearrocket") {
+            if (i->getName() != "nuclearrocket" && j->getName() != "nuclearrocket" &&
+                i->getName() != "explosion" && j->getName() != "explosion") {
                 long dx = i->getPosition().x - j->getPosition().x;
                 long dy = i->getPosition().y - j->getPosition().y;
 
@@ -406,18 +417,56 @@ void Game::checkUnitPosition() {
     }
 }
 
+void Game::checkCollisionShotsAndEntities() {
+    for (auto& character : m_characters) {
+        if (character->getName() == "nuclearrocket") {
+            for (auto& building : m_buildings) {
+                if (building->getSprite().getGlobalBounds().contains(character->getPosition().x, character->getPosition().y)) {
+                    if (!character->isMoving() && building->getRelation() != Buildings::eRelationType::MINE)
+                        building->setHealth(character->getDamage());
+                }
+            }
+        }
+    }
+}
+
 void Game::checkAliveObjects() {
     for (unsigned int i = 0; i < m_characters.size(); i++) {
         if (!m_characters[i]->isAlive()) {
+            if (m_characters[i]->getName() == "nuclearrocket") {
+                explodeCharacter(m_characters[i]->getPosition());
+            }
             m_characters.erase(m_characters.begin() + i--);
         }
     }
 
     for (unsigned int i = 0; i < m_buildings.size(); i++) {
         if (!m_buildings[i]->isAlive()) {
+            explodeCharacter(m_buildings[i]->getPosition());
             m_buildings.erase(m_buildings.begin() + i--);
         }
     }
+}
+
+eRelationType Game::detectTypeEnemyUnit(sf::Vector2f& position) {
+    for (auto& character : m_characters) {
+        if (character->getSprite().getGlobalBounds().contains(position.x, position.y)) {
+            if (character->getRelation() == eRelationType::MINE) {
+                m_consoleLogger->log(__PRETTY_FUNCTION__, character->getName() + " = MINE!");
+                return eRelationType::MINE;
+            }
+            if (character->getRelation() == eRelationType::ENEMY) {
+                m_consoleLogger->log(__PRETTY_FUNCTION__, character->getName() + " = ENEMY!");
+                character->setTarget(true);
+                return eRelationType::ENEMY;
+            }
+            if (character->getRelation() == eRelationType::ALLY) {
+                m_consoleLogger->log(__PRETTY_FUNCTION__, character->getName() + " = ALLY!");
+                return eRelationType::ALLY;
+            }
+        }
+    }
+    return eRelationType::NOTHING;
 }
 
 void Game::processEvents() {
@@ -570,6 +619,11 @@ void Game::handlePlayerKeyboardEvent(sf::Keyboard::Key key, bool isPressed) {
                 if (m_ePressedProperty == eKeyPressed::RPressed)
                     createCharacter(Factory::CharID::nuke, building->getPosition());
             }
+
+            if (building->isSelected() && m_ePressedProperty == eKeyPressed::EPressed) {
+                m_consoleLogger->log(__PRETTY_FUNCTION__, "Make enemy!");
+                building->setRelation(Buildings::eRelationType::ENEMY);
+            }
         }
 
         for (auto& character : m_characters) {
@@ -612,17 +666,20 @@ void Game::handlePlayerMouseEvent(sf::Mouse::Button button, bool isPressed) {
 
     if (button == sf::Mouse::Right && isPressed) {
         m_consoleLogger->log(__PRETTY_FUNCTION__, "Right pressed! Coordinates: x = " + std::to_string(windowPosition.x) + ", y = " + std::to_string(windowPosition.y));
+        eRelationType unitType = detectTypeEnemyUnit(worldPosition);
 
         for (auto& character : m_characters) {
-            if (character->isSelected() && m_ePressedProperty != eKeyPressed::PPressed) {
-                m_consoleLogger->log(__PRETTY_FUNCTION__, "Go command");
-                m_comManager.handleCommand(Commands::UnitAction::Go, character, worldPosition);
-            }
+            if (unitType != eRelationType::ENEMY) {
+                if (character->isSelected() && m_ePressedProperty != eKeyPressed::PPressed) {
+                    m_consoleLogger->log(__PRETTY_FUNCTION__, "Go command");
+                    m_comManager.handleCommand(Commands::UnitAction::Go, character, worldPosition);
+                }
 
-            if (character->isSelected() && m_ePressedProperty == eKeyPressed::PPressed) {
-                m_consoleLogger->log(__PRETTY_FUNCTION__, "Patrol command");
-                m_comManager.handleCommand(Commands::UnitAction::Patrol, character, worldPosition);
-                m_ePressedProperty = eKeyPressed::empty;
+                if (character->isSelected() && m_ePressedProperty == eKeyPressed::PPressed) {
+                    m_consoleLogger->log(__PRETTY_FUNCTION__, "Patrol command");
+                    m_comManager.handleCommand(Commands::UnitAction::Patrol, character, worldPosition);
+                    m_ePressedProperty = eKeyPressed::empty;
+                }
             }
         }
     }

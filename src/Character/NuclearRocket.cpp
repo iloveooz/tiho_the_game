@@ -12,12 +12,22 @@ NuclearRocket::NuclearRocket() {
 
     m_eRadiusType = Entity::eRadiusType::anyplace;
     m_sName = "nuclearrocket";
+
+    m_isStarted = false;
+
+    m_iDamage = 500;
 }
 
 void NuclearRocket::update() {
     Entity::update();
+    if (m_eMovingType == eMovingType::NO_MOVE && m_isStarted) {
+        setDead();
+    }
 }
 
 void NuclearRocket::doGo(sf::Vector2f& position) {
-    Entity::doGo(position);
+    if (!m_isStarted) {
+        m_isStarted = true;
+        Entity::doGo(position);
+    }
 }

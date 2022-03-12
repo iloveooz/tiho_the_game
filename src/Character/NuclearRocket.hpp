@@ -10,6 +10,9 @@ public:
     void doGo(sf::Vector2f& position) override;
 
     void update() override;
+
+private:
+    bool m_isStarted;
 };
 
 #endif //TIHO_NUCLEARROCKET_HPP

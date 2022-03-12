@@ -18,6 +18,7 @@ const double PI = 3.14159265;
 const double angleAdjust = 270;
 
 enum class eRelationType {
+    NOTHING,
     MINE,
     ALLY,
     ENEMY
@@ -46,6 +47,11 @@ public:
 
     void setRelation(eRelationType type);
     eRelationType getRelation() const;
+
+    void setTarget(bool value);
+    bool getTarget() const;
+
+    int getDamage() const;
 
     bool isMoving() const;
 
@@ -85,6 +91,12 @@ protected:
 
     // выбран ли объект
     bool m_bSelected;
+
+    // цель для атаки
+    bool m_bIsTarget;
+
+    // наносимый урон
+    int m_iDamage;
 
     enum class eMovingType {
         NO_MOVE,

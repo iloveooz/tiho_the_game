@@ -13,6 +13,7 @@ namespace Buildings {
     Building::Building() : m_bAlive(true), m_position(0.0, 0.0), m_dDx(0.0), m_dDy(0.0), m_dAngle(0.0), m_cursor(sf::Sprite()) {
         m_healthBar.setSize(sf::Vector2f(100.f, 4.f));
         m_healthBar.setFillColor(sf::Color(255, 0, 0, 192));
+        m_eRelationType = eRelationType::MINE;
     }
 
     std::unique_ptr<Building> Building::createBuilding(BuildID id) {
@@ -75,6 +76,12 @@ namespace Buildings {
         m_bAlive = false;
     }
 
+    void Building::setHealth(int value) {
+        m_iHealth -= value;
+        if (m_iHealth <= 0)
+            setDead();
+    }
+
     void Building::setSelected(bool value) {
         m_bSelected = value;
     }
@@ -93,5 +100,13 @@ namespace Buildings {
 
     ControlGame::Cursor& Building::getCursor() {
         return m_cursor;
+    }
+
+    void Building::setRelation(eRelationType type) {
+        m_eRelationType = type;
+    }
+
+    eRelationType Building::getRelation() const {
+        return m_eRelationType;
     }
 }

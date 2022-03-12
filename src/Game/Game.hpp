@@ -71,16 +71,20 @@ private:
     void updateViewOfMap();
 
     void renderObjects();
+    sf::FloatRect getVisible();
 
     void processEvents();
 
     void checkAliveObjects();
+
+    void checkCollisionShotsAndEntities();
 
     void handlePlayerKeyboardEvent(sf::Keyboard::Key key, bool isPressed);
     void handlePlayerMouseEvent(sf::Mouse::Button button, bool isPressed);
     void handlePlayerMouseWheelEvent(sf::Event& event);
 
     void checkMousePosition();
+    eRelationType detectTypeEnemyUnit(sf::Vector2f& position);
 
     World::Map& getMap();
 
