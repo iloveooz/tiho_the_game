@@ -48,6 +48,15 @@ namespace Buildings {
         m_aAnimation = animation;
     }
 
+    void Building::setColor() {
+        if (m_eRelationType == eRelationType::ENEMY)
+            m_aAnimation.getSprite().setColor(sf::Color(255,0,0, 192));
+        else if (m_eRelationType == eRelationType::ALLY)
+            m_aAnimation.getSprite().setColor(sf::Color(0,0,255, 192));
+        else if (m_eRelationType == eRelationType::MINE)
+            m_aAnimation.getSprite().setColor(sf::Color(0,128,128));
+    }
+
     void Building::update() {
         if (m_sName != "explosion")
             m_healthBar.setSize(sf::Vector2f((m_iHealth * 100 / m_iMaxHealth), 4.f));
@@ -56,7 +65,7 @@ namespace Buildings {
     void Building::draw(sf::RenderWindow &app) {
         m_aAnimation.getSprite().setPosition((float) m_position.x, (float) m_position.y);
         m_aAnimation.getSprite().setRotation(m_dAngle);
-        m_aAnimation.getSprite().setColor(sf::Color(0,128,128));
+        setColor();
         app.draw(m_aAnimation.getSprite());
 
         m_healthBar.setPosition(m_position.x - 50, m_position.y + 50);

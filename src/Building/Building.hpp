@@ -63,6 +63,8 @@ namespace Buildings {
         eRelationType getRelation() const;
 
     protected:
+        void setColor();
+
         // координаты фигуры
         sf::Vector2f m_position;
 
