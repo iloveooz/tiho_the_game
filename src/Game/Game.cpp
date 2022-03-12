@@ -668,6 +668,14 @@ void Game::handlePlayerMouseEvent(sf::Mouse::Button button, bool isPressed) {
         m_consoleLogger->log(__PRETTY_FUNCTION__, "Right pressed! Coordinates: x = " + std::to_string(windowPosition.x) + ", y = " + std::to_string(windowPosition.y));
         eRelationType unitType = detectTypeEnemyUnit(worldPosition);
 
+        for (auto& building : m_buildings) {
+            if (building->getRelation() != Buildings::eRelationType::ENEMY) {
+                if (building->getSprite().getGlobalBounds().contains(worldPosition.x, worldPosition.y)) {
+                    return;
+                }
+            }
+        }
+
         for (auto& character : m_characters) {
             if (unitType != eRelationType::ENEMY) {
                 if (character->isSelected() && m_ePressedProperty != eKeyPressed::PPressed) {
