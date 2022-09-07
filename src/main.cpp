@@ -10,8 +10,9 @@ int main() {
 
     auto game = std::make_shared<Game>();
 
-    game->getConsoleLogger()->log(__PRETTY_FUNCTION__, "Run!");
+    game->getConsoleLogger()->log(__PRETTY_FUNCTION__, "Start!");
     game->run();
+    game->getConsoleLogger()->log(__PRETTY_FUNCTION__, "End!");
 
     return 0;
 }
