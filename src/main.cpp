@@ -4,6 +4,11 @@
 
 #include "Game/Game.hpp"
 
+/*
+ * TIHO planet, 2019 - 2023
+ *
+ */
+
 int main() {
 
     srand(time(nullptr));
