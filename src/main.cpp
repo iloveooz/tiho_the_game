@@ -1,6 +1,5 @@
 #include <ctime>
 #include <cmath>
-#include <iostream>
 
 #include "Game/Game.hpp"
 

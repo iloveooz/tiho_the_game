@@ -12,7 +12,7 @@
 #include "../Cursor/Cursor.hpp"
 
 const int Weight = 1920; // ширина главного окна
-const int Height = 640;  // высота главного окна
+const int Height = 1080;  // высота главного окна
 
 const double PI = 3.14159265;
 const double angleAdjust = 270;

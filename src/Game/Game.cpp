@@ -5,7 +5,7 @@
 #include "../Explosion/Explosion.hpp"
 
 Game::Game() :
-        m_window(sf::VideoMode(Weight, Height), "Tycho Planet" /*, sf::Style::Fullscreen*/ ),
+        m_window(sf::VideoMode(Weight, Height), "Tycho Planet" , sf::Style::Fullscreen ),
         m_consoleLogger(new ConsoleLogger()),
         m_fileLogger(new FileLogger("output.log")) {
 
