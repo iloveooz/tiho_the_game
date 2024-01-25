@@ -50,7 +50,7 @@ namespace World {
             }
         }
 
-        m_renderTexture.create(128 * m_vMazeSize.x, 128 * m_vMazeSize.y);
+        m_renderTexture.create(64 * m_vMazeSize.x, 64 * m_vMazeSize.y);
         m_renderTexture.clear(sf::Color::Black);
 
         m_sDesert.setTexture(textureHolder.get(Textures::ID::Desert));
@@ -66,37 +66,37 @@ namespace World {
             sf::Vector2i position = indexToPosition(i);
 
             if (isCellDesert(position)) {
-                m_sDesert.setPosition(128 * position.x, 128 * position.y);
+                m_sDesert.setPosition(64 * position.x, 64 * position.y);
                 m_renderTexture.draw(m_sDesert);
             }
 
             if (isCellMeadow(position)) {
-                m_sMeadow.setPosition(128 * position.x, 128 * position.y);
+                m_sMeadow.setPosition(64 * position.x, 64 * position.y);
                 m_renderTexture.draw(m_sMeadow);
             }
 
             if (isCellMountain(position)) {
-                m_sMountain.setPosition(128 * position.x, 128 * position.y);
+                m_sMountain.setPosition(64 * position.x, 64 * position.y);
                 m_renderTexture.draw(m_sMountain);
             }
 
             if (isCellWater(position)) {
-                m_sWater.setPosition(128 * position.x, 128 * position.y);
+                m_sWater.setPosition(64 * position.x, 64 * position.y);
                 m_renderTexture.draw(m_sWater);
             }
 
             if (isCellIronSpot(position)) {
-                m_sOilSpot.setPosition(128 * position.x, 128 * position.y);
+                m_sOilSpot.setPosition(64 * position.x, 64 * position.y);
                 m_renderTexture.draw(m_sOilSpot);
             }
 
             if (isCellOilSpot(position)) {
-                m_sIronSpot.setPosition(128 * position.x, 128 * position.y);
+                m_sIronSpot.setPosition(64 * position.x, 64 * position.y);
                 m_renderTexture.draw(m_sIronSpot);
             }
 
             if (isCellStartPoint(position)) {
-                m_sStartPoint.setPosition(32 * position.x, 32 * position.y);
+                m_sStartPoint.setPosition(64 * position.x, 64 * position.y);
                 m_renderTexture.draw(m_sStartPoint);
             }
         }

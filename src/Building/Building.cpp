@@ -11,7 +11,7 @@
 
 namespace Buildings {
     Building::Building() : m_bAlive(true), m_position(0.0, 0.0), m_dDx(0.0), m_dDy(0.0), m_dAngle(0.0), m_cursor(sf::Sprite()) {
-        m_healthBar.setSize(sf::Vector2f(100.f, 4.f));
+        m_healthBar.setSize(sf::Vector2f(62.f, 4.f));
         m_healthBar.setFillColor(sf::Color(255, 0, 0, 192));
         m_eRelationType = eRelationType::MINE;
     }
@@ -59,7 +59,7 @@ namespace Buildings {
 
     void Building::update() {
         if (m_sName != "explosion")
-            m_healthBar.setSize(sf::Vector2f((m_iHealth * 100 / m_iMaxHealth), 4.f));
+            m_healthBar.setSize(sf::Vector2f((m_iHealth * 62 / m_iMaxHealth), 4.f));
     }
 
     void Building::draw(sf::RenderWindow &app) {
@@ -68,7 +68,7 @@ namespace Buildings {
         setColor();
         app.draw(m_aAnimation.getSprite());
 
-        m_healthBar.setPosition(m_position.x - 50, m_position.y + 50);
+        m_healthBar.setPosition(m_position.x - 32, m_position.y + 32);
         app.draw(m_healthBar);
     }
 

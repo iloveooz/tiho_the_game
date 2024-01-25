@@ -26,47 +26,47 @@ Game::Game() :
 
     m_textureHolder.init();
 
-    m_animTank.setTexture(m_textureHolder.get(Textures::ID::Tank), 128, 128);
+    m_animTank.setTexture(m_textureHolder.get(Textures::ID::Tank), 64, 64);
     m_CharAnimap.insert(std::make_pair(Factory::CharID::tank, m_animTank));
 
-    m_animCar.setTexture(m_textureHolder.get(Textures::ID::Car), 128, 128);
+    m_animCar.setTexture(m_textureHolder.get(Textures::ID::Car), 64, 64);
     m_CharAnimap.insert(std::make_pair(Factory::CharID::car, m_animCar));
 
-    m_animSpitFire.setTexture(m_textureHolder.get(Textures::ID::SpitFire), 128, 128);
+    m_animSpitFire.setTexture(m_textureHolder.get(Textures::ID::SpitFire), 64, 64);
     m_CharAnimap.insert(std::make_pair(Factory::CharID::spit, m_animSpitFire));
 
-    m_animNuke.setTexture(m_textureHolder.get(Textures::ID::NuclearRocket), 128, 128);
+    m_animNuke.setTexture(m_textureHolder.get(Textures::ID::NuclearRocket), 64, 64);
     m_CharAnimap.insert(std::make_pair(Factory::CharID::nuke, m_animNuke));
 
-    m_animWorker.setTexture(m_textureHolder.get(Textures::ID::Worker), 128, 128);
+    m_animWorker.setTexture(m_textureHolder.get(Textures::ID::Worker), 64, 64);
     m_CharAnimap.insert(std::make_pair(Factory::CharID::work, m_animWorker));
 
 
-    m_animArsenal.setTexture(m_textureHolder.get(Textures::ID::Arsenal), 128, 128);
+    m_animArsenal.setTexture(m_textureHolder.get(Textures::ID::Arsenal), 64, 64);
     m_BuildAnimap.insert(std::make_pair(Buildings::BuildID::arsenal, m_animArsenal));
 
-    m_animCannon.setTexture(m_textureHolder.get(Textures::ID::Cannon), 128, 128);
+    m_animCannon.setTexture(m_textureHolder.get(Textures::ID::Cannon), 64, 64);
     m_BuildAnimap.insert(std::make_pair(Buildings::BuildID::cannon, m_animCannon));
 
-    m_animFactory.setTexture(m_textureHolder.get(Textures::ID::Factory), 256, 128);
+    m_animFactory.setTexture(m_textureHolder.get(Textures::ID::Factory), 128, 64);
     m_BuildAnimap.insert(std::make_pair(Buildings::BuildID::factory, m_animFactory));
 
-    m_animGenerator.setTexture(m_textureHolder.get(Textures::ID::Generator), 128, 128);
+    m_animGenerator.setTexture(m_textureHolder.get(Textures::ID::Generator), 64, 64);
     m_BuildAnimap.insert(std::make_pair(Buildings::BuildID::gen, m_animGenerator));
 
-    m_animLab.setTexture(m_textureHolder.get(Textures::ID::Laboratory), 128, 128);
+    m_animLab.setTexture(m_textureHolder.get(Textures::ID::Laboratory), 64, 64);
     m_BuildAnimap.insert(std::make_pair(Buildings::BuildID::lab, m_animLab));
 
-    m_animMain.setTexture(m_textureHolder.get(Textures::ID::MainBase), 256, 256);
+    m_animMain.setTexture(m_textureHolder.get(Textures::ID::MainBase), 128, 128);
     m_BuildAnimap.insert(std::make_pair(Buildings::BuildID::main, m_animMain));
 
-    m_animMine.setTexture(m_textureHolder.get(Textures::ID::Mine), 128, 128);
+    m_animMine.setTexture(m_textureHolder.get(Textures::ID::Mine), 64, 64);
     m_BuildAnimap.insert(std::make_pair(Buildings::BuildID::mine, m_animMine));
 
-    m_animNSilo.setTexture(m_textureHolder.get(Textures::ID::NuclearSilo), 128, 128);
+    m_animNSilo.setTexture(m_textureHolder.get(Textures::ID::NuclearSilo), 64, 64);
     m_BuildAnimap.insert(std::make_pair(Buildings::BuildID::nsilo, m_animNSilo));
 
-    m_animOil.setTexture(m_textureHolder.get(Textures::ID::OilDerrick), 128, 128);
+    m_animOil.setTexture(m_textureHolder.get(Textures::ID::OilDerrick), 64, 64);
     m_BuildAnimap.insert(std::make_pair(Buildings::BuildID::oil, m_animOil));
 
 
@@ -122,15 +122,15 @@ void Game::createCharacter(Factory::CharID id, sf::Vector2f position) {
 }
 
 void Game::placeCharacter(Factory::CharID id, sf::Vector2f& position) {
-    int inX = int(position.x) / 128;
-    int inY = int(position.y) / 128;
+    int inX = int(position.x) / 64;
+    int inY = int(position.y) / 64;
 
     if (id == Factory::CharID::nuke) {
-        position.x = float(inX) * 128 + 64;
-        position.y = float(inY) * 128 + 64;
+        position.x = float(inX) * 64 + 32;
+        position.y = float(inY) * 64 + 32;
     } else {
-        position.x = float(inX - 1) * 128 + 64;
-        position.y = float(inY + 1) * 128 + 64;
+        position.x = float(inX - 1) * 64 + 32;
+        position.y = float(inY + 1) * 64 + 32;
     }
 }
 
@@ -248,21 +248,21 @@ void Game::selectObjectOnMap() {
 }
 
 void Game::setBuildingToGrid(Buildings::BuildID id, sf::Vector2f &position) {
-    int inX = int(position.x) / 128;
-    int inY = int(position.y) / 128;
+    int inX = int(position.x) / 64;
+    int inY = int(position.y) / 64;
 
     switch (id) {
         case Buildings::BuildID::main:
-            position.x = float(inX) * 128;
-            position.y = float(inY) * 128;
+            position.x = float(inX) * 64;
+            position.y = float(inY) * 64;
             break;
         case Buildings::BuildID::factory:
-            position.x = float(inX) * 128;
-            position.y = float(inY) * 128 + 64;
+            position.x = float(inX) * 64;
+            position.y = float(inY) * 64 + 32;
             break;
         default:
-            position.x = float(inX) * 128 + 64;
-            position.y = float(inY) * 128 + 64;
+            position.x = float(inX) * 64 + 32;
+            position.y = float(inY) * 64 + 32;
     }
 }
 
@@ -317,13 +317,13 @@ void Game::updateViewOfMap() {
     double dx = 0.0, dy = 0.0, zf = 1.0;
 
     if (m_isViewMovingUp && m_camera.getCenter().y > int(Height / 2))
-        dy -= 50.0;
-    if (m_isViewMovingDown && m_camera.getCenter().y < m_map.getMapSize().y * 128 - int(Height / 2) - 50)
-        dy += 50.0;
+        dy -= 25.0;
+    if (m_isViewMovingDown && m_camera.getCenter().y < m_map.getMapSize().y * 64 - int(Height / 2) - 25)
+        dy += 25.0;
     if (m_isViewMovingLeft && m_camera.getCenter().x > int(Weight / 2))
-        dx -= 50.0;
-    if (m_isViewMovingRight && m_camera.getCenter().x < m_map.getMapSize().x * 128 - int(Weight / 2) - 50)
-        dx += 50.0;
+        dx -= 25.0;
+    if (m_isViewMovingRight && m_camera.getCenter().x < m_map.getMapSize().x * 64 - int(Weight / 2) - 25)
+        dx += 25.0;
 
     if (m_isViewZoomingIn)
         zf = 1.1;
@@ -406,11 +406,11 @@ void Game::checkUnitPosition() {
                 long dx = i->getPosition().x - j->getPosition().x;
                 long dy = i->getPosition().y - j->getPosition().y;
 
-                if (dx * dx + dy * dy < 4 * 64 * 64) {
-                    i->getPosition().x += dx / 128.0;
-                    i->getPosition().x += dy / 128.0;
-                    j->getPosition().x -= dx / 128.0;
-                    j->getPosition().y -= dy / 128.0;
+                if (dx * dx + dy * dy < 4 * 32 * 32) {
+                    i->getPosition().x += dx / 64.0;
+                    i->getPosition().x += dy / 64.0;
+                    j->getPosition().x -= dx / 64.0;
+                    j->getPosition().y -= dy / 64.0;
                 }
             }
         }

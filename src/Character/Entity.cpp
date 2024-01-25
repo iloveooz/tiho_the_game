@@ -11,7 +11,7 @@ void Entity::settings(Animations::Animation &animation, double x, double y, doub
     m_eRelationType = eRelationType::MINE;
 
     if (m_sName != "explosion") {
-        m_healthBar.setSize(sf::Vector2f(100.f, 4.f));
+        m_healthBar.setSize(sf::Vector2f(62.f, 4.f));
         m_healthBar.setFillColor(sf::Color(255, 0, 0, 192));
     }
 }
@@ -97,7 +97,7 @@ void Entity::update() {
     }
 
     if (m_sName != "explosion")
-        m_healthBar.setSize(sf::Vector2f((m_iHealth * 100 / m_iMaxHealth), 4.f));
+        m_healthBar.setSize(sf::Vector2f((m_iHealth * 62 / m_iMaxHealth), 4.f));
 }
 
 void Entity::draw(sf::RenderWindow &app) {
@@ -105,7 +105,7 @@ void Entity::draw(sf::RenderWindow &app) {
     m_aAnimation.getSprite().setRotation(m_dAngle);
     setColor();
 
-    m_healthBar.setPosition(m_position.x - 50, m_position.y + 56);
+    m_healthBar.setPosition(m_position.x - 32, m_position.y + 32);
 
     app.draw(m_aAnimation.getSprite());
 
