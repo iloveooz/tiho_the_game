@@ -68,7 +68,7 @@ namespace Buildings {
         setColor();
         app.draw(m_aAnimation.getSprite());
 
-        m_healthBar.setPosition(m_position.x - 32, m_position.y + 32);
+        m_healthBar.setPosition(m_position.x - 32, m_position.y + 36);
         app.draw(m_healthBar);
     }
 
