@@ -9,6 +9,7 @@ public:
 
     void doGo(sf::Vector2f& position) override;
 
+    // update
     void update() override;
 };
 
