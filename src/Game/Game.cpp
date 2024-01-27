@@ -86,6 +86,7 @@ Game::~Game() {
 }
 
 void Game::run() {
+    m_consoleLogger->log(__PRETTY_FUNCTION__, "BEGIN");
     m_fileLogger->log(__PRETTY_FUNCTION__, "BEGIN");
 
     prepareGame();
@@ -101,6 +102,7 @@ void Game::run() {
     }
 
     m_fileLogger->log(__PRETTY_FUNCTION__, "END");
+    m_consoleLogger->log(__PRETTY_FUNCTION__, "END");
 }
 
 void Game::prepareGame() {
